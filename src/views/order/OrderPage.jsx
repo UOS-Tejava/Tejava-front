@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { AnimatePresence, motion } from 'framer-motion';
+import styled from "@emotion/styled";
 import Modal from "../../components/modal/Modal";
 import Voice from "../../components/voice/Voice";
 
@@ -10,12 +11,12 @@ const OrderPage = () => {
 	const open = () => setModalOpen(true);
 
 	return (
-		<div>
+		<Wrapper>
 			<motion.button
 				whileHover={{ scale : 1.1 }}
 				whileTap={{ scale : 0.9 }}
 				className="save-button"
-				// onClick={()=>null}
+				style={buttonStyle}
 				onClick={() => (modalOpen ? close() : open())}
 			>
 				음성인식으로 주문하기
@@ -30,8 +31,23 @@ const OrderPage = () => {
 						<Voice />
 					</Modal> }
 			</AnimatePresence>
-		</div>
+		</Wrapper>
 	);
 }
+
+const Wrapper = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 90vh;
+`;
+
+const buttonStyle = {
+	'border-radius': '10px',
+	'height': '30px',
+	'border': 'hidden',
+	'width': '150px',
+	'background': 'skyblue'
+};
 
 export default OrderPage;

@@ -2,6 +2,8 @@ import React from "react";
 import { motion } from 'framer-motion';
 import Backdrop from "./Backdrop";
 import '../../css/Modal.css'
+import { Button } from "@mui/material";
+import { blue } from "@mui/material/colors";
 
 // initial, animate (end state), exit, transition (delay etc. it's optional)
 
@@ -42,7 +44,7 @@ const Modal = ({ children, close }) => {
 				exit="exit"
 			>
 				{children}
-				<button onClick={close}>Close</button>
+				<Button variant="contained" onClick={close}>Close</Button>
 			</motion.div>
 		</Backdrop>
 	);
