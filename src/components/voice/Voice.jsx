@@ -1,6 +1,9 @@
+import React, { useEffect } from "react";
 import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
 import { Button, ButtonGroup } from "@mui/material";
 import styled from "@emotion/styled";
+import lottie from "lottie-web";
+import voiceAnimation from "../../static/animation/voice-animation.json";
 
 const Voice = () => {
 	const {
@@ -9,6 +12,22 @@ const Voice = () => {
 		resetTranscript,
 		browserSupportsSpeechRecognition
 	} = useSpeechRecognition();
+
+	useEffect(() => {
+		const anim = lottie.loadAnimation({
+			container: document.querySelector("#voice-animation"),
+			animationData: voiceAnimation,
+			autoplay: false,
+		});
+		anim.addEventListener("DOMLoaded", (e) => {
+			console.log(e);
+			if (listening)
+				anim.play();
+			else
+				anim.pause();
+		});
+		return () => anim.destroy();
+	}, [listening]);
 
 	if (!browserSupportsSpeechRecognition){
 		return (
@@ -22,18 +41,28 @@ const Voice = () => {
 				음성인식
 			</h2>
 			<ButtonGroup variant="text">
-				<Button onClick={SpeechRecognition.startListening}>Start</Button>
+				<Button onClick={() => {
+					SpeechRecognition.startListening();
+					// anim.play();
+				}}>Start</Button>
 				<Button onClick={SpeechRecognition.stopListening}>Stop</Button>
 				<Button onClick={resetTranscript}>Reset</Button>
 			</ButtonGroup>
-			<p>Listening : {listening ? 'on' : 'off' }</p> {/*TODO: 애니메이션 삽입*/}
+			<AnimationWrapper>
+				<div id = "voice-animation" style={{ width : 150, marginLeft: '18px' }}></div>
+			</AnimationWrapper>
 			<Textbox>
 				<p>{transcript}</p>
 			</Textbox>
-			
 		</Wrapper>
 	);
 }
+
+const AnimationWrapper = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+`;
 
 const Wrapper = styled.div`
 	display: block; // 세로 배치
@@ -54,7 +83,6 @@ const Textbox = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin-top: 20px;
 	margin-bottom: 20px;
 `;
 
