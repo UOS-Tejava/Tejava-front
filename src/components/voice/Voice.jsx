@@ -75,7 +75,7 @@ const Wrapper = styled.div`
 
 const Textbox = styled.div`
 	border-radius: 20px;
-	background: skyblue;
+	background: #E3F2FD;
 	height: 100px;
 	width: 100%;
 	position: relative;

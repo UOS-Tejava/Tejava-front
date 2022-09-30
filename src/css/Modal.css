@@ -12,9 +12,8 @@
 
 .modal {
 	width: clamp(20%, 300px, 50%);
-	height: min(60%, 500px);
 	margin: auto;
-	padding: 0 2rem;
+	max-height: 500px;
 	border-radius: 12px;
 	display: flex;
 	flex-direction: column;

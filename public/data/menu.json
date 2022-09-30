@@ -1,0 +1,29 @@
+{
+	"id":1,
+	"menuNm":"프렌치 디너",
+	"menuConfig":"샐러드, 커피, 치즈, 와인, 스테이크",
+	"menuPic":"picture",
+	"option":[
+		{
+			"id":1,
+			"optionNm":"커피",
+			"imagePath":"",
+			"price":10000,
+			"quantity":1
+		},
+		{
+			"id":2,
+			"optionNm":"치즈",
+			"imagePath":"",
+			"price":5000,
+			"quantity":1
+		},
+		{
+			"id":3,
+			"optionNm":"와인",
+			"imagePath":"",
+			"price":20000,
+			"quantity":1
+		}
+	]
+}
