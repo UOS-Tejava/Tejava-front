@@ -11,6 +11,8 @@ const OrderPage = () => {
 	const [voiceModalOpen, setVoiceModalOpen] = useState(false);
 	const [menuModalOpen, setMenuModalOpen] = useState(true);
 
+	const [cart, setCart] = useState([]);
+
 	const closeVoiceModal = () => setVoiceModalOpen(false);
 	const openVoiceModal = () => setVoiceModalOpen(true);
 	const closeMenuModal = () => setMenuModalOpen(false);
