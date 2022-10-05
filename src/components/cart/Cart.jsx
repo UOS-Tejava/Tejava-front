@@ -1,13 +1,23 @@
-import { motion } from "framer-motion";
 import styled from "@emotion/styled";
 import CartItem from "./CartItem";
+import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
+import TimePicker from "../select/TimePicker";
 
 const Cart = (props) => {
 	const close = () => props.setModal(false);
 	const open = () => props.setModal(true);
 	return (
 		<CartWrapper>
-			<p>주문표</p>
+			<div>
+				<TextWrapper>
+				주문표
+				<KeyboardVoiceIcon
+					style={{ float : 'right', marginRight: '100px' }}
+					onClick={() => (props.modalOpen ? close() : open())}
+				/>
+				</TextWrapper>
+				
+			</div>
 			<CartItemWrapper>
 				<CartItem />
 				<CartItem />
@@ -16,57 +26,54 @@ const Cart = (props) => {
 				<CartItem />
 				<CartItem />
 			</CartItemWrapper>
-			<motion.button
-				whileHover={{ scale : 1.1 }}
-				whileTap={{ scale : 0.9 }}
-				className="save-button"
-				style={buttonStyle}
-				onClick={() => (props.modalOpen ? close() : open())}
-			>
-				음성인식으로 주문하기
-			</motion.button>
+			<TextWrapper>배달 시간 선택</TextWrapper>
+			<SelectionBoxWrapper>
+				<TimePicker />
+			</SelectionBoxWrapper>
+			<TextWrapper>결제 금액</TextWrapper>
 		</CartWrapper>
 	)
 }
 
 const CartWrapper = styled.div`
-	width: 40%;
+	width: 50%;
 	height: 87%;
 	display: flex;
 	flex-direction: column;
-	background: white;
-	border-radius: 15px;
-	box-shadow : 0 2px 5px rgba(0, 0, 0, 0.5);
 	padding: 20px;
-`;
-
-const CartItemWrapper = styled.div`
+	padding-left: 5%;
 	overflow: auto;
-	width: 100%;
-	height: 70%;
-	margin-bottom: 10px;
 	&::-webkit-scrollbar{
 		width: 10px;
 		max-height: 20%;
 	}
-	&::-webkit-scrollbar-thumb{
-		background-color: gray;
-		border-radius: 10px;
-		// height: 2em;
-	}
-	&::-webkit-scrollbar-track{
-		border-radius: 10px;
-		// height: 20%;
-	}
+	// &::-webkit-scrollbar-thumb{
+	// 	background-color: gray;
+	// 	border-radius: 10px;
+	// 	// height: 2em;
+	// }
+	// &::-webkit-scrollbar-track{
+	// 	border-radius: 5px;
+	// 	// height: 20%;
+	// }
 `;
 
-const buttonStyle = {
-	'border-radius': '10px',
-	'height': '30px',
-	'border': 'hidden',
-	'width': '150px',
-	'background': '#BBDEFB'
-};
+const CartItemWrapper = styled.div`
+	// overflow: auto;
+	width: 100%;
+	height: 100%;
+`;
 
+const TextWrapper = styled.div`
+	font-size: 1.6em;
+	font-family: "Apple SD Gothic Neo";
+	font-weight: bold;
+	margin: 25px;
+`;
+
+const SelectionBoxWrapper = styled.div`
+	width: 80%;
+	padding-left: 3%;
+`;
 
 export default Cart;

@@ -11,7 +11,7 @@ const Header = ({ children }) => {
 	for (const h in headers){
 		navList.push(
 			<HeaderMenu name={h} value={headers[h]}>hi</HeaderMenu>
-	   )
+		)
 	}
 	return (
 		<Wrapper>
@@ -34,12 +34,15 @@ const Logo = styled.div`
 	width: 80px;
 	&:hover{
 		cursor: pointer;
-	}
+	};
+	font-weight: 900;
+	font-size: 2.2em;
+	font-family: "Apple SD Gothic Neo";
 `;
 
 const Wrapper = styled.div`
 	width: 100%;
-	height: 10vh;
+	height: 5vh;
 	display: flex;
 	position: relative;
 	align-items: center; // 세로 가운데정렬
@@ -47,12 +50,11 @@ const Wrapper = styled.div`
 `;
 
 const HeaderBox = styled.div`
-	width: 93%;
-	height: 50px;
+	width: 100%;
+	height: 100%;
 	display: flex;
 	position: relative;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-	border-radius: 30px;
+	border-bottom: solid #D5D3D3;
 	align-items: center;
 	padding-left: 30px;
 `;
@@ -62,11 +64,12 @@ const HeaderButton = styled.button`
 	border: hidden;
 	background: transparent;
 	color: gray;
-	margin-right: 1%;
+	margin-right: 3%;
 	&:hover{
 		text-decoration: underline;
 		cursor: pointer;
 	}
+	font-size: 1em;
 `;
 
 export default Header;

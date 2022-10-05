@@ -16,9 +16,10 @@ const CartItem = () => {
 }
 
 const ItemWrapper = styled.div`
-	width: 87%;
+	width: 80%;
 	height: 120px;
 	margin-bottom: 10px;
+	margin-left: 15px;
 	background: gray;
 	display: grid;
 	grid-template-columns: 3fr 1fr 1fr;

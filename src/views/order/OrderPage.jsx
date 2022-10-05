@@ -50,7 +50,7 @@ const Wrapper = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 85vh;
+	height: 90vh;
 `;
 
 const MenuWrapper = styled.div`
@@ -60,7 +60,8 @@ const MenuWrapper = styled.div`
 	display: grid;
 	align-items: center;
 	justify-items: center;
-	grid-template-rows: 1fr 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr;
+	grid-template-columns: 1fr 1fr;
 `;
 
 export default OrderPage;

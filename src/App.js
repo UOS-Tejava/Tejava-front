@@ -7,8 +7,8 @@ import Header from './components/header/Header';
 function App() {
 	return (
 		<div>
+			<Header/>
 			<Router>
-				<Header/>
 				<Routes>
 					<Route exact path="/" element={<Home />} />
 					<Route exact path="/order" element={<OrderPage />} />
