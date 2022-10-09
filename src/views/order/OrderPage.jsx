@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { AnimatePresence, motion } from 'framer-motion';
 import styled from "@emotion/styled";
 import Modal from "../../components/modal/Modal";
-import Voice from "../../components/voice/Voice";
-import MenuBox from "../../components/order/MenuBox";
-import Cart from "../../components/cart/Cart";
-import OrderDetail from "../../components/order/OrderDetail";
+import Voice from "./content/Voice";
+import MenuBox from "./content/MenuBox";
+import Cart from "./content/Cart";
+import OrderDetail from "./content/OrderDetail";
 
 const OrderPage = () => {
 	const [voiceModalOpen, setVoiceModalOpen] = useState(false);

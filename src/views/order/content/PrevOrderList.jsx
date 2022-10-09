@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import styled from "@emotion/styled";
-import OrderButton from "./OrderButton";
+import OrderButton from "../../main/content/OrderButton";
 
 const PrevOrderList = (props) => {
 	return (

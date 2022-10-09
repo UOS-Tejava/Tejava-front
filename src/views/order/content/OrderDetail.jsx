@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { useContext, useState } from "react";
-import Modal from "../modal/Modal";
+import Modal from "../../../components/modal/Modal";
 import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 import LeftArrow from "./Arrow";
 

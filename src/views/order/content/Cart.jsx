@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import CartItem from "./CartItem";
 import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
-import TimePicker from "../select/TimePicker";
+import TimePicker from "../../../components/select/TimePicker";
 
 const Cart = (props) => {
 	const close = () => props.setModal(false);

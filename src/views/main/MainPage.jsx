@@ -1,9 +1,9 @@
 import { Button } from "@mui/material";
 import styled from "@emotion/styled";
-import PrevOrderBox from "../../components/order/PrevOrderBox";
+import PrevOrderBox from "./content/PrevOrderBox";
 
 
-const Home = () => {
+const MainPage = () => {
 	return (
 		<Wrapper>
 			<Banner />
@@ -36,4 +36,4 @@ const Banner = styled.div`
 	background: gray;
 `;
 
-export default Home;
+export default MainPage;

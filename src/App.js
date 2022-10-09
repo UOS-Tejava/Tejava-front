@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 import OrderPage from './views/order/OrderPage';
-import Home from './views/home/Home';
+import MainPage from './views/main/MainPage';
 import Header from './components/header/Header';
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
 			<Header/>
 			<Router>
 				<Routes>
-					<Route exact path="/" element={<Home />} />
+					<Route exact path="/" element={<MainPage />} />
 					<Route exact path="/order" element={<OrderPage />} />
 					{/* <Route exact path="/" element={<Voice />} />
 					<Route exact path="/" element={<Voice />} /> */}

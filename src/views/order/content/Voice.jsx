@@ -3,7 +3,7 @@ import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognitio
 import { Button, ButtonGroup } from "@mui/material";
 import styled from "@emotion/styled";
 import lottie from "lottie-web";
-import voiceAnimation from "../../static/animation/voice-animation.json";
+import voiceAnimation from "../../../static/animation/voice-animation.json";
 
 const Voice = () => {
 	const {
