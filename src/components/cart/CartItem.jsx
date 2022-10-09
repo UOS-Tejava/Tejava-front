@@ -20,7 +20,8 @@ const ItemWrapper = styled.div`
 	height: 120px;
 	margin-bottom: 10px;
 	margin-left: 15px;
-	background: gray;
+	// background: gray;
+	border: solid 0.5px;
 	display: grid;
 	grid-template-columns: 3fr 1fr 1fr;
 	grid-template-rows: repeat(5, auto);

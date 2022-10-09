@@ -12,7 +12,7 @@ const Cart = (props) => {
 				<TextWrapper>
 				주문표
 				<KeyboardVoiceIcon
-					style={{ float : 'right', marginRight: '100px' }}
+					style={{ float : 'right', marginRight: '13%' }}
 					onClick={() => (props.modalOpen ? close() : open())}
 				/>
 				</TextWrapper>
@@ -41,7 +41,7 @@ const CartWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	padding: 20px;
-	padding-left: 5%;
+	// padding-left: 5%;
 	overflow: auto;
 	&::-webkit-scrollbar{
 		width: 10px;
@@ -61,7 +61,10 @@ const CartWrapper = styled.div`
 const CartItemWrapper = styled.div`
 	// overflow: auto;
 	width: 100%;
-	height: 100%;
+	display: flex;
+	flex-direction: column;
+	// align-items: center;
+	// height: 100%;
 `;
 
 const TextWrapper = styled.div`

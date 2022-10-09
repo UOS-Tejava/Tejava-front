@@ -36,13 +36,13 @@ const Logo = styled.div`
 		cursor: pointer;
 	};
 	font-weight: 900;
-	font-size: 2.2em;
+	font-size: 2em;
 	font-family: "Apple SD Gothic Neo";
 `;
 
 const Wrapper = styled.div`
 	width: 100%;
-	height: 5vh;
+	height: 8vh;
 	display: flex;
 	position: relative;
 	align-items: center; // 세로 가운데정렬

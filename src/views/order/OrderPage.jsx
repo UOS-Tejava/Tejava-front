@@ -35,12 +35,12 @@ const OrderPage = () => {
 					<Modal close={closeVoiceModal}>
 						<Voice />
 					</Modal> }
-				{
+				{/* {
 					menuModalOpen &&
 					<Modal close={closeMenuModal}>
 						<OrderDetail />
 					</Modal>
-				}
+				} */}
 			</AnimatePresence>
 		</Wrapper>
 	);
@@ -54,9 +54,12 @@ const Wrapper = styled.div`
 `;
 
 const MenuWrapper = styled.div`
-	width: 45%;
-	height: 100%;
-	margin-top : 10px;
+	width: 50%;
+	height: 95%;
+	// margin-top : 10px;
+	// margin-left: 3%;
+	// m
+	margin: 5%;
 	display: grid;
 	align-items: center;
 	justify-items: center;

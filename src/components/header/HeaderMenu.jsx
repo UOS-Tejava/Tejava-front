@@ -10,15 +10,15 @@ const HeaderMenu = (props) => {
 }
 
 const Wrapper = styled.div`
-	width: 150px;
+	min-width: fit-content;
 	text-align: center;
 	&:hover{
 		cursor: pointer;
 	}
-	font-size: 1.3em;
+	font-size: 1.2em;
 	font-family: "Apple SD Gothic Neo";
 	line-height: 0;
-	margin-left: 100px;
+	margin-left: 50px;
 `;
 
 export default HeaderMenu;
