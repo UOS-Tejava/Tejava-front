@@ -1,14 +1,14 @@
 import { motion } from "framer-motion";
 import styled from "@emotion/styled";
+import { useNavigate } from "react-router";
 
 const MenuBox = (props) => {
-	// const { menuConfig } = props.menuConfig;
 	return (
 		<Wrapper
 			whileHover={{ scale : 1.02 }}
 			whileTap={{ scale : 0.98 }}
 			className="menubox"
-			onClick={()=>console.log("클릭")}
+			onClick={props.onClickFunction}
 		>
 			<ImageWrapper>
 				image

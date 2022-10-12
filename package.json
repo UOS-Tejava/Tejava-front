@@ -22,7 +22,7 @@
     "react-horizontal-scrolling-menu": "^3.2.0",
     "react-redux": "^8.0.2",
     "react-router": "^6.4.1",
-    "react-router-dom": "^6.4.1",
+    "react-router-dom": "^6.4.2",
     "react-scripts": "5.0.1",
     "react-speech-recognition": "^3.9.1",
     "web-vitals": "^2.1.0"
@@ -50,5 +50,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://3.34.233.124:8080"
 }

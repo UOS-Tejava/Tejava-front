@@ -1,0 +1,80 @@
+{
+	"id": 0,
+	"menu_config": "string",
+	"menu_nm": "string",
+	"menu_pic": "string",
+	"options": [
+		{
+			"id": 0,
+			"option_nm": "string",
+			"option_pic": "string",
+			"price": 0,
+			"quantity": 0
+		}
+	],
+	"order": {
+		"createdDate": "2022-10-12T08:27:00.496Z",
+		"id": 0,
+		"lastModifiedDate": "2022-10-12T08:27:00.496Z",
+		"menu": [
+			null
+		],
+		"option_to_string": "string",
+		"orderHistory": {
+			"createdDate": "2022-10-12T08:27:00.496Z",
+			"id": 0,
+			"lastModifiedDate": "2022-10-12T08:27:00.496Z",
+			"order": [
+				null
+			],
+			"user": {
+				"address": "string",
+				"agreement": true,
+				"createdDate": "2022-10-12T08:27:00.496Z",
+				"id": 0,
+				"lastModifiedDate": "2022-10-12T08:27:00.496Z",
+				"name": "string",
+				"order_cnt": 0,
+				"phoneNo": "string",
+				"phone_check": true,
+				"pwd": "string",
+				"role": "ADMINISTRATOR",
+				"uid": "string"
+			}
+		},
+		"order_status": "completed",
+		"total_price": 0
+	},
+	"price": 0,
+	"quantity": 0,
+	"shoppingCart": {
+		"createdDate": "2022-10-12T08:27:00.496Z",
+		"id": 0,
+		"lastModifiedDate": "2022-10-12T08:27:00.496Z",
+		"menu": [
+			null
+		],
+		"total_price": 0,
+		"user": {
+			"address": "string",
+			"agreement": true,
+			"createdDate": "2022-10-12T08:27:00.496Z",
+			"id": 0,
+			"lastModifiedDate": "2022-10-12T08:27:00.496Z",
+			"name": "string",
+			"order_cnt": 0,
+			"phoneNo": "string",
+			"phone_check": true,
+			"pwd": "string",
+			"role": "ADMINISTRATOR",
+			"uid": "string"
+		}
+	},
+	"style": {
+		"id": 0,
+		"price": 0,
+		"style_config": "string",
+		"style_nm": "string",
+		"style_pic": "string"
+	}
+}

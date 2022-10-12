@@ -1,9 +1,11 @@
 {
 	"id":1,
-	"menuNm":"프렌치 디너",
-	"menuConfig":"샐러드, 커피, 치즈, 와인, 스테이크",
-	"menuPic":"picture",
-	"option":[
+	"menu_nm":"프렌치 디너",
+	"menu_config":"샐러드, 커피, 치즈, 와인, 스테이크",
+	"menu_pic":"picture",
+	"price":10000,
+	"quantity":1,
+	"options":[
 		{
 			"id":1,
 			"optionNm":"커피",
@@ -25,5 +27,12 @@
 			"price":20000,
 			"quantity":1
 		}
-	]
+	],
+	"style":{
+		"id": 1,
+		"style_nm": "심플디너",
+		"style_config": "심플디너 구성",
+		"style_pic": "stylepic",
+		"price": 1000
+	}
 }

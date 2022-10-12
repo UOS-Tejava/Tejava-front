@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion } from 'framer-motion';
 import styled from "@emotion/styled";
 import Modal from "../../components/modal/Modal";
@@ -6,12 +6,31 @@ import Voice from "./content/Voice";
 import MenuBox from "./content/MenuBox";
 import Cart from "./content/Cart";
 import OrderDetail from "./content/OrderDetail";
+import axios from "axios";
+import { useNavigate } from "react-router";
 
 const OrderPage = () => {
 	const [voiceModalOpen, setVoiceModalOpen] = useState(false);
 	const [menuModalOpen, setMenuModalOpen] = useState(true);
 
 	const [cart, setCart] = useState([]);
+
+	const [menuDetail, setMenuDetail] = useState({});
+
+	const navigate = useNavigate();
+
+	const getMenuDetailLocal = () => {
+		axios.get('/data/menu.json')
+			.then((res) => {
+				setMenuDetail(res.data);
+			})
+	}
+
+	useEffect(() => {
+		getMenuDetailLocal();
+	}, []);
+
+	console.log(menuDetail);
 
 	const closeVoiceModal = () => setVoiceModalOpen(false);
 	const openVoiceModal = () => setVoiceModalOpen(true);
@@ -20,7 +39,13 @@ const OrderPage = () => {
 	return (
 		<Wrapper>
 			<MenuWrapper>
-				<MenuBox text="비스트로 디너"/>
+				<MenuBox text="비스트로 디너" onClickFunction={() => {
+					navigate("/menu", {
+						state: {
+							detail: menuDetail
+						}
+					})
+				}}/>
 				<MenuBox text="프렌치 디너"/>
 				<MenuBox text="잉글리시 디너"/>
 				<MenuBox text="샴페인 축제 디너"/>
