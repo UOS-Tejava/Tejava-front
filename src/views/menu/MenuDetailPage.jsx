@@ -5,8 +5,6 @@ import MenuOptions from "./content/MenuOptions";
 import { useLocation } from "react-router";
 import axios from "axios";
 
-
-//나중에 axios res data로 바꾸기
 const testStyleList = [
 	{
 		"id": 1,
@@ -34,24 +32,33 @@ const testStyleList = [
 
 const MenuDetailPage = (props) => {
 	const location = useLocation();
+	const [menuDetail, setMenuDetail] = useState(location.state.detail);
+	const [styleList, setStyleList] = useState([]);
+	const [optionList, setOptionsList] = useState([]);
 
-	let styleList = [];
-	axios.get('/order/showAllStyles/menuId/' + 1, // 수정......ㅜㅠㅠㅠㅠ
-	).then(res => {
-		styleList = res.data;
-	}).catch(err=>console.log(err));
+	useEffect(()=>{
+		fetch('/order/showAllStyles/menuId/' + menuDetail.id)
+		.then(res => res.json())
+		.then(data => setStyleList(data));
+		fetch('/order/showAllOptions/menuId/' + menuDetail.id)
+		.then(res => res.json())
+		.then(data => setOptionsList(data));
+	}, []);
 
 	return (
 		<Wrapper>
 			<MenuImage />
-			<MenuOptions menuDetail={location.state.detail} styleList={testStyleList} />
+			<MenuOptions
+				menuDetail={location.state.detail}
+				styleList={styleList}
+				optionList={optionList}
+			/>
 		</Wrapper>
 	);
 }
 
 const Wrapper = styled.div`
 	height: 88vh;
-	background: gray;
 `;
 
 export default MenuDetailPage;

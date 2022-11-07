@@ -1,54 +1,56 @@
 import React, { useEffect, useState } from "react";
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import styled from "@emotion/styled";
 import Modal from "../../components/modal/Modal";
 import Voice from "./content/Voice";
 import MenuBox from "./content/MenuBox";
 import Cart from "./content/Cart";
-import OrderDetail from "./content/OrderDetail";
-import axios from "axios";
 import { useNavigate } from "react-router";
 
 const OrderPage = () => {
 	const [voiceModalOpen, setVoiceModalOpen] = useState(false);
-	const [menuModalOpen, setMenuModalOpen] = useState(true);
-
-	const [cart, setCart] = useState([]);
-
 	const [menuDetail, setMenuDetail] = useState({});
-
 	const navigate = useNavigate();
 
-	const getMenuDetailLocal = () => {
-		axios.get('/data/menu.json')
-			.then((res) => {
-				setMenuDetail(res.data);
-			})
+	const getMenuDetailLocal = async () => {
+		await fetch('/order/showAllMenus/')
+			.then(res => res.json())
+			.then(data => {
+				setMenuDetail(data);
+			});
 	}
 
 	useEffect(() => {
 		getMenuDetailLocal();
 	}, []);
 
-	console.log(menuDetail);
-
 	const closeVoiceModal = () => setVoiceModalOpen(false);
 	const openVoiceModal = () => setVoiceModalOpen(true);
-	const closeMenuModal = () => setMenuModalOpen(false);
 
+	// TODO: fetch menu list
 	return (
 		<Wrapper>
 			<MenuWrapper>
 				<MenuBox text="비스트로 디너" onClickFunction={() => {
 					navigate("/menu", {
-						state: {
-							detail: menuDetail
-						}
+						state: { detail: menuDetail[0] }
 					})
 				}}/>
-				<MenuBox text="프렌치 디너"/>
-				<MenuBox text="잉글리시 디너"/>
-				<MenuBox text="샴페인 축제 디너"/>
+				<MenuBox text="프렌치 디너" onClickFunction={() => {
+					navigate("/menu", {
+						state: { detail: menuDetail[1] }
+					})
+				}}/>
+				<MenuBox text="잉글리시 디너" onClickFunction={() => {
+					navigate("/menu", {
+						state: { detail: menuDetail[2] }
+					})
+				}}/>
+				<MenuBox text="샴페인 축제 디너" onClickFunction={() => {
+					navigate("/menu", {
+						state: { detail: menuDetail[3] }
+					})
+				}}/>
 			</MenuWrapper>
 			<Cart modalOpen={voiceModalOpen} setModal={setVoiceModalOpen} />
 			<AnimatePresence // 언마운트시에도 애니메이션이 동작하도록 감싸주기
@@ -56,16 +58,12 @@ const OrderPage = () => {
 				mode="wait" // 한 번에 하나의 컴포넌트만 업데이트 (exitBeforeEnter deprecated 되고 mode로 대체)
 				onExitComplete={() => null}
 			>
-				{voiceModalOpen &&
+				{
+					voiceModalOpen &&
 					<Modal close={closeVoiceModal}>
 						<Voice />
-					</Modal> }
-				{/* {
-					menuModalOpen &&
-					<Modal close={closeMenuModal}>
-						<OrderDetail />
 					</Modal>
-				} */}
+				}
 			</AnimatePresence>
 		</Wrapper>
 	);
@@ -81,9 +79,6 @@ const Wrapper = styled.div`
 const MenuWrapper = styled.div`
 	width: 50%;
 	height: 95%;
-	// margin-top : 10px;
-	// margin-left: 3%;
-	// m
 	margin: 5%;
 	display: grid;
 	align-items: center;

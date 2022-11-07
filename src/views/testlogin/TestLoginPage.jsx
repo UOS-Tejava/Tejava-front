@@ -1,21 +1,21 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
 
 const requestLogin = (userId, userPw)=>{
-	axios.get('/login', {
-		"pwd": {userPw},
-		"staySignedIn": true,
-		"uid": {userId}
-	}).then(res=>{
-		// if(res.data.loginSuccess === false){
-		// 	alert(res.data.message);
-		// } else{
-		alert("로그인 성공");
+	fetch('/login', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			"pwd": userPw,
+			"staySignedIn": true,
+			"uid": userId
+		})
+	})
+	.then(res => {
+		res.json();
 		window.location.href = "/"
-		// }
-		//res가 ok면 로긴 상태로,
-		//res가 fail이면 alert상태로(화면 새로고침?)
-	}).catch(err=>console.log(err.response.data))
+	});
 }
 
 function InputID(){
@@ -62,17 +62,6 @@ function LoginBox(){
 }
 
 export default function Login(){
-	// const isAuth = async ()=>{
-	// 	await axios.get('/auth/authenticate').then(res=>{
-	// 		if (res.data.login){
-	// 			alert("이미 로그인된 상태입니다.");
-	// 			window.location.href = '/';
-	// 		}
-	// 	})
-	// }
-	// useEffect(()=>{
-	// 	isAuth();
-	// }, []);
 	return (
 		<div className="login">
 			<LoginBox/>

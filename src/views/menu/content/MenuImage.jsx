@@ -33,7 +33,6 @@ const TextWrapper = styled.div`
 	font-family: "Apple SD Gothic Neo";
 	font-weight: bold;
 	min-width: 350px;
-	background: red;
 `;
 
 const MenuConfigWrapper = styled.div`
@@ -41,7 +40,6 @@ const MenuConfigWrapper = styled.div`
 	font-family: "Apple SD Gothic Neo";
 	min-width: 350px;
 	margin: 10px;
-	background: red;
 `;
 
 export default MenuImage;
