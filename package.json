@@ -52,5 +52,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://43.200.93.146"
+  "proxy": "http://43.200.93.146:8080"
 }

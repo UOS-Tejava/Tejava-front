@@ -1,14 +1,54 @@
-import { motion } from 'framer-motion';
 import styled from '@emotion/styled';
 import { DeleteForever } from '@mui/icons-material';
+import { useNavigate } from 'react-router';
 
-const CartItem = () => {
+const CartItem = (props) => {
+	const item = props.item;
+	console.log(item);
+	const navigate = useNavigate();
+	let idx = 0;
+	if (item.menu_nm == '비스트로 디너')
+		idx = 1;
+	else if (item.menu_nm == '프렌치 디너')
+		idx = 2;
+	else if (item.menu_nm == '잉글리시 디너')
+		idx = 3;
+	else
+		idx = 4;
+	const deleteMenu = (id) => {
+		fetch('/cart/delete-one',{
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				menuId: id,
+				userId: 1
+			})
+		})
+		.then(res => res.json())
+		.then(data => console.log(data))
+		.catch(err => console.log(err))
+	};
+
+	const modifyMenu = () => {
+		navigate("/menu", {
+			state: { detail: item, idx: idx, modify: true }
+		})
+	}
+
 	return (
 		<ItemWrapper>
-			<ItemName>디너 이름</ItemName>
-			<ItemOption>옵션</ItemOption>
-			<ItemPrice>가격</ItemPrice>
-			<ItemButton>
+			<div
+				onClick={modifyMenu}
+			>
+			<ItemName>{item.menu_nm}</ItemName>
+			<ItemOption>{item.style.style_nm}</ItemOption>
+			<ItemPrice>{item.price}</ItemPrice>
+			</div>
+			<ItemButton
+				onClick={() => deleteMenu(item.id)}
+			>
 				<DeleteForever />
 			</ItemButton>
 		</ItemWrapper>

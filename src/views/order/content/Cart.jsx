@@ -3,10 +3,62 @@ import CartItem from "./CartItem";
 import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
 import TimePicker from "../../../components/select/TimePicker";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 const Cart = (props) => {
 	const close = () => props.setModal(false);
 	const open = () => props.setModal(true);
+
+	const [cart, setCart] = useState([]);
+	const [time, setTime] = useState("");
+
+	useEffect(() => {
+		fetch('/cart', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ userId: 1 })
+		}) // TODO: userId 불러오는 부분 구현하기
+		.then(res => res.json())
+		.then(data => setCart(data))
+		.catch(err => console.log(err));
+	}, []);
+
+	let cartList = [];
+	let price = 0;
+	cart.map((item) => {
+		cartList.push(
+			<CartItem item={item} />
+		);
+		price += item.price;
+	});
+
+	let discount = 0;
+	// if 단골이면 price의 10퍼
+	let totalPrice = price - discount;
+	
+	// const order = async () => {
+	// 	await fetch('/order/placeOrder',{
+	// 		method: 'POST',
+	// 		headers: {
+	// 			"Content-Type": "application/json",
+	// 		},
+	// 		body: JSON.stringify({
+	// 			"req_orderDateTime": time,
+	// 			"total_price": price,
+	// 			"userId": 1 // TODO: 수정
+	// 		})
+	// 	})
+	// 	.then(res => {
+	// 		// res.json();
+	// 		// window.location.href = "/" // TODO: payment로 이동
+	// 	})
+	// 	.catch(err => console.log(err));
+	// } 
+
+	// console.log(time);
+
 	return (
 		<CartWrapper>
 			<div>
@@ -17,23 +69,20 @@ const Cart = (props) => {
 					onClick={() => (props.modalOpen ? close() : open())}
 				/>
 				</TextWrapper>
-				
 			</div>
 			<CartItemWrapper>
-				<CartItem />
-				<CartItem />
-				<CartItem />
-				<CartItem />
-				<CartItem />
-				<CartItem />
+				{cartList}
 			</CartItemWrapper>
 			<TextWrapper>배달 시간 선택</TextWrapper>
 			<SelectionBoxWrapper>
-				<TimePicker />
+				<TimePicker setTime={setTime} />
 			</SelectionBoxWrapper>
 			<TextWrapper>결제 금액</TextWrapper>
+			{price}
+			<div>할인액</div>
 			<ButtonWrapper>
-				<OrderButton>주문하기</OrderButton>
+				<OrderButton
+				>총 {price}원 주문하기</OrderButton>
 			</ButtonWrapper>
 		</CartWrapper>
 	)

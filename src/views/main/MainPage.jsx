@@ -7,7 +7,6 @@ import { useEffect } from "react";
 const MainPage = () => {
 	useEffect(() => {
 		fetch('/')
-		.then(res => res.json())
 		.then(data => console.log(data))
 	})
 	return (

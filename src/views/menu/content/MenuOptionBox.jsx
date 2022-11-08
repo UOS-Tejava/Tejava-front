@@ -31,7 +31,7 @@ const MenuOptionBox = (props) => {
 	return (
 		<Wrapper>
 			<TextWrapper>{option.option_nm}</TextWrapper>
-			<ImageBox />
+			<ImageBox source={option.option_pic} />
 			<PriceWrapper>{"+ " + option.price + " 원"}</PriceWrapper>
 			<Counter
 				onIncrease={onIncrease}
@@ -55,6 +55,8 @@ const ImageBox = styled.div`
 	width: 130px;
 	height: 50%;
 	background: yellow;
+	background-image: ${(props) => `url(${props.source})`};
+	background-size: cover;
 `;
 
 const TextWrapper = styled.div`

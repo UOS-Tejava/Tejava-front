@@ -38,19 +38,19 @@ const MenuOptions = (props) => {
 		setMenuDetail({...menuDetail, price: price + style.price})
 	}, [price]);
 
+	console.log()
 	const addToCart = () => {
 		fetch('/cart/add', {
 			method: 'POST',
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({menu: menuDetail, userId: 1}) //userid 불러오는 법
 		})
-		.then(res => res.json())
+		.then(res => window.location.href = '/order')
 		.catch(err => console.log(err));
 	}
 
-	console.log(optionList);
 	let styleBoxList = [];
 	styleList.map((item) => {
 		styleBoxList.push(
@@ -80,8 +80,6 @@ const MenuOptions = (props) => {
 			/>
 		)
 	})}
-
-	console.log(menuDetail);
 
 	return (
 		<Wrapper>

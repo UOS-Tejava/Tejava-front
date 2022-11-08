@@ -32,22 +32,22 @@ const testStyleList = [
 
 const MenuDetailPage = (props) => {
 	const location = useLocation();
-	const [menuDetail, setMenuDetail] = useState(location.state.detail);
+	// const [menuDetail, setMenuDetail] = useState(location.state.detail);
 	const [styleList, setStyleList] = useState([]);
 	const [optionList, setOptionsList] = useState([]);
 
 	useEffect(()=>{
-		fetch('/order/showAllStyles/menuId/' + menuDetail.id)
+		fetch('/order/showAllStyles/menuId/' + location.state.idx)
 		.then(res => res.json())
 		.then(data => setStyleList(data));
-		fetch('/order/showAllOptions/menuId/' + menuDetail.id)
+		fetch('/order/showAllOptions/menuId/' + location.state.idx)
 		.then(res => res.json())
 		.then(data => setOptionsList(data));
 	}, []);
 
 	return (
 		<Wrapper>
-			<MenuImage />
+			<MenuImage menuDetail={location.state.detail} />
 			<MenuOptions
 				menuDetail={location.state.detail}
 				styleList={styleList}

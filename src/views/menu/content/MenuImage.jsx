@@ -1,44 +1,48 @@
 import styled from "@emotion/styled";
 
 const MenuImage = (props) => {
+	const menuDetail = props.menuDetail;
 	return (
 		<Wrapper>
-			<TextWrapper>{props.name}샴페인 축제 디너</TextWrapper>
-			<MenuConfigWrapper>{props.config}
-				샴페인, 바게트빵 4개, 커피 한 포트, 와인, 스테이크
+			<TextWrapper>{menuDetail.menu_nm}</TextWrapper>
+			<MenuConfigWrapper>
+				{menuDetail.menu_config}
 			</MenuConfigWrapper>
-			<ImageBox />
+			<ImageBox source={menuDetail.menu_pic} />
 		</Wrapper>
 	);
 }
 
 const Wrapper = styled.div`
 	height: 100%;
-	width: 50%;
+	width: 40%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	float: left;
+	margin-left: 40px;
 `;
 
 const ImageBox = styled.div`
-	min-width: 350px;
-	height: 300px;
+	min-width: 440px;
+	height: 330px;
 	background: yellow;
+	background-image: ${(props) => `url(${props.source})`};
+	background-size: cover;
 `;
 
 const TextWrapper = styled.div`
 	font-size: 2em;
 	font-family: "Apple SD Gothic Neo";
 	font-weight: bold;
-	min-width: 350px;
+	min-width: 420px;
 `;
 
 const MenuConfigWrapper = styled.div`
 	font-size: 1em;
 	font-family: "Apple SD Gothic Neo";
-	min-width: 350px;
+	min-width: 420px;
 	margin: 10px;
 `;
 
