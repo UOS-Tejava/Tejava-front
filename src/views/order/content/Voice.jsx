@@ -20,7 +20,6 @@ const Voice = () => {
 			autoplay: false,
 		});
 		anim.addEventListener("DOMLoaded", (e) => {
-			console.log(e);
 			if (listening)
 				anim.play();
 			else

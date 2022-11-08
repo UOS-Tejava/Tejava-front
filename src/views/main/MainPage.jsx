@@ -1,9 +1,15 @@
 import { Button } from "@mui/material";
 import styled from "@emotion/styled";
 import PrevOrderBox from "./content/PrevOrderBox";
+import { useEffect } from "react";
 
 
 const MainPage = () => {
+	useEffect(() => {
+		fetch('/')
+		.then(res => res.json())
+		.then(data => console.log(data))
+	})
 	return (
 		<Wrapper>
 			<Banner />

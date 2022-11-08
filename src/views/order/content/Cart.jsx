@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import CartItem from "./CartItem";
 import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
 import TimePicker from "../../../components/select/TimePicker";
+import { motion } from "framer-motion";
 
 const Cart = (props) => {
 	const close = () => props.setModal(false);
@@ -31,6 +32,9 @@ const Cart = (props) => {
 				<TimePicker />
 			</SelectionBoxWrapper>
 			<TextWrapper>결제 금액</TextWrapper>
+			<ButtonWrapper>
+				<OrderButton>주문하기</OrderButton>
+			</ButtonWrapper>
 		</CartWrapper>
 	)
 }
@@ -76,7 +80,27 @@ const TextWrapper = styled.div`
 
 const SelectionBoxWrapper = styled.div`
 	width: 80%;
-	padding-left: 3%;
+	padding-left: 5%;
+`;
+
+const ButtonWrapper = styled.div`
+	width: 90%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`;
+
+const OrderButton = styled(motion.button)`
+	width: 60%;
+	height: 40px;
+	margin: 20px;
+	border: hidden;
+	border-radius: 20px;
+	color: white;
+	font-size: 1.0em;
+	font-family: "Apple SD Gothic Neo";
+	font-weight: bold;
+	background: black;
 `;
 
 export default Cart;

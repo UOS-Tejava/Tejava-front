@@ -10,7 +10,7 @@ const Header = ({ children }) => {
 	const navList = [];
 	for (const h in headers){
 		navList.push(
-			<HeaderMenu name={h} value={headers[h]}>hi</HeaderMenu>
+			<HeaderMenu name={h} value={headers[h]} />
 		)
 	}
 	return (
@@ -22,7 +22,7 @@ const Header = ({ children }) => {
 				{children}
 				{navList}
 				<div style={{ display: 'flex', width:'100%', justifyContent: 'flex-end', marginRight: '20px' }}>
-					<HeaderButton>sign in</HeaderButton>
+					<HeaderButton onClick={()=>window.location.href="/testlogin"}>sign in</HeaderButton>
 					<HeaderButton>sign up</HeaderButton>
 				</div>
 			</HeaderBox>
