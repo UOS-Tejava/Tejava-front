@@ -5,6 +5,10 @@ import TimePicker from "../../../components/select/TimePicker";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
+const toPriceString = (item) => {
+	return item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 const Cart = (props) => {
 	const close = () => props.setModal(false);
 	const open = () => props.setModal(true);
@@ -18,8 +22,8 @@ const Cart = (props) => {
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({ userId: 1 })
-		}) // TODO: userId 불러오는 부분 구현하기
+			body: JSON.stringify({ userId: JSON.parse(localStorage.getItem('user')).id })
+		})
 		.then(res => res.json())
 		.then(data => setCart(data))
 		.catch(err => console.log(err));
@@ -36,28 +40,30 @@ const Cart = (props) => {
 
 	let discount = 0;
 	// if 단골이면 price의 10퍼
+	if (localStorage.getItem('user') && JSON.parse(localStorage.getItem('user')).order_cnt >= 0) // 5로 바꿔
+		discount = price * 0.1;
 	let totalPrice = price - discount;
 	
-	// const order = async () => {
-	// 	await fetch('/order/placeOrder',{
-	// 		method: 'POST',
-	// 		headers: {
-	// 			"Content-Type": "application/json",
-	// 		},
-	// 		body: JSON.stringify({
-	// 			"req_orderDateTime": time,
-	// 			"total_price": price,
-	// 			"userId": 1 // TODO: 수정
-	// 		})
-	// 	})
-	// 	.then(res => {
-	// 		// res.json();
-	// 		// window.location.href = "/" // TODO: payment로 이동
-	// 	})
-	// 	.catch(err => console.log(err));
-	// } 
+	const order = async () => {
+		await fetch('/order/placeOrder',{
+			method: 'POST',
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				"req_orderDateTime": time,
+				"total_price": totalPrice,
+				"userId": 1 // TODO: 수정
+			})
+		})
+		.then(res => {
+			// res.json();
+			// window.location.href = "/" // TODO: payment로 이동
+		})
+		.catch(err => console.log(err));
+	} 
 
-	// console.log(time);
+	console.log(time);
 
 	return (
 		<CartWrapper>
@@ -78,11 +84,24 @@ const Cart = (props) => {
 				<TimePicker setTime={setTime} />
 			</SelectionBoxWrapper>
 			<TextWrapper>결제 금액</TextWrapper>
-			{price}
-			<div>할인액</div>
+			<PriceWrapper>
+				<PriceBox>
+					<PriceName>총 금액</PriceName>
+					<Price color="black">{toPriceString(price) + " 원"}</Price>
+				</PriceBox>
+				<PriceBox>
+					<PriceName>단골 할인</PriceName>
+					<Price color="red">{"- " + toPriceString(discount) + " 원"}</Price>
+				</PriceBox>
+				<PriceBox>
+					<PriceName>결제 예정 금액</PriceName>
+					<Price color="black">{toPriceString(totalPrice) + " 원"}</Price>
+				</PriceBox>
+			</PriceWrapper>
 			<ButtonWrapper>
 				<OrderButton
-				>총 {price}원 주문하기</OrderButton>
+					onClick={order}
+				>총 {toPriceString(totalPrice)}원 주문하기</OrderButton>
 			</ButtonWrapper>
 		</CartWrapper>
 	)
@@ -150,6 +169,40 @@ const OrderButton = styled(motion.button)`
 	font-family: "Apple SD Gothic Neo";
 	font-weight: bold;
 	background: black;
+`;
+
+const PriceBox = styled.div`
+	width: 100%;
+	height: 30px;
+	display: flex;
+	align-items: center;
+`;
+
+const PriceWrapper = styled.div`
+	width: 80%;
+	height: 200px;
+	display: flex;
+	flex-direction: column;
+	margin-left: 10px;
+`;
+
+const PriceName = styled.div`
+	font-size: 1em;
+	font-family: "Apple SD Gothic Neo";
+	font-weight: bold;
+	margin-left: 20px;
+	width: 60%;
+`;
+
+const Price = styled.div`
+	font-size: 1em;
+	font-family: "Apple SD Gothic Neo";
+	// color : #0174DF;
+	color: ${(props) => (props.color)};
+	width: 40%;
+	float: right;
+	display: flex;
+	justify-content: flex-end;
 `;
 
 export default Cart;

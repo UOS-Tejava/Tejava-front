@@ -13,6 +13,14 @@ const Header = ({ children }) => {
 			<HeaderMenu name={h} value={headers[h]} />
 		)
 	}
+
+	const logout = () => {
+		fetch('logout');
+		localStorage.clear();
+		window.location.replace("/");
+	};
+
+
 	return (
 		<Wrapper>
 			<HeaderBox>
@@ -21,10 +29,19 @@ const Header = ({ children }) => {
 				</Logo>
 				{children}
 				{navList}
-				<div style={{ display: 'flex', width:'100%', justifyContent: 'flex-end', marginRight: '20px' }}>
-					<HeaderButton onClick={()=>window.location.href="/testlogin"}>sign in</HeaderButton>
-					<HeaderButton>sign up</HeaderButton>
-				</div>
+				{
+					localStorage.getItem('user') === null &&
+					<div style={{ display: 'flex', width:'100%', justifyContent: 'flex-end', marginRight: '20px' }}>
+						<HeaderButton onClick={()=>window.location.href="/testlogin"}>sign in</HeaderButton>
+						<HeaderButton>sign up</HeaderButton>
+					</div>
+				}
+				{
+					localStorage.getItem('user') &&
+					<div style={{ display: 'flex', width:'100%', justifyContent: 'flex-end', marginRight: '20px' }}>
+						<HeaderButton onClick={()=>{logout()}}>logout</HeaderButton>
+					</div>
+				}
 			</HeaderBox>
 		</Wrapper>
 	)

@@ -38,14 +38,13 @@ const MenuOptions = (props) => {
 		setMenuDetail({...menuDetail, price: price + style.price})
 	}, [price]);
 
-	console.log()
 	const addToCart = () => {
 		fetch('/cart/add', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify({menu: menuDetail, userId: 1}) //userid 불러오는 법
+			body: JSON.stringify({menu: menuDetail, userId: JSON.parse(localStorage.getItem('user')).id})
 		})
 		.then(res => window.location.href = '/order')
 		.catch(err => console.log(err));
