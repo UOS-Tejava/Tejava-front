@@ -14,11 +14,25 @@ const Header = ({ children }) => {
 		)
 	}
 
-	const logout = () => {
-		fetch('logout');
+	const logout = async () => {
+		await fetch('/logout');
+		await fetch('/', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			}
+		})
+		.then(res => res.json())
+		.then(data => {
+			localStorage.setItem('user', JSON.stringify(data));
+			window.location.replace("/");
+		})
+		.catch(err => console.log(err));
 		localStorage.clear();
-		window.location.replace("/");
+
 	};
+
+	const user = JSON.parse(localStorage.getItem('user'));
 
 
 	return (
@@ -30,14 +44,14 @@ const Header = ({ children }) => {
 				{children}
 				{navList}
 				{
-					localStorage.getItem('user') === null &&
+					(user === null || user.uid === '비회원') && //TODO: 비회원
 					<div style={{ display: 'flex', width:'100%', justifyContent: 'flex-end', marginRight: '20px' }}>
 						<HeaderButton onClick={()=>window.location.href="/testlogin"}>sign in</HeaderButton>
 						<HeaderButton>sign up</HeaderButton>
 					</div>
 				}
 				{
-					localStorage.getItem('user') &&
+					(user && user.uid !== '비회원') &&
 					<div style={{ display: 'flex', width:'100%', justifyContent: 'flex-end', marginRight: '20px' }}>
 						<HeaderButton onClick={()=>{logout()}}>logout</HeaderButton>
 					</div>

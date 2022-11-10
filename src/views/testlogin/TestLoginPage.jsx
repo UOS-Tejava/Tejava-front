@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useCookies } from 'react-cookie';
 
 const requestLogin = (userId, userPw)=>{
-	
 	fetch('/login', {
 		method: 'POST',
 		headers: {

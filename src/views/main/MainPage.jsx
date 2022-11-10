@@ -1,14 +1,23 @@
-import { Button } from "@mui/material";
 import styled from "@emotion/styled";
 import PrevOrderBox from "./content/PrevOrderBox";
 import { useEffect } from "react";
 
-
 const MainPage = () => {
 	useEffect(() => {
-		fetch('/')
-		.then(data => console.log(data))
-	})
+		// if (!localStorage.getItem('user')){
+			fetch('/', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: {}
+			})
+			.then(res => res.json())
+			.then(data => localStorage.setItem('user', JSON.stringify(data)))
+			.catch(err => console.log(err));
+		// }
+	}, []);
+
 	return (
 		<Wrapper>
 			<Banner />

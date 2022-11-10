@@ -17,13 +17,7 @@ const Cart = (props) => {
 	const [time, setTime] = useState("");
 
 	useEffect(() => {
-		fetch('/cart', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({ userId: JSON.parse(localStorage.getItem('user')).id })
-		})
+		fetch('/cart')
 		.then(res => res.json())
 		.then(data => setCart(data))
 		.catch(err => console.log(err));
@@ -45,7 +39,7 @@ const Cart = (props) => {
 	let totalPrice = price - discount;
 	
 	const order = async () => {
-		await fetch('/order/placeOrder',{
+		await fetch('/order/place-order',{
 			method: 'POST',
 			headers: {
 				"Content-Type": "application/json",
@@ -62,8 +56,6 @@ const Cart = (props) => {
 		})
 		.catch(err => console.log(err));
 	} 
-
-	console.log(time);
 
 	return (
 		<CartWrapper>

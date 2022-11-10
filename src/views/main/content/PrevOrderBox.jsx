@@ -5,15 +5,7 @@ import PrevOrderList from "./PrevOrderList";
 const PrevOrderBox = (props) => {
 	const [prevOrderList, setPrevOrderList] = useState([]);
 	useEffect(() => {
-		fetch('/order/history', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				userId: JSON.parse(localStorage.getItem('user')).id
-			})
-		})
+		fetch('/order/history')
 		.then(res => res.json())
 		.then(data => setPrevOrderList(data))
 		.catch(err => console.log(err));
