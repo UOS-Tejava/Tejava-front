@@ -8,7 +8,7 @@ const toPriceString = (item) => {
 
 const MenuBox = (props) => {
 	const item = props.item;
-	console.log(item.menu_pic);
+
 	return (
 		<Wrapper
 			whileHover={{ scale : 1.02 }}

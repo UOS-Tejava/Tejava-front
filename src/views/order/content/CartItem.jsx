@@ -19,18 +19,10 @@ const CartItem = (props) => {
 	else
 		idx = 4;
 	const deleteMenu = (id) => {
-		fetch('/cart/delete-one',{
-			method: 'DELETE',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				menuId: id,
-				userId: JSON.parse(localStorage.getItem('user')).id
-			})
+		fetch('/cart/delete-one/menuId/' + id, {
+			method: 'DELETE'
 		})
-		.then(res => res.json())
-		.then(data => console.log(data))
+		.then(data => window.location.reload()) // TODO: 새로고침 안 되도록
 		.catch(err => console.log(err))
 	};
 
@@ -50,7 +42,7 @@ const CartItem = (props) => {
 			</MenuInfoWrapper>
 			<ItemPrice>{toPriceString(item.price) + " 원"}</ItemPrice>
 			<ItemButton
-				onClick={() => deleteMenu(item.id)}
+				onClick={() => deleteMenu(item.menuId)}
 			>
 				<DeleteForever />
 			</ItemButton>

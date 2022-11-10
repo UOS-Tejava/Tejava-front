@@ -44,7 +44,6 @@ const CartAddModal = ({ children, close, add }) => {
 					<SubmitButton
 						onClick={() => {
 							add();
-							window.location.href = "/order";
 					}}>✓</SubmitButton>
 					<CancelButton onClick={close}>✗</CancelButton>
 				</ButtonWrapper>

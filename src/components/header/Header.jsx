@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { useNavigate } from "react-router";
 import HeaderMenu from "./HeaderMenu";
 
 const headers = {
@@ -7,6 +8,7 @@ const headers = {
 }
 
 const Header = ({ children }) => {
+	
 	const navList = [];
 	for (const h in headers){
 		navList.push(

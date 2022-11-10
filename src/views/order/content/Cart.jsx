@@ -19,7 +19,9 @@ const Cart = (props) => {
 	useEffect(() => {
 		fetch('/cart')
 		.then(res => res.json())
-		.then(data => setCart(data))
+		.then(data => {
+			console.log(data);
+			setCart(data)})
 		.catch(err => console.log(err));
 	}, []);
 

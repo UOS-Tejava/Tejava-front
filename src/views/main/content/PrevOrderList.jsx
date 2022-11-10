@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import CartAddModal from "../../../components/modal/CartAddModal";
 import Modal from "../../../components/modal/Modal";
 
@@ -11,6 +12,8 @@ const toPriceString = (item) => {
 const PrevOrderList = (props) => {
 	const menu = props.menu;
 	const [modalOpen, setModalOpen] = useState(false);
+
+	const navigate = useNavigate();
 
 	const addToCart = async (menuDetail) => {
 		await fetch('/cart/add', {
@@ -23,7 +26,7 @@ const PrevOrderList = (props) => {
 				userId: JSON.parse(localStorage.getItem('user')).id
 			})
 		})
-		.then(res => window.location.href = "/order")
+		.then(res => navigate("/order"))
 		.catch(err => console.log(err))
 	};
 
