@@ -2,13 +2,15 @@ import styled from "@emotion/styled";
 import HeaderMenu from "./HeaderMenu";
 
 const headers = {
-	"홈" : "",
-	"주문하기" : "order",
+	"홈": "",
+	"주문하기": "order",
+	"주문내역": "orderhistory"
 }
 
 const Header = ({ children }) => {
+
 	const navList = [];
-	for (const h in headers){
+	for (const h in headers) {
 		navList.push(
 			<HeaderMenu name={h} value={headers[h]} />
 		)
@@ -16,14 +18,14 @@ const Header = ({ children }) => {
 	return (
 		<Wrapper>
 			<HeaderBox>
-				<Logo onClick={() => {window.location.href="/"}}>
+				<Logo onClick={() => { window.location.href = "/" }}>
 					LOGO
 				</Logo>
 				{children}
 				{navList}
-				<div style={{ display: 'flex', width:'100%', justifyContent: 'flex-end', marginRight: '20px' }}>
-					<HeaderButton onClick={()=>window.location.href="/testlogin"}>sign in</HeaderButton>
-					<HeaderButton>sign up</HeaderButton>
+				<div style={{ display: 'flex', width: '100%', justifyContent: 'flex-end', marginRight: '20px' }}>
+					<HeaderButton onClick={() => window.location.href = "/login"}>sign in</HeaderButton>
+					<HeaderButton onClick={() => window.location.href = "/signup"}>sign up</HeaderButton>
 				</div>
 			</HeaderBox>
 		</Wrapper>
