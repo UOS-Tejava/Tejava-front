@@ -19,7 +19,7 @@ let registerInfo = {
   "phoneCheck": true,
   "phoneNo": "string",
   "pwd": "string",
-  "registerAsAdmin": true,
+  "registerAsAdmin": false,
   "uid": "string"
 }
 
@@ -43,6 +43,7 @@ function Signup() {
               if (e.target.value == registerInfo.pwd) {
                 setVisible(true);
               } else setVisible(false)
+              registerInfo.matchingPwd = e.target.value;
             }} />
             {visible == true ? <div>비밀번호가 일치합니다</div> : null}
             <MDBInput wrapperClass='mb-4' label='연락처' size='lg' id='form4' type='tel' onChange={(e) => { registerInfo.phoneNo = e.target.value }} />
@@ -53,8 +54,13 @@ function Signup() {
               }} />
             </div>
             <MDBBtn className='mb-4 w-100 gradient-custom-4' size='lg' onClick={()=>{
-              axios.post('/user/register', registerInfo)
-
+              axios.post('/user/register', JSON.stringify(registerInfo), {
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+              })
+              .then(res => console.log(res))
+              .catch(err => console.log(err))
             }}>등록</MDBBtn>
           </MDBCardBody>
         </MDBCard>
