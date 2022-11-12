@@ -53,7 +53,7 @@ function Signup() {
               }} />
             </div>
             <MDBBtn className='mb-4 w-100 gradient-custom-4' size='lg' onClick={()=>{
-              axios.post('http://43.200.93.146:8080/user/register', registerInfo).then((res)=>{console.log(res);})
+              axios.post('/api/user/register', registerInfo)
 
             }}>등록</MDBBtn>
           </MDBCardBody>
