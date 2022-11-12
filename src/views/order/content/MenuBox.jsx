@@ -41,7 +41,6 @@ const Wrapper = styled(motion.div)`
 const ImageWrapper = styled.div`
 	width: 80%;
 	height: 50%;
-	background: yellow;
 	margin-top: 15px;
 	background-image: ${(props) => `url(${props.source})`};
 	background-size: cover;

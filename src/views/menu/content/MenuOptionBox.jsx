@@ -54,7 +54,6 @@ const Wrapper = styled.div`
 const ImageBox = styled.div`
 	width: 130px;
 	height: 50%;
-	background: yellow;
 	background-image: ${(props) => `url(${props.source})`};
 	background-size: cover;
 `;

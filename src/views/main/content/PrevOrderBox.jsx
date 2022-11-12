@@ -10,7 +10,6 @@ const PrevOrderBox = (props) => {
 		.then(data => setPrevOrderList(data))
 		.catch(err => console.log(err));
 	}, []);
-	// console.log(prevOrderList);
 	let prevList = [];
 	prevOrderList.map((item) => {
 		prevList.push(

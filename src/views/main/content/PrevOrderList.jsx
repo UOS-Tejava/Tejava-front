@@ -77,7 +77,6 @@ const Wrapper = styled.div`
 const ImageWrapper = styled.div`
 	width: 80%;
 	height: 100px;
-	background: yellow;
 	background-image: ${props => `url(${props.source})`};
 	background-size: cover;
 `;

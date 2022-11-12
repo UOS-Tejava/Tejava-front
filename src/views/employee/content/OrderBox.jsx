@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
+import OrderBoxInfo from "./OrderBoxInfo";
 
 const convertStatus = (status) => {
 	if (status === 'pending')
@@ -12,20 +13,6 @@ const convertStatus = (status) => {
 	else if (status === 'completed')
 		return '배달 완료'
 	return '';
-}
-
-const changeStatus = (id, status) => {
-	fetch('/employee/order-status',{
-		method: 'PATCH',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify({
-			orderId: id,
-			orderStatus: status,
-			userId: JSON.parse(localStorage.getItem('user')).id
-		})
-	})
 }
 
 const OrderBox = (props) => {
@@ -40,139 +27,89 @@ const OrderBox = (props) => {
 	})
 
 	return (
-		<Wrapper
-			animate={{
-				height: open ? 300 : 150,
-			}}
-			onClick={() => setOpen((open) => !open)}
+		<Wrapper>
+		<ListWrapper
+		layout
+		onClick={() => setOpen((open) => !open)}
 		>
-			{
-				!open &&
-				<>
-					<InfoWrapper>
-						<TextWrapper>
-							<ItemName>주문자명</ItemName>
-							<ItemText>{orderDetail.customerName}</ItemText>
-						</TextWrapper>
-						<TextWrapper>
-							<ItemName>배달 주소</ItemName>
-							<ItemText>{orderDetail.customerAddress}</ItemText>
-						</TextWrapper>
-						<TextWrapper>
-							<ItemName>배달 요청 시간</ItemName>
-							<ItemText>{orderDetail.req_orderDateTime}</ItemText>
-						</TextWrapper>
-						<TextWrapper>
-							<ItemName>총 가격</ItemName>
-							<ItemText>{orderDetail.totalPrice}</ItemText>
-						</TextWrapper>
-					</InfoWrapper>
-					<StatusWrapper>{convertStatus(orderDetail.orderStatus)}</StatusWrapper>
-				</>
-			}
+			<InfoWrapper layout>
+				<TextWrapper style={{width:'25%'}}>
+					<ItemText>{convertStatus(orderDetail.orderStatus)}</ItemText>
+				</TextWrapper>
+				<TextWrapper style={{width:'20%'}}>
+					<ItemText>{orderDetail.customerName}</ItemText>
+				</TextWrapper>
+				<TextWrapper style={{width:'40%'}}>
+					<ItemText>{orderDetail.orderedDate}</ItemText>
+				</TextWrapper>
+				<TextWrapper style={{width:'40%'}}>
+					<ItemText>{orderDetail.req_orderDateTime}</ItemText>
+				</TextWrapper>
+				<TextWrapper>
+					<ItemText>{orderDetail.totalPrice}</ItemText>
+				</TextWrapper>
+			</InfoWrapper>
+		</ListWrapper>
+			<AnimatePresence>
 			{
 				open &&
-				<>
-				<InfoWrapper>
-					<TextWrapper>
-						<ItemName>주문 일시</ItemName>
-						<ItemText>{orderDetail.orderedDate}</ItemText>
-					</TextWrapper>
-					<TextWrapper>
-						<ItemName>주문자명</ItemName>
-						<ItemText>{orderDetail.customerName}</ItemText>
-					</TextWrapper>
-					<TextWrapper>
-						<ItemName>배달 주소</ItemName>
-						<ItemText>{orderDetail.customerAddress}</ItemText>
-					</TextWrapper>
-					<TextWrapper>
-						<ItemName>메뉴</ItemName>
-						<MenuList>
-							{menuList}
-						</MenuList>
-					</TextWrapper>
-					<TextWrapper>
-						<ItemName>총 가격</ItemName>
-						<ItemText>{orderDetail.totalPrice}</ItemText>
-					</TextWrapper>
-					<TextWrapper>
-						<ItemName>배달 요청 일시</ItemName>
-						<ItemText>{orderDetail.req_orderDateTime}</ItemText>
-					</TextWrapper>
-				</InfoWrapper>
-				<StatusButton
-					onClick={() => {
-						changeStatus(orderDetail.orderId, 'cooking');
-					}}
-				>{convertStatus(orderDetail.orderStatus)}</StatusButton>
-				</>
+				<SubWrapper
+					layout
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					exit={{ opacity: 0 }}
+					transition={{ duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
+				>
+					<OrderBoxInfo item={orderDetail} menu={orderDetail.menuDTOList} />
+				</SubWrapper>
 			}
-		</Wrapper>
+			</AnimatePresence>
+			</Wrapper>
 	);
 }
 
-const Wrapper = styled(motion.div)`
-	width: 600px;
-	border: solid black;
-	margin-top: 10px;
-	border-radius: 10px;
-	// height: 150px;
+const Wrapper = styled.div`
+	width: 900px;
+`;
+
+const ListWrapper = styled(motion.li)`
+	width: 100%;
+	height: 50px;
+	border-bottom: solid gray 0.1px;
 	displey: flex;
 	align-items: center;
 	justify-content: center;
-	padding: 10px;
+	overflow: hidden;
+	cursor: pointer;
+	// background-color: rgba(214, 214, 214, 0.5);
+	overflow: hidden;
+	cursor: pointer;
 `;
 
-const InfoWrapper = styled.div`
-	width: 73%;
+const InfoWrapper = styled(motion.div)`
+	width: 100%;
 	height: 90%;
 	display: flex;
-	flex-direction: column;
+	// flex-direction: column;
 	justify-content: center;
 	float: left;
-	margin: 7px;
 `;
 
 const TextWrapper = styled.div`
 	width: 380px;
-	margin: 10px;
-	display: flex;
-`;
-
-const StatusWrapper = styled.div`
-	width: 23%;
-	background: skyblue;
-	height: 50%;
-	float: left;
-	margin-top: 40px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	border-radius: 10px;
+	margin-top: 10px;
 `;
 
-const StatusButton = styled.button`
-	width: 23%;
-	background: skyblue;
-	height: 50%;
-	float: left;
-	margin-top: 75px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border-radius: 10px;
-`;
-
-const ItemName = styled.div`
-	font-size: 1.0em;
-	font-family: "Apple SD Gothic Neo";
-	font-weight: bold;
-	width: 30%;
+const SubWrapper = styled(motion.div)`
+	height: 230px;
+	width: 100%;
 `;
 
 const ItemText = styled.div`
-	font-size: 1.0em;
+	font-size: 0.9em;
 	font-family: "Apple SD Gothic Neo";
 	width: 60%;
 `;
