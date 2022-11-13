@@ -10,37 +10,17 @@ import {
 	MDBIcon,
 	MDBCheckbox
 } from 'mdb-react-ui-kit';
-
-
-const requestLogin = (userId, userPw) => {
-	fetch('/login', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify({
-			"pwd": userPw,
-			"staySignedIn": true,
-			"uid": userId
-		})
-	})
-		.then(res => {
-			res.json();
-			window.location.href = "/"
-		});
-}
+import axios from 'axios';
 
 function LoginBox() {
-	const [userId, setUserId] = useState("");
-	const [userPw, setUserPw] = useState("");
-	const submitLogin = () => {
-		requestLogin(userId, userPw);
-		//post하기
+	let loginInfo = {
+		uid: '',
+		pwd: '',
+		staySignedIn: false
 	}
+
 	return (
-
 		<MDBContainer fluid>
-
 			<MDBRow className='d-flex justify-content-center align-items-center h-100'>
 				<MDBCol col='12'>
 
@@ -50,16 +30,16 @@ function LoginBox() {
 							<h2 className="fw-bold mb-2 text-uppercase">로그인</h2>
 							<p className="mb-5">아이디와 비밀번호를 입력하세요</p>
 
-							<MDBInput wrapperClass='mb-4 mx-5 w-100' label='ID' id='formControlLg' type='email' size="lg" />
-							<MDBInput wrapperClass='mb-4 mx-5 w-100' label='Password' id='formControlLg' type='password' size="lg" />
+							<MDBInput wrapperClass='mb-4 mx-5 w-100' label='ID' id='formControlLg' type='email' size="lg" onChange={(e) => { loginInfo.uid = e.target.value }} />
+							<MDBInput wrapperClass='mb-4 mx-5 w-100' label='Password' id='formControlLg' type='password' size="lg" onChange={(e) => { loginInfo.pwd = e.target.value }} />
 
-							<MDBCheckbox label='로그인 상태 유지' />
+							<MDBCheckbox label='로그인 상태 유지' onClick={() => { loginInfo.staySignedIn = !(loginInfo.staySignedIn) }} />
 							<MDBCheckbox label='직원 로그인' />
 
 							<span className="small"><a class="" href="#!" >아이디 찾기 </a></span>
 							<span className="small"><a class="" href="#!" >비밀번호 찾기</a></span>
 
-							<MDBBtn outline className='mx-2 px-5' color='primary' size='lg' style={{ margin: '20px' }}>
+							<MDBBtn outline className='mx-2 px-5' color='primary' size='lg' style={{ margin: '20px' }} onClick={() => { axios.post('/login',loginInfo).then((res)=>{console.log(res);}) }}>
 								로그인
 							</MDBBtn>
 

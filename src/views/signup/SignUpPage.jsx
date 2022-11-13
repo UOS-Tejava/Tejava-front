@@ -11,16 +11,16 @@ import {
   from 'mdb-react-ui-kit';
 
 let registerInfo = {
-  "address": "string",
-  "adminVerificationCode": "string",
-  "agreement": false,
-  "matchingPwd": "string",
-  "name": "string",
-  "phoneCheck": true,
-  "phoneNo": "string",
-  "pwd": "string",
-  "registerAsAdmin": false,
-  "uid": "string"
+  address: "string",
+  adminVerificationCode: "string",
+  agreement: false,
+  matchingPwd: "string",
+  name: "string",
+  phoneCheck: true,
+  phoneNo: "string",
+  pwd: "string",
+  registerAsAdmin: false,
+  uid: "string"
 }
 
 
@@ -36,7 +36,14 @@ function Signup() {
           <MDBCardBody className='px-5'>
             <h2 className="text-uppercase text-center mb-5">회원가입</h2>
             <MDBInput wrapperClass='mb-4' label='아이디' size='lg' id='form1' type='text' onChange={(e) => { registerInfo.uid = e.target.value }} />
-            <MDBBtn className='btn btn-info mb-3'>중복확인</MDBBtn>
+            <MDBBtn className='btn btn-info mb-3' onClick={() => {
+              axios.get(`​/user​/duplication-check​/uid​/${registerInfo.uid}`)
+                .then((res) => {
+                  console.log(res);
+                  if (res == true) alert('아이디 중복'); else alert('사용할 수 있는 아이디입니다')
+                })
+                .catch((err) => { console.log(err); })
+            }}>중복확인</MDBBtn>
             <MDBInput wrapperClass='mb-4' label='이름' size='lg' id='form2' type='email' onChange={(e) => { registerInfo.name = e.target.value }} />
             <MDBInput wrapperClass='mb-4' label='비밀번호' size='lg' id='form3' type='password' onChange={(e) => { registerInfo.pwd = e.target.value }} />
             <MDBInput wrapperClass='mb-4' label='비밀번호 확인' size='lg' id='form4' type='password' onChange={(e) => {
@@ -53,14 +60,14 @@ function Signup() {
                 registerInfo.agreement = !(registerInfo.agreement);
               }} />
             </div>
-            <MDBBtn className='mb-4 w-100 gradient-custom-4' size='lg' onClick={()=>{
+            <MDBBtn className='mb-4 w-100 gradient-custom-4' size='lg' onClick={() => {
               axios.post('/user/register', JSON.stringify(registerInfo), {
                 headers: {
                   'Content-Type': 'application/json',
                 },
               })
-              .then(res => console.log(res))
-              .catch(err => console.log(err))
+                .then(res => console.log(res))
+                .catch(err => console.log(err))
             }}>등록</MDBBtn>
           </MDBCardBody>
         </MDBCard>
