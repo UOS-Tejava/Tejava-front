@@ -69,11 +69,11 @@ const OrderBoxInfo = (props) => {
 	);
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled(motion.div)`
 	width: 100%;
 	display: flex;
 	height: 100%;
-	// border-bottom: solid gray 0.1px;
+	border-bottom: solid gray 0.1px;
 	background-color: rgba(214, 214, 214, 0.3);
 `;
 

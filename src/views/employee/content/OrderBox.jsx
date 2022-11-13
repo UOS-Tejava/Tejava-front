@@ -29,8 +29,8 @@ const OrderBox = (props) => {
 	return (
 		<Wrapper>
 		<ListWrapper
-		layout
-		onClick={() => setOpen((open) => !open)}
+			layout
+			onClick={() => setOpen((open) => !open)}
 		>
 			<InfoWrapper layout>
 				<TextWrapper style={{width:'25%'}}>
@@ -54,13 +54,22 @@ const OrderBox = (props) => {
 			{
 				open &&
 				<SubWrapper
-					layout
-					initial={{ opacity: 0 }}
-					animate={{ opacity: 1 }}
-					exit={{ opacity: 0 }}
+					// layout
+					// initial={{ opacity: 0 }}
+					// animate={{ opacity: 1 }}
+					// exit={{ opacity: 0 }}
 					transition={{ duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
+					initial={{ opacity: 0 }}
+					animate={{
+						height : open ? 300 : 0,
+						opacity: 1
+					}}
+					exit={{
+						height: 0,
+						opacity: 0
+					}}
 				>
-					<OrderBoxInfo item={orderDetail} menu={orderDetail.menuDTOList} />
+					<OrderBoxInfo item={orderDetail} menu={orderDetail.menuDTOList} open={open} />
 				</SubWrapper>
 			}
 			</AnimatePresence>

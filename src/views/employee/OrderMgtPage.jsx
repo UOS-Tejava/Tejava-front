@@ -4,40 +4,69 @@ import { useEffect } from "react";
 import { useState } from "react";
 import OrderBox from "./content/OrderBox";
 import { motion } from "framer-motion";
-import { FormControl, NativeSelect } from "@mui/material";
+import { FormControl, InputLabel, MenuItem, NativeSelect, Select } from "@mui/material";
 
 const OrderMgtPage = () => {
+	const [data, setData] = useState([]);
 	const [orderList, setOrderList] = useState([]);
+	const [orderBoxList, setOrderBoxList] = useState([]);
+	const [mode, setMode] = useState("all");
+
 	useEffect(() => {
 		fetch('/employee/orders')
 		.then(res => res.json())
 		.then(data => {
-			// console.log(data);
-			setOrderList(data)
+			data = data.sort((a, b) => b.orderId - a.orderId);
+			setData(data);
+			setOrderList(data);
 		})
 		.catch(err => console.log(err));
 	}, []);
 
-	let orderBoxList = [];
-	orderList.map((item) => {
-		orderBoxList.push(
-			<OrderBox orderDetail={item} />
-		);
-	});
+	useEffect(() => {
+		if (mode !== "all")
+			setOrderList(data.filter(d => d.orderStatus === mode));
+		else
+			setOrderList(data);
+	}, [mode]);
+
+	useEffect(() => {
+		let newList = [];
+		orderList.map((item) => {
+			newList.push(
+				<OrderBox orderDetail={item} />
+			);
+		});
+		setOrderBoxList(newList);
+	}, [orderList]);
+
+	const handleChange = (event) => {
+		setMode(event.target.value);
+	};
 
 	return (
 		<>
+		<Wrapper>
 		<Header>
 			<Text>주문 관리</Text>
-			{/* <FormControl>
-				<NativeSelect
-					defaultValue="선택하기"
+			<FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+				<InputLabel id="demo-simple-select-standard-label">주문상태</InputLabel>
+				<Select
+					labelId="demo-simple-select-standard-label"
+					id="demo-simple-select-standard"
+					value={mode}
+					onChange={handleChange}
+					label="Age"
 				>
-
-				</NativeSelect>
-			</FormControl> */}
+				<MenuItem value={"all"}>전체</MenuItem>
+				<MenuItem value={"pending"}>접수 대기중</MenuItem>
+				<MenuItem value={"cooking"}>조리 중</MenuItem>
+				<MenuItem value={"delivering"}>배달 중</MenuItem>
+				<MenuItem value={"completed"}>완료</MenuItem>
+				</Select>
+			</FormControl>
 		</Header>
-		<Wrapper>
+		
 			<TableHeader>
 				<TextWrapper style={{width:'25%'}}>
 					<ItemText>주문상태</ItemText>
@@ -56,33 +85,32 @@ const OrderMgtPage = () => {
 				</TextWrapper>
 			</TableHeader>
 			
-			<AnimateSharedLayout>
-				<UlWrapper layout>
+			{/* <AnimateSharedLayout> */}
+				<UlWrapper
+				// layout transition={{ duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
+				>
 				{
-					orderList &&
+					data &&
 					orderBoxList
 				}
 				</UlWrapper>
-			</AnimateSharedLayout>
+			{/* </AnimateSharedLayout> */}
 		</Wrapper>
 		</>
 	)
 }
 
 const Wrapper = styled.div`
-	height: 75vh;
+	height: 88vh;
 	display: flex;
 	flex-direction: column;
 	width: 100%;
 	align-items: center;
-	margin-top: 20px;
 `;
 
 const Header = styled.div`
-	height: 10px;
 	display: flex;
 	width: 900px;
-	margin-left: 100px;
 	margin-top: 50px;
 `;
 
@@ -90,7 +118,12 @@ const Text = styled.div`
 	font-size: 1.3em;
 	font-family: "Apple SD Gothic Neo";
 	font-weight: bold;
-	width: 50%;
+	height: 60px;
+	width: 80%;
+	display: flex;
+	align-items: center;
+	padding-left: 30px;
+	// padding-top: 10px;
 `;
 
 const TextWrapper = styled.div`

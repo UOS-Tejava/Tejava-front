@@ -20,7 +20,6 @@ const Cart = (props) => {
 		fetch('/cart')
 		.then(res => res.json())
 		.then(data => {
-			console.log(data);
 			setCart(data)})
 		.catch(err => console.log(err));
 	}, []);
