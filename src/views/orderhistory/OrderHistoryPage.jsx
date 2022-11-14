@@ -17,12 +17,15 @@ import {
   MDBModalFooter,
 } from 'mdb-react-ui-kit';
 import { Link } from 'react-router-dom'
-//import OrderHistoryModal from "./orderHistoryModal";
+import OrderHistoryModal from "./orderHistoryModal";
+import {useSelector, useDispatch} from 'react-redux';
+import {setSeeModal} from '../../store';
 
 
 
 function OrderHistory() {
   let [testorderHistory, setTestOrderHistory] = useState(testorderedData);
+  // let dispatch = useDispatch()
   return (
     <div>
       <Link to='/payment'>결제화면테스트</Link>
@@ -31,26 +34,24 @@ function OrderHistory() {
         testorderHistory.map((a, i) => {
           return (
             <>
-            <TestHistoryModal data={a} index={i} />
+              <TestHistoryModal data={a} index={i}/>
             </>
-            )
+          )
         })
-        
       }
+      <OrderHistoryModal/>
     </div>
   )
 }
 
 function TestHistoryModal(props) {
+
   const [basicModal, setBasicModal] = useState(false);
-  const toggleShow = () => setBasicModal(!basicModal);
 
   return (
-    
     <div>
       <div className="d-flex justify-content-center">
-  
-        <MDBCard type='button' className="btn m-4 md" alignment='center' border="primary" style={{ width: '600px' }} onClick={toggleShow}>
+        <MDBCard type='button' className="btn m-4 md" alignment='center' border="primary" style={{ width: '600px' }}>
           <MDBCardHeader className="" >{props.data.시간}</MDBCardHeader>
           <div className="row">
             <MDBCardBody className="">
@@ -62,28 +63,6 @@ function TestHistoryModal(props) {
           <MDBCardFooter className='text-muted'>옵션</MDBCardFooter>
         </MDBCard>
       </div>
-  
-  
-        <div>
-          <MDBModal className="d-flex justify-content-center position-relative" show={basicModal} setShow={setBasicModal} tabIndex='-1' centered='true'>
-            <MDBModalDialog centered='true'>
-              <MDBModalContent>
-                <MDBModalHeader>
-                  <MDBModalTitle>Modal title</MDBModalTitle>
-                  <MDBBtn className='btn-close' color='none' onClick={toggleShow}></MDBBtn>
-                </MDBModalHeader>
-                <MDBModalBody>...</MDBModalBody>
-    
-                <MDBModalFooter>
-                  <MDBBtn color='secondary' onClick={toggleShow}>
-                    Close
-                  </MDBBtn>
-                  <MDBBtn>Save changes</MDBBtn>
-                </MDBModalFooter>
-              </MDBModalContent>
-            </MDBModalDialog>
-          </MDBModal>
-        </div>
     </div>
 
   );
