@@ -10,7 +10,7 @@ import Signup from './views/signup/SignUpPage';
 import OrderHistory from './views/orderhistory/OrderHistoryPage';
 import Payment from './views/payment/PaymentPage';
 import PaymentSuccess from './views/payment/PaymentSuccessPage';
-
+import OrderMgtPage from './views/employee/OrderMgtPage';
 
 function App() {
 	return (
@@ -26,6 +26,7 @@ function App() {
 					<Route path="/orderhistory" element={<OrderHistory />} />
 					<Route path='/payment' element={<Payment/>}/>
 					<Route path='/paymentsuccess' element={<PaymentSuccess/>}/>
+					<Route exact path="/employee/order" element={<OrderMgtPage />} />
 				</Routes>
 			</Router>
 		</div>
