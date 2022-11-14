@@ -12,10 +12,12 @@ const requestLogin = (userId, userPw)=>{
 			"uid": userId
 		})
 	})
-	.then(res => {
-		res.json();
-		window.location.href = "/"
-	});
+	.then(res => res.json())
+	.then(data => {
+		localStorage.setItem('user', JSON.stringify(data));
+		window.location.href = "/";
+	})
+	.catch(err => alert("로그인 정보가 올바르지 않습니다.")); //TODO: 예외처리
 }
 
 function InputID(){

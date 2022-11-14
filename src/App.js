@@ -5,6 +5,7 @@ import MainPage from './views/main/MainPage';
 import Header from './components/header/Header';
 import MenuDetailPage from './views/menu/MenuDetailPage';
 import Login from './views/testlogin/TestLoginPage';
+import OrderMgtPage from './views/employee/OrderMgtPage';
 
 function App() {
 	return (
@@ -16,6 +17,7 @@ function App() {
 					<Route exact path="/order" element={<OrderPage />} />
 					<Route exact path="/menu" element={<MenuDetailPage />} />
 					<Route exact path="/testlogin" element={<Login />} />
+					<Route exact path="/employee/order" element={<OrderMgtPage />} />
 				</Routes>
 			</Router>
 		</div>

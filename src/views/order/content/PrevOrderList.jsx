@@ -32,8 +32,6 @@ const Wrapper = styled.div`
 const ImageWrapper = styled.div`
 	width: 80%;
 	height: 100px;
-	background: yellow;
-	// margin-bottom: 5px;
 `;
 
 const TextWrapper = styled.div`
@@ -42,7 +40,6 @@ const TextWrapper = styled.div`
 	font-weight: bold;
 	width: 150px;
 	text-align: center;
-	// margin-bottom: 5px;
 	margin-top: 15px;
 `;
 

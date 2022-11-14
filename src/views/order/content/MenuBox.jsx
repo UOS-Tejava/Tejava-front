@@ -2,7 +2,13 @@ import { motion } from "framer-motion";
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router";
 
+const toPriceString = (item) => {
+	return item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 const MenuBox = (props) => {
+	const item = props.item;
+
 	return (
 		<Wrapper
 			whileHover={{ scale : 1.02 }}
@@ -10,12 +16,10 @@ const MenuBox = (props) => {
 			className="menubox"
 			onClick={props.onClickFunction}
 		>
-			<ImageWrapper>
-				image
-			</ImageWrapper>
-			<MenuNameWrapper>{props.text}</MenuNameWrapper>
-			<MenuConfigWrapper>{props.option}와인, 스테이크</MenuConfigWrapper>
-			<PriceWrapper>{props.price}10,000 원</PriceWrapper>
+			<ImageWrapper source={item.menu_pic} />
+			<MenuNameWrapper>{item.menu_nm}</MenuNameWrapper>
+			<MenuConfigWrapper>{item.menu_config}</MenuConfigWrapper>
+			<PriceWrapper>{toPriceString(item.price) + " 원"}</PriceWrapper>
 		</Wrapper>
 	);
 }
@@ -37,12 +41,13 @@ const Wrapper = styled(motion.div)`
 const ImageWrapper = styled.div`
 	width: 80%;
 	height: 50%;
-	background: yellow;
 	margin-top: 15px;
+	background-image: ${(props) => `url(${props.source})`};
+	background-size: cover;
 `;
 
 const MenuNameWrapper = styled.div`
-	font-size: 1.5em;
+	font-size: 1.3em;
 	font-family: "Apple SD Gothic Neo";
 	font-weight: bold;
 	margin-top: 20px;
@@ -50,11 +55,12 @@ const MenuNameWrapper = styled.div`
 `;
 
 const MenuConfigWrapper = styled.div`
-	font-size: 1.2em;
+	font-size: 1.0em;
 	font-family: "Apple SD Gothic Neo";
-	line-height: 0;
-	margin-top: 15px;
-	margin-bottom: 10px;
+	word-break: break-all;
+	margin-left: 20px;
+	margin-right: 20px;
+	text-align: center;
 `;
 
 const PriceWrapper = styled.div`

@@ -4,9 +4,14 @@ import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
-const TimePicker = () => {
-    const [value, setValue] = useState(dayjs('2022-10-05T10:10:10')); // 현재로 설정?
+const TimePicker = (props) => {
+    const [value, setValue] = useState(dayjs()); // 현재로 설정?
     const handleChange = (newValue) => setValue(newValue);
+    const setTime = props.setTime;
+
+    useEffect(() => {
+        setTime(value.$y + '년 ' + value.$H + '시 ' + value.$m + '분');
+    }, [value])
 
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -16,6 +21,7 @@ const TimePicker = () => {
                     value={value}
                     onChange={handleChange}
                     renderInput={(params) => <TextField {...params} />}
+                    disablePast={true}
                 />
             </Stack>
         </LocalizationProvider>

@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { useNavigate } from "react-router";
 import HeaderMenu from "./HeaderMenu";
 
 const headers = {
@@ -7,12 +8,35 @@ const headers = {
 }
 
 const Header = ({ children }) => {
+	
 	const navList = [];
 	for (const h in headers){
 		navList.push(
 			<HeaderMenu name={h} value={headers[h]} />
 		)
 	}
+
+	const logout = async () => {
+		await fetch('/logout');
+		await fetch('/', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			}
+		})
+		.then(res => res.json())
+		.then(data => {
+			localStorage.setItem('user', JSON.stringify(data));
+			window.location.replace("/");
+		})
+		.catch(err => console.log(err));
+		localStorage.clear();
+
+	};
+
+	const user = JSON.parse(localStorage.getItem('user'));
+
+
 	return (
 		<Wrapper>
 			<HeaderBox>
@@ -21,10 +45,19 @@ const Header = ({ children }) => {
 				</Logo>
 				{children}
 				{navList}
-				<div style={{ display: 'flex', width:'100%', justifyContent: 'flex-end', marginRight: '20px' }}>
-					<HeaderButton onClick={()=>window.location.href="/testlogin"}>sign in</HeaderButton>
-					<HeaderButton>sign up</HeaderButton>
-				</div>
+				{
+					(user === null || user.uid === '비회원') && //TODO: 비회원
+					<div style={{ display: 'flex', width:'100%', justifyContent: 'flex-end', marginRight: '20px' }}>
+						<HeaderButton onClick={()=>window.location.href="/testlogin"}>sign in</HeaderButton>
+						<HeaderButton>sign up</HeaderButton>
+					</div>
+				}
+				{
+					(user && user.uid !== '비회원') &&
+					<div style={{ display: 'flex', width:'100%', justifyContent: 'flex-end', marginRight: '20px' }}>
+						<HeaderButton onClick={()=>{logout()}}>logout</HeaderButton>
+					</div>
+				}
 			</HeaderBox>
 		</Wrapper>
 	)

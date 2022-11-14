@@ -7,9 +7,11 @@ import MenuBox from "./content/MenuBox";
 import Cart from "./content/Cart";
 import { useNavigate } from "react-router";
 
+// const MenuList = (menuDetail) => 
+
 const OrderPage = () => {
 	const [voiceModalOpen, setVoiceModalOpen] = useState(false);
-	const [menuDetail, setMenuDetail] = useState({});
+	const [menuDetail, setMenuDetail] = useState();
 	const navigate = useNavigate();
 
 	const getMenuDetailLocal = async () => {
@@ -27,30 +29,34 @@ const OrderPage = () => {
 	const closeVoiceModal = () => setVoiceModalOpen(false);
 	const openVoiceModal = () => setVoiceModalOpen(true);
 
-	// TODO: fetch menu list
 	return (
 		<Wrapper>
 			<MenuWrapper>
-				<MenuBox text="비스트로 디너" onClickFunction={() => {
-					navigate("/menu", {
-						state: { detail: menuDetail[0] }
-					})
-				}}/>
-				<MenuBox text="프렌치 디너" onClickFunction={() => {
-					navigate("/menu", {
-						state: { detail: menuDetail[1] }
-					})
-				}}/>
-				<MenuBox text="잉글리시 디너" onClickFunction={() => {
-					navigate("/menu", {
-						state: { detail: menuDetail[2] }
-					})
-				}}/>
-				<MenuBox text="샴페인 축제 디너" onClickFunction={() => {
-					navigate("/menu", {
-						state: { detail: menuDetail[3] }
-					})
-				}}/>
+				{
+					menuDetail &&
+					<>
+						<MenuBox item={menuDetail[0]} onClickFunction={() => {
+							navigate("/menu", {
+								state: { detail: menuDetail[0], idx: 1, modify: false }
+							})
+						}}/>
+						<MenuBox item={menuDetail[1]} onClickFunction={() => {
+							navigate("/menu", {
+								state: { detail: menuDetail[1], idx: 2, modify: false }
+							})
+						}}/>
+						<MenuBox item={menuDetail[2]} onClickFunction={() => {
+							navigate("/menu", {
+								state: { detail: menuDetail[2], idx: 3, modify: false }
+							})
+						}}/>
+						<MenuBox item={menuDetail[3]} onClickFunction={() => {
+							navigate("/menu", {
+								state: { detail: menuDetail[3], idx: 4, modify: false }
+							})
+						}}/>
+					</>
+				}
 			</MenuWrapper>
 			<Cart modalOpen={voiceModalOpen} setModal={setVoiceModalOpen} />
 			<AnimatePresence // 언마운트시에도 애니메이션이 동작하도록 감싸주기

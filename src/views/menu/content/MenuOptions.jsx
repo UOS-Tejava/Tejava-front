@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import MenuOptionBox from "./MenuOptionBox";
 import MenuStyleBox from "./MenuStyleBox";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router";
 
 const toPriceString = (item) => {
 	return item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -15,6 +16,7 @@ const MenuOptions = (props) => {
 	const [price, setPrice] = useState(props.menuDetail.price); // 옵션 변경 시 바꿀 것
 	const [totalAmount, setTotalAmount] = useState(props.menuDetail.price);
 	const [style, setStyle] = useState({id:0});
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		setStyle(styleList[0]);
@@ -42,15 +44,14 @@ const MenuOptions = (props) => {
 		fetch('/cart/add', {
 			method: 'POST',
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify({menu: menuDetail, userId: 1}) //userid 불러오는 법
+			body: JSON.stringify({menu: menuDetail, userId: JSON.parse(localStorage.getItem('user')).id})
 		})
-		.then(res => res.json())
+		.then(res => navigate("/order"))
 		.catch(err => console.log(err));
 	}
 
-	console.log(optionList);
 	let styleBoxList = [];
 	styleList.map((item) => {
 		styleBoxList.push(
@@ -80,8 +81,6 @@ const MenuOptions = (props) => {
 			/>
 		)
 	})}
-
-	console.log(menuDetail);
 
 	return (
 		<Wrapper>
