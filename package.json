@@ -29,7 +29,7 @@
     "react-redux": "^8.0.2",
     "react-router": "^6.4.1",
     "react-router-dom": "^6.4.2",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^5.0.1",
     "react-speech-recognition": "^3.9.1",
     "web-vitals": "^2.1.0"
   },
@@ -57,5 +57,9 @@
       "last 1 safari version"
     ]
   },
+<<<<<<< HEAD
   "proxy" : "http://43.200.93.146:8080"
+=======
+  "proxy": "http://43.200.93.146:8080/"
+>>>>>>> 0f89436350bf5ed0a27e29f8cde766242a2e16d1
 }
