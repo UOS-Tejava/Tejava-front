@@ -13,7 +13,6 @@ function PaymentSuccess() {
                 <p>주문일시 : ~~</p>
                 <a href="#">주문내역 확인하기</a>
               </div>
-
             </div>
           </div>
         </div>

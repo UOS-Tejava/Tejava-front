@@ -1,5 +1,5 @@
 import { useState } from "react"
-import orderedData from "./ordereddata"
+import testorderedData from "./testordereddata"
 import {
   MDBCard,
   MDBCardBody,
@@ -7,45 +7,85 @@ import {
   MDBCardText,
   MDBCardHeader,
   MDBCardFooter,
-  MDBBtn
+  MDBBtn,
+  MDBModal,
+  MDBModalDialog,
+  MDBModalContent,
+  MDBModalHeader,
+  MDBModalTitle,
+  MDBModalBody,
+  MDBModalFooter,
 } from 'mdb-react-ui-kit';
 import { Link } from 'react-router-dom'
+//import OrderHistoryModal from "./orderHistoryModal";
 
 
 
 function OrderHistory() {
-  let [orderHistory, setOrderHistory] = useState(orderedData);
+  let [testorderHistory, setTestOrderHistory] = useState(testorderedData);
   return (
-    <>
+    <div>
       <Link to='/payment'>결제화면테스트</Link>
-
+      <h2 className="text-center">주문내역</h2>
       {
-        orderHistory.map((a, i) => {
-          return <HistoryModal data={a} index={i} />
+        testorderHistory.map((a, i) => {
+          return (
+            <>
+            <TestHistoryModal data={a} index={i} />
+            </>
+            )
         })
+        
       }
-    </>
-    // 오더히스토리 배열 -> state로 생성
-    // 데이터를 받을때마다 state 변경
-    // state를 map 돌려서 모달창 리스트를 생성 -> o
-    // 모달창은 별도의 컴포넌트 -- 변수전달 어떻게? -> o
-    //모달창 css는 어떻게 -> o
+    </div>
   )
 }
 
-function HistoryModal(props) {
+function TestHistoryModal(props) {
+  const [basicModal, setBasicModal] = useState(false);
+  const toggleShow = () => setBasicModal(!basicModal);
+
   return (
-    <>
-      <MDBCard className="m-5 md" alignment='center' border="primary" style={{ width: '600px' }}>
-        <MDBCardHeader>Featured</MDBCardHeader>
-        <MDBCardBody>
-          <MDBCardTitle>{props.data.메뉴}</MDBCardTitle>
-          <MDBCardText>{props.data.스타일}</MDBCardText>
-          <MDBBtn href='#'>{props.data.상태}</MDBBtn>
-        </MDBCardBody>
-        <MDBCardFooter className='text-muted'>2 days ago</MDBCardFooter>
-      </MDBCard>
-    </>
+    
+    <div>
+      <div className="d-flex justify-content-center">
+  
+        <MDBCard type='button' className="btn m-4 md" alignment='center' border="primary" style={{ width: '600px' }} onClick={toggleShow}>
+          <MDBCardHeader className="" >{props.data.시간}</MDBCardHeader>
+          <div className="row">
+            <MDBCardBody className="">
+              <MDBCardTitle>{props.data.메뉴}</MDBCardTitle>
+              <MDBCardText>{props.data.스타일}</MDBCardText>
+              <MDBBtn className="" href='#'>{props.data.상태}</MDBBtn>
+            </MDBCardBody>
+          </div>
+          <MDBCardFooter className='text-muted'>옵션</MDBCardFooter>
+        </MDBCard>
+      </div>
+  
+  
+        <div>
+          <MDBModal className="d-flex justify-content-center position-relative" show={basicModal} setShow={setBasicModal} tabIndex='-1' centered='true'>
+            <MDBModalDialog centered='true'>
+              <MDBModalContent>
+                <MDBModalHeader>
+                  <MDBModalTitle>Modal title</MDBModalTitle>
+                  <MDBBtn className='btn-close' color='none' onClick={toggleShow}></MDBBtn>
+                </MDBModalHeader>
+                <MDBModalBody>...</MDBModalBody>
+    
+                <MDBModalFooter>
+                  <MDBBtn color='secondary' onClick={toggleShow}>
+                    Close
+                  </MDBBtn>
+                  <MDBBtn>Save changes</MDBBtn>
+                </MDBModalFooter>
+              </MDBModalContent>
+            </MDBModalDialog>
+          </MDBModal>
+        </div>
+    </div>
+
   );
 }
 

@@ -37,10 +37,10 @@ function Signup() {
             <h2 className="text-uppercase text-center mb-5">회원가입</h2>
             <MDBInput wrapperClass='mb-4' label='아이디' size='lg' id='form1' type='text' onChange={(e) => { registerInfo.uid = e.target.value }} />
             <MDBBtn className='btn btn-info mb-3' onClick={() => {
-              axios.get(`​/user​/duplication-check​/uid​/${registerInfo.uid}`)
+              axios.get(`/user/duplication-check/uid/${registerInfo.uid}`)
                 .then((res) => {
-                  console.log(res);
-                  if (res == true) alert('아이디 중복'); else alert('사용할 수 있는 아이디입니다')
+                  console.log(res)
+                  if (res.data == true) alert('아이디 중복'); else if(res.data==false) alert('사용할 수 있는 아이디입니다')
                 })
                 .catch((err) => { console.log(err); })
             }}>중복확인</MDBBtn>
