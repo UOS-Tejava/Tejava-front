@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
 	MDBBtn,
 	MDBContainer,
@@ -11,6 +11,8 @@ import {
 	MDBCheckbox
 } from 'mdb-react-ui-kit';
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+import { changeUserState } from '../../store'
 
 function LoginBox() {
 	let loginInfo = {
@@ -18,6 +20,8 @@ function LoginBox() {
 		pwd: '',
 		staySignedIn: false
 	}
+	let dispatch = useDispatch()
+	let a = useSelector((state) => state.user)
 
 	return (
 		<MDBContainer fluid>
@@ -39,12 +43,22 @@ function LoginBox() {
 							<span className="small"><a class="" href="#!" >아이디 찾기 </a></span>
 							<span className="small"><a class="" href="#!" >비밀번호 찾기</a></span>
 
-							<MDBBtn outline className='mx-2 px-5' color='primary' size='lg' style={{ margin: '20px' }} onClick={() => { axios.post('/login',loginInfo).then((res)=>{console.log(res);}) }}>
+							<MDBBtn outline className='mx-2 px-5' color='primary' size='lg' style={{ margin: '20px' }} onClick={() => {
+								axios.post('/login', loginInfo)
+									.then((res) => {
+										//console.log(res.data);
+										dispatch(changeUserState(res.data))
+									})
+									.catch((err) => { console.log(err); });
+
+
+							}}>
 								로그인
 							</MDBBtn>
 
 							<div>
 								<p className="mb-0">아직 회원이 아니세요? <a href="#!" class="fw-bold">회원가입</a></p>
+								<div>{a.name}</div>
 							</div>
 						</MDBCardBody>
 					</MDBCard>
