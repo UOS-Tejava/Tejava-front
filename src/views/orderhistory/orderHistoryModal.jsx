@@ -11,23 +11,21 @@ import {
 } from 'mdb-react-ui-kit';
 
 
-function OrderHistoryModal() {
-  const [basicModal, setBasicModal] = useState(false);
-  const toggleShow = () => setBasicModal(!basicModal);
+function OrderHistoryModal(props) {
 
   return (
     <>
-      <MDBModal show={basicModal} setShow={setBasicModal} tabIndex='-1'>
+      <MDBModal className="d-flex justify-content-center position-relative" tabIndex='-1'>
         <MDBModalDialog>
           <MDBModalContent>
             <MDBModalHeader>
               <MDBModalTitle>Modal title</MDBModalTitle>
-              <MDBBtn className='btn-close' color='none' onClick={toggleShow}></MDBBtn>
+              <MDBBtn className='btn-close' color='none' onClick={props.toggleShow}></MDBBtn>
             </MDBModalHeader>
             <MDBModalBody>...</MDBModalBody>
 
             <MDBModalFooter>
-              <MDBBtn color='secondary' onClick={toggleShow}>
+              <MDBBtn color='secondary' onClick={props.toggleShow}>
                 Close
               </MDBBtn>
               <MDBBtn>Save changes</MDBBtn>

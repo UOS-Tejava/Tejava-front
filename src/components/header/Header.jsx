@@ -53,7 +53,7 @@ const Header = ({ children }) => {
 					(user === null || user.uid === '비회원') && //TODO: 비회원
 					<div style={{ display: 'flex', width:'100%', justifyContent: 'flex-end', marginRight: '20px' }}>
 						<HeaderButton onClick={()=>window.location.href="/login"}>sign in</HeaderButton>
-						<HeaderButton>sign up</HeaderButton>
+						<HeaderButton onClick={()=>window.location.href="/signup"}>sign up</HeaderButton>
 					</div>
 				}
 				{
