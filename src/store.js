@@ -24,13 +24,14 @@ let user = createSlice({
 
 let seeModal = createSlice({
   name : 'seeModal',
-  initialState : {상태 : false},
+  initialState : {value : false},
   reducers : {
     setSeeModal(state){
-      state.상태 = !(state.상태);
+      state.value = !(state.value);
     }
   }
 })
+
 
 export default configureStore({
   reducer: {
