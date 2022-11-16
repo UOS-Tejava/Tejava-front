@@ -1,5 +1,4 @@
-import { useState } from "react"
-import testorderedData from "./testordereddata"
+import { useEffect, useState } from "react"
 import {
   MDBCard,
   MDBCardBody,
@@ -18,33 +17,38 @@ import {
 } from 'mdb-react-ui-kit';
 import { Link } from 'react-router-dom'
 import OrderHistoryModal from "./orderHistoryModal";
-import {useSelector, useDispatch} from 'react-redux';
-import {setSeeModal} from '../../store';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSeeModal } from '../../store';
+import axios from "axios";
 
-
+// async function getOrderHistory(set) {
+//   await axios.get('/order/history').then((res)=>{
+//     set(res.data)
+//   })
+// }
 
 function OrderHistory() {
-  let [testorderHistory, setTestOrderHistory] = useState(testorderedData);
-  // let dispatch = useDispatch()
+  let [orderHistory, setOrderHistory] = useState([]);
+  axios.get('/order/history').then((res)=>{setOrderHistory(res.data)})
   return (
     <div>
       <Link to='/payment'>결제화면테스트</Link>
       <h2 className="text-center">주문내역</h2>
       {
-        testorderHistory.map((a, i) => {
+        orderHistory.map((a, i) => {
           return (
             <>
-              <TestHistoryModal data={a} index={i}/>
+              <HistoryCard data={a} index={i} />
             </>
           )
         })
       }
-      <OrderHistoryModal/>
+      <OrderHistoryModal />
     </div>
   )
 }
 
-function TestHistoryModal(props) {
+function HistoryCard(props) {
 
   const [basicModal, setBasicModal] = useState(false);
 
@@ -55,15 +59,15 @@ function TestHistoryModal(props) {
           <MDBCardHeader className="" >{props.data.시간}</MDBCardHeader>
           <div className="row">
             <MDBCardBody className="">
-              <MDBCardTitle>{props.data.메뉴}</MDBCardTitle>
-              <MDBCardText>{props.data.스타일}</MDBCardText>
-              <MDBBtn className="" href='#'>{props.data.상태}</MDBBtn>
+              <MDBCardTitle>{props.data.menu_nm}</MDBCardTitle>
+              <MDBCardText>{props.data.menu_config}</MDBCardText>
+              <MDBBtn className="" href='#'>{props.data.price}</MDBBtn>
             </MDBCardBody>
           </div>
           <MDBCardFooter className='text-muted'>옵션</MDBCardFooter>
         </MDBCard>
         {
-          basicModal==true? <OrderHistoryModal basicModal={basicModal} setBasicModal={setBasicModal}/> : null
+          basicModal == true ? <OrderHistoryModal basicModal={basicModal} setBasicModal={setBasicModal} /> : null
         }
       </div>
     </div>
