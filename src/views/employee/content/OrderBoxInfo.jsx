@@ -30,6 +30,8 @@ const changeStatus = (id, status) => {
 			userId: JSON.parse(localStorage.getItem('user')).id
 		})
 	})
+	.then(res => window.location.replace("/"))
+	.catch(err => console.log(err))
 }
 
 const OrderBoxInfo = (props) => {

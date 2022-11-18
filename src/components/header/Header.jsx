@@ -7,12 +7,24 @@ const headers = {
 	"주문하기" : "order",
 }
 
-const Header = ({ children }) => {
-	
+const employee_headers = {
+	"홈" : "",
+	"주문 관리" : "employee/order",
+	"재고 관리" : "employee/stock"
+}
+
+const Header = ({ children }) => {	
 	const navList = [];
-	for (const h in headers){
+	const user = JSON.parse(localStorage.getItem('user'));
+
+	let headerList;
+	if (user && user.role === "ADMINISTRATOR")
+		headerList = employee_headers;
+	else
+		headerList = headers;
+	for (const h in headerList){
 		navList.push(
-			<HeaderMenu name={h} value={headers[h]} />
+			<HeaderMenu name={h} value={headerList[h]} />
 		)
 	}
 
@@ -33,8 +45,6 @@ const Header = ({ children }) => {
 		localStorage.clear();
 
 	};
-
-	const user = JSON.parse(localStorage.getItem('user'));
 
 
 	return (
