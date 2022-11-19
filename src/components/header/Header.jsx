@@ -51,7 +51,7 @@ const Header = ({ children }) => {
 		<Wrapper>
 			<HeaderBox>
 				<Logo onClick={() => {window.location.href="/"}}>
-					LOGO
+					<Image src="/logo.jpeg" />
 				</Logo>
 				{children}
 				{navList}
@@ -74,13 +74,22 @@ const Header = ({ children }) => {
 }
 
 const Logo = styled.div`
-	width: 80px;
+	min-width: 140px;
+	height: 100%;
 	&:hover{
 		cursor: pointer;
 	};
 	font-weight: 900;
 	font-size: 2em;
 	font-family: "Apple SD Gothic Neo";
+	position: relative;
+	overflow: hidden;
+`;
+
+const Image = styled.img`
+	width: 125px;
+	position: abolute;
+	transform: translate(0%, -30%);
 `;
 
 const Wrapper = styled.div`
