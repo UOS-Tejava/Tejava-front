@@ -3,8 +3,9 @@ import { useNavigate } from "react-router";
 import HeaderMenu from "./HeaderMenu";
 
 const headers = {
-	"홈" : "",
-	"주문하기" : "order",
+	"홈": "",
+	"주문하기": "order",
+	"주문내역": "orderhistory"
 }
 
 const employee_headers = {
@@ -55,11 +56,15 @@ const Header = ({ children }) => {
 				</Logo>
 				{children}
 				{navList}
+				{/* <div style={{ display: 'flex', width: '100%', justifyContent: 'flex-end', marginRight: '20px' }}>
+					<HeaderButton onClick={() => window.location.href = "/login"}>sign in</HeaderButton>
+					<HeaderButton onClick={() => window.location.href = "/signup"}>sign up</HeaderButton>
+				</div> */}
 				{
 					(user === null || user.uid === '비회원') && //TODO: 비회원
 					<div style={{ display: 'flex', width:'100%', justifyContent: 'flex-end', marginRight: '20px' }}>
-						<HeaderButton onClick={()=>window.location.href="/testlogin"}>sign in</HeaderButton>
-						<HeaderButton>sign up</HeaderButton>
+						<HeaderButton onClick={()=>window.location.href="/login"}>sign in</HeaderButton>
+						<HeaderButton onClick={()=>window.location.href="/signup"}>sign up</HeaderButton>
 					</div>
 				}
 				{
