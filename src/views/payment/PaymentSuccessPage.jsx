@@ -1,4 +1,9 @@
+import { useNavigate } from 'react-router'
+import './paymentSuccessPage.css'
+
 function PaymentSuccess() {
+  let navigate = useNavigate()
+
   return (
     <>
       <div class="container">
@@ -11,7 +16,7 @@ function PaymentSuccess() {
               <div class="content">
                 <h1>고객님의 주문이 완료되었습니다.</h1>
                 <p>주문일시 : ~~</p>
-                <a href="#">주문내역 확인하기</a>
+                <button onClick={()=>{navigate("/orderhistory")}}>주문내역 확인하기</button>
               </div>
             </div>
           </div>
