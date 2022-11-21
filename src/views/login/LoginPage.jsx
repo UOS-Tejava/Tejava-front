@@ -14,6 +14,13 @@ import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeUserState } from '../../store'
 
+// let a = []
+// axios.get('/order/history').then((res)=>{a=res.data})
+// console.log(a);
+// setTimeout(() => {
+// 	console.log(a);
+// }, 2000);
+
 function LoginBox() {
 	let loginInfo = {
 		uid: '',
