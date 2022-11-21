@@ -22,23 +22,11 @@ let user = createSlice({
   }
 })
 
-let seeModal = createSlice({
-  name : 'seeModal',
-  initialState : {value : false},
-  reducers : {
-    setSeeModal(state){
-      state.value = !(state.value);
-    }
-  }
-})
-
 
 export default configureStore({
   reducer: {
     user : user.reducer,
-    seeModal : seeModal.reducer
   }
 })
 
 export let { changeUserState } = user.actions
-export let { setSeeModal } = seeModal.actions

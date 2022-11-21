@@ -9,12 +9,14 @@ const headers = {
 }
 
 const employee_headers = {
-	"홈" : "",
-	"주문 관리" : "employee/order",
-	"재고 관리" : "employee/stock"
+	"홈": "",
+	"주문 관리": "employee/order",
+	"재고 관리": "employee/stock"
 }
 
-const Header = ({ children }) => {	
+const Header = ({ children }) => {
+	let navigate = useNavigate();
+
 	const navList = [];
 	const user = JSON.parse(localStorage.getItem('user'));
 
@@ -23,7 +25,7 @@ const Header = ({ children }) => {
 		headerList = employee_headers;
 	else
 		headerList = headers;
-	for (const h in headerList){
+	for (const h in headerList) {
 		navList.push(
 			<HeaderMenu name={h} value={headerList[h]} />
 		)
@@ -37,12 +39,12 @@ const Header = ({ children }) => {
 				'Content-Type': 'application/json',
 			}
 		})
-		.then(res => res.json())
-		.then(data => {
-			localStorage.setItem('user', JSON.stringify(data));
-			window.location.replace("/");
-		})
-		.catch(err => console.log(err));
+			.then(res => res.json())
+			.then(data => {
+				localStorage.setItem('user', JSON.stringify(data));
+				window.location.replace("/");
+			})
+			.catch(err => console.log(err));
 		localStorage.clear();
 
 	};
@@ -51,7 +53,7 @@ const Header = ({ children }) => {
 	return (
 		<Wrapper>
 			<HeaderBox>
-				<Logo onClick={() => {window.location.href="/"}}>
+				<Logo onClick={() => { window.location.href = "/" }}>
 					<Image src="/logo.jpeg" />
 				</Logo>
 				{children}
@@ -62,15 +64,15 @@ const Header = ({ children }) => {
 				</div> */}
 				{
 					(user === null || user.uid === '비회원') && //TODO: 비회원
-					<div style={{ display: 'flex', width:'100%', justifyContent: 'flex-end', marginRight: '20px' }}>
-						<HeaderButton onClick={()=>window.location.href="/login"}>sign in</HeaderButton>
-						<HeaderButton onClick={()=>window.location.href="/signup"}>sign up</HeaderButton>
+					<div style={{ display: 'flex', width: '100%', justifyContent: 'flex-end', marginRight: '20px' }}>
+						<HeaderButton onClick={() => navigate('/login')}>sign in</HeaderButton>
+						<HeaderButton onClick={() => navigate('/signup')}>sign up</HeaderButton>
 					</div>
 				}
 				{
 					(user && user.uid !== '비회원') &&
-					<div style={{ display: 'flex', width:'100%', justifyContent: 'flex-end', marginRight: '20px' }}>
-						<HeaderButton onClick={()=>{logout()}}>logout</HeaderButton>
+					<div style={{ display: 'flex', width: '100%', justifyContent: 'flex-end', marginRight: '20px' }}>
+						<HeaderButton onClick={() => { logout() }}>logout</HeaderButton>
 					</div>
 				}
 			</HeaderBox>

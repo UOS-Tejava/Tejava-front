@@ -13,6 +13,7 @@ import {
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeUserState } from '../../store'
+import { useNavigate } from 'react-router';
 
 // let a = []
 // axios.get('/order/history').then((res)=>{a=res.data})
@@ -29,7 +30,7 @@ function LoginBox() {
 	}
 	let dispatch = useDispatch()
 	let a = useSelector((state) => state.user)
-
+	let navigate = useNavigate()
 	return (
 		<MDBContainer fluid>
 			<MDBRow className='d-flex justify-content-center align-items-center h-100'>
@@ -55,10 +56,9 @@ function LoginBox() {
 									.then((res) => {
 										//console.log(res.data);
 										dispatch(changeUserState(res.data))
+										navigate('/')
 									})
 									.catch((err) => { console.log(err); });
-
-
 							}}>
 								로그인
 							</MDBBtn>

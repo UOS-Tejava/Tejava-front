@@ -1,9 +1,13 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 
 function Payment() {
     let navigate = useNavigate();
-
+    let location = useLocation();
+    let { req_orderDateTime, total_price, cart } = location.state
+    console.log(location);
+    console.log(location.state);
+    console.log(total_price, cart);
     return (
         <div className="container p-0 mt-3">
             <div className="card px-4">
@@ -16,14 +20,27 @@ function Payment() {
                         </div>
                     </div>
 
-                    <div className="col-12 row">
+                    <div className="col-12 row mb-3">
                         <span className="text mb-1 col-4">주문 내역</span>
-                        <span className='col-8'>[주문정보]</span>
+                        <span className='col-8'>
+                            {
+                                cart.map((a) => {
+                                    return (
+                                        <div className='mb-2'>
+                                            <div>메뉴 : {a.menu_nm}  </div>
+                                            <div>메뉴 구성(옵션 적용) : {a.options.map((aa)=>{return (<span>'{aa.option_nm}'  </span>)})}  </div>
+                                            <div>스타일 : {a.style.style_nm}</div>
+                                            <div>스타일 구성 : {a.style.style_config}</div>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </span>
                     </div>
 
-                    <div className="col-12 row">
+                    <div className="col-12 row mb-3">
                         <span className="text mb-1 col-4">배달예정시간</span>
-                        <span className='col-8'>[시간]</span>
+                        <span className='col-8'>{req_orderDateTime}</span>
                     </div>
 
                     <div className="col-12">
@@ -50,7 +67,7 @@ function Payment() {
                             <input className="form-control mb-3 pt-2 " type="password" placeholder="***" />
                         </div>
                     </div>
-                    <div className='text-center mb-3'>총 주문 금액 : </div>
+                    <div className='text-center mb-3'>총 주문 금액 : {total_price}</div>
                     <div className="col-12 row">
                         <button type="button" className="btn btn-primary mb-3" onClick={() => { navigate('/paymentsuccess') }}>
                             <span className="">결제하기 </span>
