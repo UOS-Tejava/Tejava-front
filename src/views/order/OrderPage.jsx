@@ -80,7 +80,7 @@ const Wrapper = styled.div`
 	align-items: center;
 	justify-content: center;
 	height: 90vh;
-	width: 100vw;
+	// width: 100vw;
 `;
 
 const MenuWrapper = styled.div`
@@ -92,7 +92,7 @@ const MenuWrapper = styled.div`
 	justify-items: center;
 	grid-template-rows: 1fr 1fr;
 	grid-template-columns: 1fr 1fr;
-	float: left;
+	// float: left;
 `;
 
 export default OrderPage;

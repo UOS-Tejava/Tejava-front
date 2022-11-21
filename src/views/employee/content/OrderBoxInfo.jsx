@@ -35,6 +35,8 @@ const changeStatus = (id, status) => {
 }
 
 const OrderBoxInfo = (props) => {
+
+	const setModified = props.setModified;
 	const item = props.item;
 	let menuList = [];
 	props.menu.map((item) => {

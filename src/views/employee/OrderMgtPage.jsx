@@ -11,8 +11,10 @@ const OrderMgtPage = () => {
 	const [orderList, setOrderList] = useState([]);
 	const [orderBoxList, setOrderBoxList] = useState([]);
 	const [mode, setMode] = useState("all");
+	const [modified, setModified] = useState(false);
 
 	useEffect(() => {
+		setModified(false);
 		fetch('/employee/orders')
 		.then(res => res.json())
 		.then(data => {
@@ -21,7 +23,7 @@ const OrderMgtPage = () => {
 			setOrderList(data);
 		})
 		.catch(err => console.log(err));
-	}, []);
+	}, [modified]);
 
 	useEffect(() => {
 		if (mode !== "all")
@@ -34,7 +36,7 @@ const OrderMgtPage = () => {
 		let newList = [];
 		orderList.map((item) => {
 			newList.push(
-				<OrderBox orderDetail={item} />
+				<OrderBox orderDetail={item} setModified={setModified} />
 			);
 		});
 		setOrderBoxList(newList);

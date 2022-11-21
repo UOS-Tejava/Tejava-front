@@ -69,7 +69,7 @@ const OrderBox = (props) => {
 						opacity: 0
 					}}
 				>
-					<OrderBoxInfo item={orderDetail} menu={orderDetail.menuDTOList} open={open} />
+					<OrderBoxInfo item={orderDetail} menu={orderDetail.menuDTOList} open={open} setModified={props.setModified} />
 				</SubWrapper>
 			}
 			</AnimatePresence>
