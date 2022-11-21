@@ -79,7 +79,8 @@ const Cart = (props) => {
 						navigate("/payment", {
 							state: {
 								req_orderDateTime: time,
-								total_price: totalPrice
+								total_price: totalPrice,
+								cart: cart
 							}
 						})
 					}}
