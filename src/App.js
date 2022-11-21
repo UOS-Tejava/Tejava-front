@@ -11,12 +11,13 @@ import OrderHistory from './views/orderhistory/OrderHistoryPage';
 import Payment from './views/payment/PaymentPage';
 import PaymentSuccess from './views/payment/PaymentSuccessPage';
 import OrderMgtPage from './views/employee/OrderMgtPage';
+import StockMgtPage from './views/employee/StockMgtPage';
 
 function App() {
 	return (
 		<div>
-			<Header/>
 			<Router>
+				<Header/>
 				<Routes>
 					<Route exact path="/" element={<MainPage />} />
 					<Route exact path="/order" element={<OrderPage />} />
@@ -27,6 +28,7 @@ function App() {
 					<Route path='/payment' element={<Payment/>}/>
 					<Route path='/paymentsuccess' element={<PaymentSuccess/>}/>
 					<Route exact path="/employee/order" element={<OrderMgtPage />} />
+					<Route exact path="/employee/stock" element={<StockMgtPage />} />
 				</Routes>
 			</Router>
 		</div>
