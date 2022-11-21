@@ -12,6 +12,7 @@ const toPriceString = (item) => {
 const Cart = (props) => {
 	const close = () => props.setModal(false);
 	const open = () => props.setModal(true);
+	const navigate = props.navigate;
 
 	const [cart, setCart] = useState([]);
 	const [time, setTime] = useState("");
@@ -35,28 +36,9 @@ const Cart = (props) => {
 
 	let discount = 0;
 	// if 단골이면 price의 10퍼
-	if (localStorage.getItem('user') && JSON.parse(localStorage.getItem('user')).order_cnt >= 0) // 5로 바꿔
+	if (localStorage.getItem('user') && JSON.parse(localStorage.getItem('user')).order_cnt >= 5) // 5로 바꿔
 		discount = price * 0.1;
 	let totalPrice = price - discount;
-	
-	const order = async () => {
-		await fetch('/order/place-order',{
-			method: 'POST',
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				"req_orderDateTime": time,
-				"total_price": totalPrice,
-				"userId": 1 // TODO: 수정
-			})
-		})
-		.then(res => {
-			// res.json();
-			// window.location.href = "/" // TODO: payment로 이동
-		})
-		.catch(err => console.log(err));
-	} 
 
 	return (
 		<CartWrapper>
@@ -93,7 +75,14 @@ const Cart = (props) => {
 			</PriceWrapper>
 			<ButtonWrapper>
 				<OrderButton
-					onClick={order}
+					onClick={() => {
+						navigate("/payment", {
+							state: {
+								req_orderDateTime: time,
+								total_price: totalPrice
+							}
+						})
+					}}
 				>총 {toPriceString(totalPrice)}원 주문하기</OrderButton>
 			</ButtonWrapper>
 		</CartWrapper>
@@ -121,6 +110,8 @@ const CartWrapper = styled.div`
 	// 	border-radius: 5px;
 	// 	// height: 20%;
 	// }
+	max-width: 500px;
+	min-width: 500px;
 `;
 
 const CartItemWrapper = styled.div`

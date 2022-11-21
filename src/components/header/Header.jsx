@@ -8,11 +8,24 @@ const headers = {
 	"주문내역": "orderhistory"
 }
 
-const Header = ({ children }) => {
+const employee_headers = {
+	"홈" : "",
+	"주문 관리" : "employee/order",
+	"재고 관리" : "employee/stock"
+}
+
+const Header = ({ children }) => {	
 	const navList = [];
-	for (const h in headers) {
+	const user = JSON.parse(localStorage.getItem('user'));
+
+	let headerList;
+	if (user && user.role === "ADMINISTRATOR")
+		headerList = employee_headers;
+	else
+		headerList = headers;
+	for (const h in headerList){
 		navList.push(
-			<HeaderMenu name={h} value={headers[h]} />
+			<HeaderMenu name={h} value={headerList[h]} />
 		)
 	}
 
@@ -34,14 +47,12 @@ const Header = ({ children }) => {
 
 	};
 
-	const user = JSON.parse(localStorage.getItem('user'));
-
 
 	return (
 		<Wrapper>
 			<HeaderBox>
-				<Logo onClick={() => { window.location.href = "/" }}>
-					LOGO
+				<Logo onClick={() => {window.location.href="/"}}>
+					<Image src="/logo.jpeg" />
 				</Logo>
 				{children}
 				{navList}
@@ -68,13 +79,22 @@ const Header = ({ children }) => {
 }
 
 const Logo = styled.div`
-	width: 80px;
+	min-width: 140px;
+	height: 100%;
 	&:hover{
 		cursor: pointer;
 	};
 	font-weight: 900;
 	font-size: 2em;
 	font-family: "Apple SD Gothic Neo";
+	position: relative;
+	overflow: hidden;
+`;
+
+const Image = styled.img`
+	width: 125px;
+	position: abolute;
+	transform: translate(0%, -30%);
 `;
 
 const Wrapper = styled.div`

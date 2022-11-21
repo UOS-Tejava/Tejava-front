@@ -58,7 +58,7 @@ const OrderPage = () => {
 					</>
 				}
 			</MenuWrapper>
-			<Cart modalOpen={voiceModalOpen} setModal={setVoiceModalOpen} />
+			<Cart modalOpen={voiceModalOpen} setModal={setVoiceModalOpen} navigate={navigate} />
 			<AnimatePresence // 언마운트시에도 애니메이션이 동작하도록 감싸주기
 				initial={false} // 초기 렌더링 시 children 애니메이션 prevent
 				mode="wait" // 한 번에 하나의 컴포넌트만 업데이트 (exitBeforeEnter deprecated 되고 mode로 대체)
@@ -80,6 +80,7 @@ const Wrapper = styled.div`
 	align-items: center;
 	justify-content: center;
 	height: 90vh;
+	width: 100vw;
 `;
 
 const MenuWrapper = styled.div`
@@ -91,6 +92,7 @@ const MenuWrapper = styled.div`
 	justify-items: center;
 	grid-template-rows: 1fr 1fr;
 	grid-template-columns: 1fr 1fr;
+	float: left;
 `;
 
 export default OrderPage;
