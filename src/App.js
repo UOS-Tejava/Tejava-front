@@ -12,8 +12,15 @@ import Payment from './views/payment/PaymentPage';
 import PaymentSuccess from './views/payment/PaymentSuccessPage';
 import OrderMgtPage from './views/employee/OrderMgtPage';
 import StockMgtPage from './views/employee/StockMgtPage';
+import { useDispatch } from 'react-redux';
+import { changeUserState } from './store';
 
 function App() {
+	let dispatch = useDispatch();
+	let userInfo = JSON.parse(JSON.stringify(localStorage.getItem('user')))
+	console.log(userInfo, typeof(userInfo));
+	//  dispatch(changeUserState(userInfo))
+
 	return (
 		<div>
 			<Router>

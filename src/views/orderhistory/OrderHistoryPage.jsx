@@ -44,7 +44,6 @@ function OrderHistory() {
   return (
     <div>
       {show ? <HistoryModal orderHistory={orderHistory} closeModal={closeModal} navigate={navigate} /> : null}
-      <Link to='/payment'>결제화면테스트</Link>
       <h2 className="text-center">주문내역</h2>
       {
         orderHistory.map((a, i) => {
