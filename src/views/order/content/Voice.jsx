@@ -49,9 +49,9 @@ const Voice = (props) => {
 
 	return (
 		<Wrapper>
-			<h2>
+			<Text>
 				음성인식
-			</h2>
+			</Text>
 			<ButtonGroup variant="text">
 				<Button onClick={() => {
 					SpeechRecognition.startListening();
@@ -82,7 +82,7 @@ const Wrapper = styled.div`
 	justify-content: center; // 가로 가운데정렬
 	position: relative;
 	text-align: center;
-	width: 90%;
+	width: 90%
 `;
 
 const Textbox = styled.div`
@@ -95,6 +95,13 @@ const Textbox = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	margin-bottom: 20px;
+`;
+
+const Text = styled.div`
+	font-size: 1.7em;
+	font-family: "Apple SD Gothic Neo";
+	font-weight: bold;
 	margin-bottom: 20px;
 `;
 

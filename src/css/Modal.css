@@ -11,6 +11,7 @@
 }
 
 .modal {
+	position: relative;
 	width: clamp(20%, 300px, 50%);
 	margin: auto;
 	max-height: 500px;
