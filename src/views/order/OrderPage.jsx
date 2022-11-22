@@ -37,6 +37,7 @@ const OrderPage = () => {
 
 	return (
 		<Wrapper>
+			<SubWrapper>
 			<MenuWrapper>
 				{
 					menuDetail &&
@@ -77,6 +78,7 @@ const OrderPage = () => {
 					</Modal>
 				}
 			</AnimatePresence>
+			</SubWrapper>
 		</Wrapper>
 	);
 }
@@ -86,12 +88,19 @@ const Wrapper = styled.div`
 	align-items: center;
 	justify-content: center;
 	height: 90vh;
+	min-width: fit-content;
+`;
+
+const SubWrapper = styled.div`
+	width: 1280px;
+	display: flex;
+	height: 90vh;
 `;
 
 const MenuWrapper = styled.div`
 	width: 50%;
 	height: 95%;
-	margin: 5%;
+	margin: 2%;
 	display: grid;
 	align-items: center;
 	justify-items: center;

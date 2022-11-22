@@ -35,29 +35,55 @@ const MenuDetailPage = (props) => {
 	// const [menuDetail, setMenuDetail] = useState(location.state.detail);
 	const [styleList, setStyleList] = useState([]);
 	const [optionList, setOptionsList] = useState([]);
+	const [style, setStyle] = useState();
 
 	useEffect(()=>{
 		fetch('/order/showAllStyles/menuId/' + location.state.idx)
 		.then(res => res.json())
-		.then(data => setStyleList(data));
+		.then(data => {
+			setStyleList(data);
+			if (!location.state.modify)
+				setStyle(data[0]);
+			else
+				setStyle(location.state.detail.style);
+			// console.log(location.state.detail.style);
+			// console.log(data[0]);
+		});
 		fetch('/order/showAllOptions/menuId/' + location.state.idx)
 		.then(res => res.json())
-		.then(data => setOptionsList(data));
+		.then(data => {
+			if (!location.state.modify)
+				setOptionsList(data);
+			else
+				setOptionsList(location.state.detail.options);
+		});
 	}, []);
 
 	return (
 		<Wrapper>
-			<MenuImage menuDetail={location.state.detail} />
-			<MenuOptions
-				menuDetail={location.state.detail}
-				styleList={styleList}
-				optionList={optionList}
-			/>
+			<SubWrapper>
+				<MenuImage menuDetail={location.state.detail} />
+				<MenuOptions
+					menuDetail={location.state.detail}
+					styleList={styleList}
+					optionList={optionList}
+					style={style}
+					modify={location.state.modify}
+				/>
+			</SubWrapper>
 		</Wrapper>
 	);
 }
 
 const Wrapper = styled.div`
+	height: 88vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`;
+
+const SubWrapper = styled.div`
+	min-width: fit-content;
 	height: 88vh;
 `;
 

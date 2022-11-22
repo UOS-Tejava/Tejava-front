@@ -15,11 +15,15 @@ const MenuOptions = (props) => {
 	const [menuDetail, setMenuDetail] = useState({...props.menuDetail, options:[]});
 	const [price, setPrice] = useState(props.menuDetail.price); // 옵션 변경 시 바꿀 것
 	const [totalAmount, setTotalAmount] = useState(props.menuDetail.price);
-	const [style, setStyle] = useState({id:0});
+	const [style, setStyle] = useState();
+	const [styleBoxList, setStyleBoxList] = useState([]);
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		setStyle(styleList[0]);
+		if (props.modify)
+			setStyle(menuDetail.style);
+		else
+			setStyle(styleList[0]);
 		setMenuDetail({...menuDetail, style: style});
 		if (styleList.length !== 0){
 			setTotalAmount(price + styleList[0].price);
@@ -36,9 +40,12 @@ const MenuOptions = (props) => {
 	}, [style]);
 
 	useEffect(() => {
-		setTotalAmount(price + style.price);
-		setMenuDetail({...menuDetail, price: price + style.price})
-	}, [price]);
+		if (style)
+		{
+			setTotalAmount(price + style.price);
+			setMenuDetail((menuDetail) => ({...menuDetail, price: price + style.price}))
+		}
+	}, [price, style]);
 
 	const addToCart = () => {
 		fetch('/cart/add', {
@@ -48,23 +55,47 @@ const MenuOptions = (props) => {
 			},
 			body: JSON.stringify({menu: menuDetail, userId: JSON.parse(localStorage.getItem('user')).id})
 		})
+		.then(res => {
+			navigate("/order");
+		})
+		.catch(err => console.log(err));
+	}
+
+	const modifyMenu = () => {
+		fetch('/cart/update/menu-detail', {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				menuId: menuDetail.menuId,
+				newOptions: menuDetail.options,
+				newStyle: menuDetail.style,
+				userId: JSON.parse(localStorage.getItem('user')).id
+			})
+		})
 		.then(res => navigate("/order"))
 		.catch(err => console.log(err));
 	}
 
-	let styleBoxList = [];
-	styleList.map((item) => {
-		styleBoxList.push(
-			style === item ?
-			<MenuStyleBox style={item} selected={true} onClickFunction={()=>{}} />
-			:
-			<MenuStyleBox style={item} selected={false} onClickFunction={()=>{
-				setStyle(item);
-				setMenuDetail({...menuDetail, style:{item}});
-			}} setTotalAmount={setTotalAmount} price={price} />
-		);
-	});
-	// TODO: 컴포넌트 분리 (리렌더링?)
+	useEffect(() => {
+		if (style){
+			let newList = [];
+			styleList.map((item) =>
+				newList.push(
+					style.style_nm === item.style_nm ?
+					<MenuStyleBox style={item} selected={true} onClickFunction={()=>{}} />
+					:
+					<MenuStyleBox style={item} selected={false} onClickFunction={()=>{
+						setStyle(item);
+						setMenuDetail((menuDetail) => ({...menuDetail, style:{item}}));
+						setTotalAmount(price + item.price);
+						console.log(menuDetail.options);
+					}} setTotalAmount={setTotalAmount} price={price} />
+			));
+			setStyleBoxList(newList);
+		}
+	}, [styleList, style]);
 
 	let optionBoxList = [];
 	if (menuDetail.options.length !== 0){
@@ -92,13 +123,26 @@ const MenuOptions = (props) => {
 			<OptionBoxWrapper>
 				{optionBoxList}
 			</OptionBoxWrapper>
-			<CartButton
-				whileHover={{ scale : 1.05 }}
-				whileTap={{ scale : 0.95 }}
-				onClick={addToCart}
-			>
-				{"총 " + toPriceString(menuDetail.price) + " 원 담기"}
-			</CartButton>
+			{
+				!props.modify &&
+				<CartButton
+					whileHover={{ scale : 1.05 }}
+					whileTap={{ scale : 0.95 }}
+					onClick={addToCart}
+				>
+					{"총 " + toPriceString(menuDetail.price) + " 원 담기"}
+				</CartButton>
+			}
+			{
+				props.modify &&
+				<CartButton
+					whileHover={{ scale : 1.05 }}
+					whileTap={{ scale : 0.95 }}
+					onClick={modifyMenu}
+				>
+					{"메뉴 수정하기"}
+				</CartButton>
+			}
 		</Wrapper>
 	);
 }
@@ -107,7 +151,7 @@ const Wrapper = styled.div`
 	width: 50%;
 	height: 100%;
 	overflow: auto;
-	float: left;
+	// float: left;
 	display: flex;
 	flex-direction: column;
 	align-items: center;

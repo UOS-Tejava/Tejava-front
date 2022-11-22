@@ -92,7 +92,7 @@ const Cart = (props) => {
 
 const CartWrapper = styled.div`
 	width: 50%;
-	height: 87%;
+	height: 95%;
 	display: flex;
 	flex-direction: column;
 	padding: 20px;
