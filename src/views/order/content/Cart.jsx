@@ -111,8 +111,8 @@ const CartWrapper = styled.div`
 	// 	border-radius: 5px;
 	// 	// height: 20%;
 	// }
-	max-width: 500px;
-	min-width: 500px;
+	// max-width: 500px;
+	// min-width: 500px;
 `;
 
 const CartItemWrapper = styled.div`
