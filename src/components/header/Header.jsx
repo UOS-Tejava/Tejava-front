@@ -27,7 +27,7 @@ const Header = ({ children }) => {
 		headerList = headers;
 	for (const h in headerList) {
 		navList.push(
-			<HeaderMenu name={h} value={headerList[h]} />
+			<HeaderMenu name={h} value={headerList[h]} navigate={navigate} />
 		)
 	}
 
@@ -39,12 +39,12 @@ const Header = ({ children }) => {
 				'Content-Type': 'application/json',
 			}
 		})
-			.then(res => res.json())
-			.then(data => {
-				localStorage.setItem('user', JSON.stringify(data));
-				window.location.replace("/");
-			})
-			.catch(err => console.log(err));
+		.then(res => res.json())
+		.then(data => {
+			localStorage.setItem('user', JSON.stringify(data));
+			window.location.replace("/");
+		})
+		.catch(err => console.log(err));
 		localStorage.clear();
 
 	};
