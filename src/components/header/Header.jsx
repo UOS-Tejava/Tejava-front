@@ -82,7 +82,7 @@ const Header = ({ children }) => {
 
 const Logo = styled.div`
 	min-width: 140px;
-	height: 100%;
+	height: 90%;
 	&:hover{
 		cursor: pointer;
 	};

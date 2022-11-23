@@ -17,18 +17,22 @@ const MenuBox = (props) => {
 			onClick={props.onClickFunction}
 		>
 			<ImageWrapper source={item.menu_pic} />
-			<MenuNameWrapper>{item.menu_nm}</MenuNameWrapper>
-			<MenuConfigWrapper>{item.menu_config}</MenuConfigWrapper>
-			<PriceWrapper>{toPriceString(item.price) + " 원"}</PriceWrapper>
+			{/* <InfoWrapper> */}
+				<MenuNameWrapper>{item.menu_nm}</MenuNameWrapper>
+				<MenuConfigWrapper>{item.menu_config}</MenuConfigWrapper>
+				<PriceWrapper>{toPriceString(item.price) + " 원"}</PriceWrapper>
+			{/* </InfoWrapper> */}
 		</Wrapper>
 	);
 }
 
 const Wrapper = styled(motion.div)`
-	border-radius : 10px;
+	position: relative;
+	border-radius : 5px;
 	border : hidden;
-	height : 95%;
-	width: clamp(300px, 60%, 500px);
+	height : 98%;
+	// width: clamp(300px, 60%, 500px);
+	width: 98%;
 	box-shadow : 0 2px 5px rgba(0, 0, 0, 0.2);
 	background : white;
 	display: flex;
@@ -38,10 +42,26 @@ const Wrapper = styled(motion.div)`
 	margin-left: 10%;
 `;
 
+const InfoWrapper = styled.div`
+	// position: absolute;
+	// top: 50%;
+	// width: 100%;
+	// background: red;
+	// height :50%;
+	// display: flex;
+	// flex-direction: column;
+	// align-items: center;
+	// justify-content: center;
+`;
+
 const ImageWrapper = styled.div`
-	width: 80%;
+	border-top-left-radius: inherit;
+	border-top-right-radius: inherit;
+	position: absolute;
+	top: 0px;
+	margin-bottom: auto;
+	width: 100%;
 	height: 50%;
-	margin-top: 15px;
 	background-image: ${(props) => `url(${props.source})`};
 	background-size: cover;
 `;
@@ -50,8 +70,12 @@ const MenuNameWrapper = styled.div`
 	font-size: 1.3em;
 	font-family: "Apple SD Gothic Neo";
 	font-weight: bold;
-	margin-top: 20px;
+	text-align: center;
 	margin-bottom: 10px;
+	position: absolute;
+	top: 57%;
+	height: 10%;
+	width: 100%;
 `;
 
 const MenuConfigWrapper = styled.div`
@@ -61,14 +85,23 @@ const MenuConfigWrapper = styled.div`
 	margin-left: 20px;
 	margin-right: 20px;
 	text-align: center;
+	margin-bottom: 20px;
+	position: absolute;
+	top: 71%;
+	height: 10%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 `;
 
 const PriceWrapper = styled.div`
 	color : #0174DF;
 	font-size: 1.2em;
 	line-height: 0.5;
-	margin-top: 20px;
-	margin-bottom: 25px;
+	text-align: center;
+	position: absolute;
+	top: 87%;
+	height: 10%;
 `;
 
 

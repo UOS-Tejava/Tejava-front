@@ -6,6 +6,17 @@ const toPriceString = (item) => {
 	return item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+const optionString = (options) => {
+	let str = "";
+	let i = 0;
+	for (i = 0; i < options.length; i++){
+		if (i != 0)
+			str += ", ";
+		str += options[i].option_nm + " " + options[i].quantity + "개";
+	}
+	return str;
+}
+
 const CartItem = (props) => {
 	const item = props.item;
 	const navigate = useNavigate();
@@ -37,8 +48,12 @@ const CartItem = (props) => {
 			<MenuInfoWrapper
 				onClick={modifyMenu}
 			>
-			<ItemName>{item.menu_nm}</ItemName>
-			<ItemOption>{item.style.style_nm}</ItemOption>
+			<NameWrapper>
+				<ItemName>{item.menu_nm}</ItemName>
+				<ItemQuantity>{item.quantity}</ItemQuantity>
+			</NameWrapper>
+			<ItemStyle>{item.style.style_nm}</ItemStyle>
+			<ItemOption>{optionString(item.options)}</ItemOption>
 			</MenuInfoWrapper>
 			<ItemPrice>{toPriceString(item.price) + " 원"}</ItemPrice>
 			<ItemButton
@@ -51,8 +66,8 @@ const CartItem = (props) => {
 }
 
 const ItemWrapper = styled.div`
-	width: 80%;
-	height: 90px;
+	width: 90%;
+	height: 160px;
 	margin-bottom: 15px;
 	margin-left: 15px;
 	background: white;
@@ -71,26 +86,38 @@ const MenuInfoWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	margin-left: 10px;
+`;
+
+const NameWrapper = styled.div`
+	width: 100%;
+	display: flex;
 `;
 
 const ItemName = styled.div`
-	display: flex;
-	align-items: center;
-	grid-column: 1/2;
-	grid-row: 2/3;
 	font-size: 1.3em;
 	font-family: "Apple SD Gothic Neo";
 	font-weight: bold;
 `;
 
-const ItemOption = styled.div`
-	display: flex;
-	align-items: center;
-	grid-column: 1/2;
-	grid-row: 4/5;	
+const ItemQuantity = styled.div`
+	font-size: 1.3em;
+	font-family: "Apple SD Gothic Neo";
+	color : #9070FF;
+	margin-left : 10px;
+`;
+
+
+const ItemStyle = styled.div`
 	font-size: 1em;
 	font-family: "Apple SD Gothic Neo";
-	margin-top: 15px;
+	margin-top: 10px;
+`;
+
+const ItemOption = styled.div`
+	font-size: 0.8em;
+	font-family: "Apple SD Gothic Neo";
+	margin-top: 10px;
 `;
 
 const ItemPrice = styled.div`

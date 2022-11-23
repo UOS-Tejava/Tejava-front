@@ -24,6 +24,8 @@ const Cart = (props) => {
 			setCart(data)})
 		.catch(err => console.log(err));
 	}, []);
+	
+	console.log(cart);
 
 	let cartList = [];
 	let price = 0;
@@ -42,15 +44,13 @@ const Cart = (props) => {
 
 	return (
 		<CartWrapper>
-			<div>
 				<TextWrapper>
 				주문표
 				<KeyboardVoiceIcon
-					style={{ float : 'right', marginRight: '13%' }}
+					style={{ float : 'right' }}
 					onClick={() => (props.modalOpen ? close() : open())}
 				/>
 				</TextWrapper>
-			</div>
 			<CartItemWrapper>
 				{cartList}
 			</CartItemWrapper>
@@ -125,6 +125,7 @@ const CartItemWrapper = styled.div`
 `;
 
 const TextWrapper = styled.div`
+	width: 88%;
 	font-size: 1.6em;
 	font-family: "Apple SD Gothic Neo";
 	font-weight: bold;
