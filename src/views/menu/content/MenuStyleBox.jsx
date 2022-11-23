@@ -25,6 +25,7 @@ const Wrapper = styled.div`
 	margin: 8px;
 	display: flex;
 	justify-content: center;
+	align-items: center;
 	flex-direction: column;
 `;
 
@@ -34,16 +35,18 @@ const StyleName = styled.div`
 	font-weight: bold;
 	width: 100%;
 	text-align: center;
-	margin-bottom: 10px;
 `;
 
 const StyleConfig = styled.div`
-	font-size: 1em;
+	font-size: 0.3em;
 	font-family: "Apple SD Gothic Neo";
-	width: 100%;
+	width: 95%;
+	height: 40%;
 	text-align: center;
-	margin-bottom: 10px;
-
+	white-space: normal;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 `;
 
 const StylePrice = styled.div`

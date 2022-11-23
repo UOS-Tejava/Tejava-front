@@ -62,6 +62,7 @@ const ImageBox = styled.div`
 const TextWrapper = styled.div`
 	font-size: 1.0em;
 	font-family: "Apple SD Gothic Neo";
+	font-weight: bold;
 	margin: 15px;
 `;
 

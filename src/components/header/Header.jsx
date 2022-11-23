@@ -101,6 +101,7 @@ const Image = styled.img`
 
 const Wrapper = styled.div`
 	width: 100%;
+	min-width: 1280px;
 	height: 8vh;
 	display: flex;
 	position: relative;
