@@ -25,36 +25,57 @@ const StockMgtPage = () => {
 		setStockBoxList(newList);
 	}, [stockList]);
 
+	console.log(stockList);
+
 	return (
-		<Wrapper>
-			{/* {
-				!modify ?
-				<ButtonWrapper>
-					<ModifyButton
-						onClick={() => setModify(true)}
-					>재고 현황 기입하기</ModifyButton>
-				</ButtonWrapper>
-				:
-				<ButtonWrapper>
-					<ModifyButton>수정</ModifyButton>
-					<ModifyButton onClick={() => setModify(false)}>취소</ModifyButton>
-				</ButtonWrapper>
-			} */}
-			<StockWrapper>
-				{stockBoxList}
-			</StockWrapper>
+		// <Wrapper>
+		// 	{/* {
+		// 		!modify ?
+		// 		<ButtonWrapper>
+		// 			<ModifyButton
+		// 				onClick={() => setModify(true)}
+		// 			>재고 현황 기입하기</ModifyButton>
+		// 		</ButtonWrapper>
+		// 		:
+		// 		<ButtonWrapper>
+		// 			<ModifyButton>수정</ModifyButton>
+		// 			<ModifyButton onClick={() => setModify(false)}>취소</ModifyButton>
+		// 		</ButtonWrapper>
+		// 	} */}
+		// 	<StockWrapper>
+		// 		{stockBoxList}
+		// 	</StockWrapper>
 			
+		// </Wrapper>
+		<Wrapper>
+			<Header>
+				<Text>재고 관리</Text>
+			</Header>
+			<TableHeader>
+				<TextWrapper style={{width: '10%'}}>
+					<ItemText>No</ItemText>
+				</TextWrapper>
+				<TextWrapper style={{width: '45%'}}>
+					<ItemText>상품명</ItemText>
+				</TextWrapper>
+				<TextWrapper style={{width: '45%'}}>
+					<ItemText>수량</ItemText>
+				</TextWrapper>
+			</TableHeader>
+			<UlWrapper>
+				{stockBoxList}
+			</UlWrapper>
 		</Wrapper>
 	);
 };
 
-const Wrapper = styled.div`
-	height: 88vh;
-	display: flex;
-	width: 100%;
-	align-items: center;
-	justify-item: center;
-`;
+// const Wrapper = styled.div`
+// 	height: 88vh;
+// 	display: flex;
+// 	width: 100%;
+// 	align-items: center;
+// 	justify-item: center;
+// `;
 
 const StockWrapper = styled.div`
 	width: 100%;
@@ -72,6 +93,66 @@ const ButtonWrapper = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+`;
+
+// ----------------------
+
+
+const Wrapper = styled.div`
+	height: 88vh;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	align-items: center;
+`;
+
+const Header = styled.div`
+	display: flex;
+	width: 900px;
+	margin-top: 30px;
+`;
+
+const Text = styled.div`
+	font-size: 1.3em;
+	font-family: "Apple SD Gothic Neo";
+	font-weight: bold;
+	height: 60px;
+	width: 80%;
+	display: flex;
+	align-items: center;
+	padding-left: 30px;
+`;
+
+const TextWrapper = styled.div`
+	height: 40px;
+	display: flex;
+	align-items: center;
+	margin-left: 30px;
+	margin-top: 5px;
+`;
+
+const ItemText = styled.div`
+	width: 100%;
+	font-size: 1.0em;
+	font-family: "Apple SD Gothic Neo";
+	font-weight: bold;
+	width: 60%;
+`;
+
+const TableHeader = styled.div`
+	width: 915px;
+	border-top: solid black 0.5px;
+	border-bottom: solid black 0.5px;
+	display: flex;
+	margin-top: 10px;
+`;
+
+const UlWrapper = styled(motion.ul)`
+	display: flex;
+	flex-direction: column;
+	-webkit-padding-start: 0px;
+	margin: 0;
+	overflow: auto;
 `;
 
 export default StockMgtPage;

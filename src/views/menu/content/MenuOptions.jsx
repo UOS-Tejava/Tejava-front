@@ -56,7 +56,15 @@ const MenuOptions = (props) => {
 			body: JSON.stringify({menu: menuDetail, userId: JSON.parse(localStorage.getItem('user')).id})
 		})
 		.then(res => {
-			navigate("/order");
+			if (!res.ok)
+				return res.json();
+			else {
+				alert("장바구니에 추가되었습니다.");
+				navigate("/order");
+			}
+		})
+		.then(data => {
+			alert(data.message);
 		})
 		.catch(err => console.log(err));
 	}
@@ -74,7 +82,17 @@ const MenuOptions = (props) => {
 				userId: JSON.parse(localStorage.getItem('user')).id
 			})
 		})
-		.then(res => navigate("/order"))
+		.then(res => {
+			if (!res.ok)
+				return res.json();
+			else {
+				alert("수정되었습니다.");
+				navigate("/order");
+			}
+		})
+		.then(data => {
+			alert(data.message);
+		})
 		.catch(err => console.log(err));
 	}
 
