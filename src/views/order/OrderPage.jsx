@@ -22,6 +22,12 @@ const OrderPage = () => {
 			});
 	}
 
+	const voiceNavigate = (idx) => {
+		navigate("/menu", {
+			state: { detail: menuDetail[idx], idx: idx + 1, modify: false }
+		});
+	};
+
 	useEffect(() => {
 		getMenuDetailLocal();
 	}, []);
@@ -31,6 +37,7 @@ const OrderPage = () => {
 
 	return (
 		<Wrapper>
+			<SubWrapper>
 			<MenuWrapper>
 				{
 					menuDetail &&
@@ -67,10 +74,11 @@ const OrderPage = () => {
 				{
 					voiceModalOpen &&
 					<Modal close={closeVoiceModal}>
-						<Voice />
+						<Voice navigate={voiceNavigate} />
 					</Modal>
 				}
 			</AnimatePresence>
+			</SubWrapper>
 		</Wrapper>
 	);
 }
@@ -80,19 +88,24 @@ const Wrapper = styled.div`
 	align-items: center;
 	justify-content: center;
 	height: 90vh;
-	width: 100vw;
+	min-width: fit-content;
+`;
+
+const SubWrapper = styled.div`
+	width: 1280px;
+	display: flex;
+	height: 90vh;
 `;
 
 const MenuWrapper = styled.div`
 	width: 50%;
 	height: 95%;
-	margin: 5%;
+	margin: 2%;
 	display: grid;
 	align-items: center;
 	justify-items: center;
 	grid-template-rows: 1fr 1fr;
 	grid-template-columns: 1fr 1fr;
-	float: left;
 `;
 
 export default OrderPage;

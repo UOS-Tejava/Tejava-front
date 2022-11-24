@@ -23,6 +23,13 @@ const Wrapper = styled.div`
 `;
 
 const CounterButton = styled(motion.button)`
+	border-radius: 50%;
+	width: 25px;
+	height: 25px;
+	font-size: 0.8em;
+	border: hidden;
+	background: #BDD8FF;
+	padding-bottom: 3px;
 `;
 
 export default Counter;

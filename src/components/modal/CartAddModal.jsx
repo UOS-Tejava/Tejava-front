@@ -44,8 +44,8 @@ const CartAddModal = ({ children, close, add }) => {
 					<SubmitButton
 						onClick={() => {
 							add();
-					}}>✓</SubmitButton>
-					<CancelButton onClick={close}>✗</CancelButton>
+					}}>확인</SubmitButton>
+					<SubmitButton onClick={close}>취소</SubmitButton>
 				</ButtonWrapper>
 			</ModalWrapper>
 		</Backdrop>
@@ -58,21 +58,11 @@ const ButtonWrapper = styled.div`
 `;
 
 const SubmitButton = styled.button`
-	background-color: transparent;
+	height: 30px;
+	width: 50px;
     border: unset;
-    color: green;
-	font-size: x-large;
 	cursor: pointer;
-`;
-
-const CancelButton = styled.button`
-    background-color: transparent;
-    border: unset;
-    color: red;
-	font-size: large;
-	margin-bottom: 3px;
-	margin-left: 10px;
-	cursor: pointer;
+	margin: 10px;
 `;
 
 const ModalWrapper = styled(motion.div)`

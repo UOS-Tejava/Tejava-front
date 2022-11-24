@@ -2,8 +2,12 @@ import styled from "@emotion/styled";
 
 const HeaderMenu = (props) => {
 	const url = "/" + props.value;
+	const navigate = props.navigate;
+
 	return (
-		<Wrapper onClick={() => window.location.href = url}>
+		<Wrapper onClick={() => {
+			navigate(url);
+		}}>
 			{props.name}
 		</Wrapper>
 	)
