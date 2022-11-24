@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import OrderBox from "./content/OrderBox";
 import { motion } from "framer-motion";
-import { FormControl, InputLabel, MenuItem, NativeSelect, Select } from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 const OrderMgtPage = () => {
 	const [data, setData] = useState([]);

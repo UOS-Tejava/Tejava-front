@@ -113,9 +113,10 @@ const TextWrapper = styled.div`
 `;
 
 const SubWrapper = styled(motion.div)`
-	height: 230px;
+	height: 300px;
 	width: 100%;
 `;
+// TODO: 높이 수정
 
 const ItemText = styled.div`
 	font-size: 0.9em;
