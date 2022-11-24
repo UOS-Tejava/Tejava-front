@@ -27,7 +27,7 @@ const Header = ({ children }) => {
 		headerList = headers;
 	for (const h in headerList) {
 		navList.push(
-			<HeaderMenu name={h} value={headerList[h]} />
+			<HeaderMenu name={h} value={headerList[h]} navigate={navigate} />
 		)
 	}
 
@@ -39,12 +39,12 @@ const Header = ({ children }) => {
 				'Content-Type': 'application/json',
 			}
 		})
-			.then(res => res.json())
-			.then(data => {
-				localStorage.setItem('user', JSON.stringify(data));
-				window.location.replace("/");
-			})
-			.catch(err => console.log(err));
+		.then(res => res.json())
+		.then(data => {
+			localStorage.setItem('user', JSON.stringify(data));
+			window.location.replace("/");
+		})
+		.catch(err => console.log(err));
 		localStorage.clear();
 
 	};
@@ -82,7 +82,7 @@ const Header = ({ children }) => {
 
 const Logo = styled.div`
 	min-width: 140px;
-	height: 100%;
+	height: 90%;
 	&:hover{
 		cursor: pointer;
 	};
@@ -101,6 +101,7 @@ const Image = styled.img`
 
 const Wrapper = styled.div`
 	width: 100%;
+	min-width: 1280px;
 	height: 8vh;
 	display: flex;
 	position: relative;

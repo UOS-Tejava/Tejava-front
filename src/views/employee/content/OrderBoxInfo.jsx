@@ -11,6 +11,17 @@ const convertStatus = (status) => {
 	return '';
 }
 
+const optionString = (options) => {
+	let str = "";
+	let i = 0;
+	for (i = 0; i < options.length; i++){
+		if (i != 0)
+			str += ", ";
+		str += options[i].option_nm + " " + options[i].quantity + "개";
+	}
+	return str;
+}
+
 const changeStatus = (id, status) => {
 	let toStatus = '';
 	if (status === 'pending')
@@ -35,13 +46,15 @@ const changeStatus = (id, status) => {
 }
 
 const OrderBoxInfo = (props) => {
-
-	const setModified = props.setModified;
 	const item = props.item;
 	let menuList = [];
 	props.menu.map((item) => {
 		menuList.push(
-			<ItemText>{item.menu_nm}</ItemText>
+			<MenuWrapper>
+				<ItemText>{item.menu_nm}</ItemText>
+				<OptionText>{item.style.style_nm}</OptionText>
+				<OptionText>{optionString(item.options)}</OptionText>
+			</MenuWrapper>
 		);
 	})
 
@@ -127,8 +140,21 @@ const Content = styled.div`
 	flex-direction: column;
 `;
 
+const MenuWrapper = styled.div`
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 15px;
+`;
+
 const ItemText = styled.div`
-	font-size: 1.0em;
+	font-size: 0.9em;
+	font-family: "Apple SD Gothic Neo";
+	font-weight: bold;
+`;
+
+const OptionText = styled.div`
+	font-size: 0.8em;
 	font-family: "Apple SD Gothic Neo";
 `;
 

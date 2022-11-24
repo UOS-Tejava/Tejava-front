@@ -10,19 +10,20 @@ const MenuOptionBox = (props) => {
 	const price = props.price;
 	const setPrice = props.setPrice;
 	let optionList = menuDetail.options;
+	let newOption = option;
 
 	const onIncrease = () => {
 		optionList[index].quantity += 1;
 		setMenuDetail({...menuDetail, options: optionList});
 		if (optionList[index].quantity > option.quantity)
-			setPrice(price + option.price);
+			setPrice((price) => (price + option.price));
 	}
 
 	const onDecrease = () => {
 		if (optionList[index].quantity > 0){
 			optionList[index].quantity -= 1;
 			if (optionList[index].quantity >= option.quantity)
-				setPrice(price - option.price);
+				setPrice((price) => (price - option.price));
 		}
 		setMenuDetail({...menuDetail, options: optionList});
 		
@@ -61,6 +62,7 @@ const ImageBox = styled.div`
 const TextWrapper = styled.div`
 	font-size: 1.0em;
 	font-family: "Apple SD Gothic Neo";
+	font-weight: bold;
 	margin: 15px;
 `;
 

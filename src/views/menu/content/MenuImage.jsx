@@ -21,7 +21,7 @@ const Wrapper = styled.div`
 	align-items: center;
 	justify-content: center;
 	float: left;
-	margin-left: 40px;
+	margin-left: 5%;
 `;
 
 const ImageBox = styled.div`
