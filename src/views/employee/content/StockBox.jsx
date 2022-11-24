@@ -31,55 +31,94 @@ const StockBox = (props) => {
 	}
 
 	return (
+		// <Wrapper>
+		// 	<Image source={item.stock_item_pic} />
+		// 	<BoldText>{item.stock_item_nm}</BoldText>
+		// 	<>
+		// 	<ButtonWrapper>
+		// 	{
+		// 		!modify ?
+		// 		<RegularText>{item.quantity}</RegularText>
+		// 		:
+		// 		<Input
+		// 			type="text"
+		// 			name="quantity"
+		// 			value={quantity}
+		// 			onChange={onChangeInput}
+		// 		/>
+		// 	}
+		// 	{
+		// 		!modify ?
+		// 			<ModifyButton
+		// 				onClick={() => setModify(true)}
+		// 			>수정</ModifyButton>
+		// 		:
+		// 		<>
+		// 			<ModifyButton onClick={requestModify}>확인</ModifyButton>
+		// 			<ModifyButton onClick={() => setModify(false)}>취소</ModifyButton>
+		// 		</>
+		// 	}
+		// 	</ButtonWrapper>
+		// 	</>
+		// </Wrapper>
 		<Wrapper>
-			<Image source={item.stock_item_pic} />
-			<BoldText>{item.stock_item_nm}</BoldText>
-			<>
-			<ButtonWrapper>
-			{
-				!modify ?
-				<RegularText>{item.quantity}</RegularText>
-				:
-				<Input
-					type="text"
-					name="quantity"
-					value={quantity}
-					onChange={onChangeInput}
-				/>
-			}
-			{
-				!modify ?
-					<ModifyButton
-						onClick={() => setModify(true)}
-					>수정</ModifyButton>
-				:
-				<>
-					<ModifyButton onClick={requestModify}>확인</ModifyButton>
-					<ModifyButton onClick={() => setModify(false)}>취소</ModifyButton>
-				</>
-			}
-			</ButtonWrapper>
-			</>
+			<ListWrapper>
+				<InfoWrapper>
+					<TextWrapper style={{width: '10%'}}>
+						<ItemText>{item.id}</ItemText>
+					</TextWrapper>
+					<TextWrapper style={{width: '45%'}}>
+						<Image source={item.stock_item_pic} />
+						<ItemText>{item.stock_item_nm}</ItemText>
+					</TextWrapper>
+					<TextWrapper style={{width: '45%'}}>
+						{/* <ButtonWrapper> */}
+						{
+							!modify ?
+							<RegularText>{item.quantity}</RegularText>
+							:
+							<Input
+								type="text"
+								name="quantity"
+								value={quantity}
+								onChange={onChangeInput}
+							/>
+						}
+						{
+							!modify ?
+								<ModifyButton
+									onClick={() => setModify(true)}
+								>수정</ModifyButton>
+							:
+							<>
+								<ModifyButton onClick={requestModify}>확인</ModifyButton>
+								<ModifyButton onClick={() => setModify(false)}>취소</ModifyButton>
+							</>
+						}
+						{/* </ButtonWrapper> */}
+					</TextWrapper>
+				</InfoWrapper>
+			</ListWrapper>
 		</Wrapper>
 	)
 }
 
-const Wrapper = styled.div`
-	width: 200px;
-	height: 200px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items:center;
-	margin: 10px;
-`;
+// const Wrapper = styled.div`
+// 	width: 200px;
+// 	height: 200px;
+// 	display: flex;
+// 	flex-direction: column;
+// 	justify-content: center;
+// 	align-items:center;
+// 	margin: 10px;
+// `;
 
 const Image = styled.div`
-	width: 95%;
-	height: 100px;
+	width: 100px;
+	height: 60px;
 	background-image: ${props => `url(${props.source})`};
 	background-size: cover;
-	margin-bottom: 10px;
+	margin-right: 20px;
 `;
 
 const BoldText = styled.div`
@@ -90,24 +129,90 @@ const BoldText = styled.div`
 `;
 
 const RegularText = styled.div`
-	font-size: 0.9em;
+	font-size: 1em;
 	font-family: "Apple SD Gothic Neo";
-	width: 80px;
+	width: 50%;
+	margin-left: 10px;
 `;
 
 const Input = styled.input`
-	width: 50px;
+	width: 50%;
+	// height: 31px;
+	font-size: 15px;
+	border: 0;
+	border-radius: 5px;
+	outline: none;
+	padding-left: 10px;
+	background-color: rgb(233, 233, 233);
+	margin-right: 10px;
 `;
 
 const ModifyButton = styled.button`
 	width: 50px;
+	border: 0;
+	margin-right: 10px;
 `;
 
 const ButtonWrapper = styled.div`
 	width: 150px;
 	display: flex;
+	// justify-content: center;
+	// align-items: center;
+`;
+
+
+const Wrapper = styled.div`
+	width: 900px;
+	height: 80px;
+`;
+
+const ListWrapper = styled.li`
+	width: 100%;
+	height: 100%;
+	border-bottom: solid gray 0.1px;
+	displey: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	cursor: pointer;
+	// background-color: rgba(214, 214, 214, 0.5);
+	overflow: hidden;
+	cursor: pointer;
+`;
+
+const InfoWrapper = styled.div`
+	width: 100%;
+	height: 100%;
+	display: flex;
+	// flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	float: left;
+`;
+
+const TextWrapper = styled.div`
+	display: flex;
+	// justify-content: center;
+	align-items: center;
+	margin-left: 20px;
+`;
+
+const SubWrapper = styled.div`
+	height: 300px;
+	width: 100%;
+`;
+// TODO: 높이 수정
+
+const ItemText = styled.div`
+	font-size: 0.9em;
+	font-family: "Apple SD Gothic Neo";
+	width: 60%;
+`;
+
+const MenuList = styled.div`
+	width: 70%;
+	display: flex;
+	flex-direction: column;
 `;
 
 export default StockBox;

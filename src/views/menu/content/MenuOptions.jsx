@@ -55,8 +55,15 @@ const MenuOptions = (props) => {
 			},
 			body: JSON.stringify({menu: menuDetail, userId: JSON.parse(localStorage.getItem('user')).id})
 		})
-		.then(res => {
-			navigate("/order");
+		.then(res => res.json())
+		.then(data => {
+			if (data.status == 200)
+			{
+				alert("장바구니에 추가되었습니다.");
+				navigate("/order");
+			}
+			else
+				alert(data.message);
 		})
 		.catch(err => console.log(err));
 	}
