@@ -41,11 +41,14 @@ const Header = ({ children }) => {
 		})
 			.then(res => res.json())
 			.then(data => {
-				localStorage.setItem('user', JSON.stringify(data));
+				localStorage.clear();
 				window.location.replace("/");
+
+				localStorage.setItem('user', JSON.stringify(data));
+				// window.location.replace("/");
 			})
 			.catch(err => console.log(err));
-		localStorage.clear();
+		// localStorage.clear();
 
 	};
 

@@ -17,14 +17,14 @@ import { changeUserState } from './store';
 
 function App() {
 	let dispatch = useDispatch();
-	let userInfo = JSON.parse(JSON.stringify(localStorage.getItem('user')))
-	console.log(userInfo, typeof(userInfo));
-	//  dispatch(changeUserState(userInfo))
+	let userInfo = JSON.parse(localStorage.getItem('user'))
+	console.log(userInfo);
+	dispatch(changeUserState(userInfo))
 
 	return (
 		<div>
 			<Router>
-				<Header/>
+				<Header />
 				<Routes>
 					<Route exact path="/" element={<MainPage />} />
 					<Route exact path="/order" element={<OrderPage />} />
@@ -32,8 +32,8 @@ function App() {
 					<Route exact path="/login" element={<Login />} />
 					<Route exact path="/signup" element={<Signup />} />
 					<Route exact path="/orderhistory" element={<OrderHistory />} />
-					<Route exact path='/payment' element={<Payment/>}/>
-					<Route exact path='/paymentsuccess' element={<PaymentSuccess/>}/>
+					<Route exact path='/payment' element={<Payment />} />
+					<Route exact path='/paymentsuccess' element={<PaymentSuccess />} />
 					<Route exact path="/employee/order" element={<OrderMgtPage />} />
 					<Route exact path="/employee/stock" element={<StockMgtPage />} />
 				</Routes>

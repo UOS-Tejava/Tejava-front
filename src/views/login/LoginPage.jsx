@@ -58,14 +58,13 @@ function LoginBox() {
 										dispatch(changeUserState(res.data))
 										navigate('/')
 									})
-									.catch((err) => { console.log(err); });
+									.catch((err) => { console.log(err); alert('로그인이 실패하였습니다. 아이디와 비밀번호를 확인하여 다시 입력하세요.') });
 							}}>
 								로그인
 							</MDBBtn>
 
 							<div>
 								<p className="mb-0">아직 회원이 아니세요? <a href="#!" class="fw-bold">회원가입</a></p>
-								<div>{a.name}</div>
 							</div>
 						</MDBCardBody>
 					</MDBCard>

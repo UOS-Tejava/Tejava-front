@@ -103,7 +103,6 @@ function HistoryModal(props) {
           )
           })}</div>
         <div className="mb-4">배달요청일시 {props.orderHistory[cardNum].req_orderDateTime}</div>
-        <button className="btn btn-primary" id="change" onClick={(e)=>{e.stopPropagation(); props.navigate('/menu'); }}>옵션/스타일변경</button>
         <button className="btn btn-danger" id="close" onClick={props.closeModal}>닫기</button>
       </div>
     </div>

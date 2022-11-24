@@ -1,8 +1,10 @@
-import { useNavigate } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 import './paymentSuccessPage.css'
 
 function PaymentSuccess() {
   let navigate = useNavigate()
+  let location = useLocation();
+  let {req_orderDateTime} = location.state;
 
   return (
     <>
@@ -15,7 +17,7 @@ function PaymentSuccess() {
               </div>
               <div className="content">
                 <h1>고객님의 주문이 완료되었습니다.</h1>
-                <p>주문일시 : ~~</p>
+                <p>주문일시 : {req_orderDateTime} </p>
                 <button onClick={()=>{navigate("/orderhistory")}}>주문내역 확인하기</button>
               </div>
             </div>

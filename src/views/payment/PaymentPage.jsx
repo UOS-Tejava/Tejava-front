@@ -5,9 +5,8 @@ function Payment() {
     let navigate = useNavigate();
     let location = useLocation();
     let { req_orderDateTime, total_price, cart } = location.state
-    console.log(location);
-    console.log(location.state);
-    console.log(total_price, cart);
+
+    console.log(req_orderDateTime);
     return (
         <div className="container p-0 mt-3">
             <div className="card px-4">
@@ -69,7 +68,9 @@ function Payment() {
                     </div>
                     <div className='text-center mb-3'>총 주문 금액 : {total_price}</div>
                     <div className="col-12 row">
-                        <button type="button" className="btn btn-primary mb-3" onClick={() => { navigate('/paymentsuccess') }}>
+                        <button type="button" className="btn btn-primary mb-3" onClick={() => { navigate('/paymentsuccess', {
+                            state : {req_orderDateTime : req_orderDateTime}
+                        }) }}>
                             <span className="">결제하기 </span>
                             <span className="fas fa-arrow-right"></span>
                         </button>
