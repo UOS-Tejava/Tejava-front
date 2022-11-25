@@ -1,9 +1,13 @@
+import { useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 
 function Payment() {
     let navigate = useNavigate();
     let location = useLocation();
+    let userInfo = useSelector(state => state.user);
+    console.log(userInfo.name);
+     
     let { req_orderDateTime, total_price, cart } = location.state
 
     console.log(req_orderDateTime);
@@ -15,7 +19,7 @@ function Payment() {
                     <div className="col-12">
                         <div className="d-flex flex-column">
                             <p className="text mb-1">주문자 이름</p>
-                            <input className="form-control mb-3" type="text" placeholder="Name" />
+                            <input className="form-control mb-3" type="text" placeholder={userInfo.address == null? "Name" : userInfo.name} />
                         </div>
                     </div>
 
@@ -45,7 +49,7 @@ function Payment() {
                     <div className="col-12">
                         <div className="d-flex flex-column">
                             <p className="text mb-1">배달 주소</p>
-                            <input className="form-control mb-3" type="text" placeholder="주소" />
+                            <input className="form-control mb-3" type="text" placeholder={userInfo.address == null? "주소" : userInfo.address} />
                         </div>
                     </div>
                     <div className="col-12">

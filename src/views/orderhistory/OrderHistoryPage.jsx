@@ -33,13 +33,14 @@ function OrderHistory() {
   }
   useEffect(() => {
     console.log('re');
-    axios.get('/order/history').then((res) => {
+    axios.get('/order/history/orders').then((res) => {
+      console.log(res.data);
       setOrderHistory(res.data);
       temp = res.data
     })
   }, []);
   
-  console.log(orderHistory);
+  // console.log(orderHistory);
 
   return (
     <div>

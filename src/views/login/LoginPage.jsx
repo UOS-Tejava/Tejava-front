@@ -29,8 +29,9 @@ function LoginBox() {
 		staySignedIn: false
 	}
 	let dispatch = useDispatch()
-	let a = useSelector((state) => state.user)
 	let navigate = useNavigate()
+	let storeUserInfo = useSelector((state) => state.user)
+
 	return (
 		<MDBContainer fluid>
 			<MDBRow className='d-flex justify-content-center align-items-center h-100'>
@@ -54,9 +55,11 @@ function LoginBox() {
 							<MDBBtn outline className='mx-2 px-5' color='primary' size='lg' style={{ margin: '20px' }} onClick={() => {
 								axios.post('/login', loginInfo)
 									.then((res) => {
-										//console.log(res.data);
+										console.log(res, res.data);
+										localStorage.setItem('user', JSON.stringify(res.data))
 										dispatch(changeUserState(res.data))
-										navigate('/')
+										if (JSON.parse(localStorage.getItem('user')).role == 'ADMINISTRATOR') navigate('/employee/order')
+										else navigate('/')
 									})
 									.catch((err) => { console.log(err); alert('로그인이 실패하였습니다. 아이디와 비밀번호를 확인하여 다시 입력하세요.') });
 							}}>

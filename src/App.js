@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Link, Routes, useNavigate } from 'react-router-dom';
 import OrderPage from './views/order/OrderPage';
@@ -12,14 +12,15 @@ import Payment from './views/payment/PaymentPage';
 import PaymentSuccess from './views/payment/PaymentSuccessPage';
 import OrderMgtPage from './views/employee/OrderMgtPage';
 import StockMgtPage from './views/employee/StockMgtPage';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { changeUserState } from './store';
 
 function App() {
 	let dispatch = useDispatch();
 	let userInfo = JSON.parse(localStorage.getItem('user'))
-	console.log(userInfo);
 	dispatch(changeUserState(userInfo))
+	let storeUserInfo = useSelector(state => state.user)
+	console.log(storeUserInfo);
 
 	return (
 		<div>
@@ -31,7 +32,7 @@ function App() {
 					<Route exact path="/menu" element={<MenuDetailPage />} />
 					<Route exact path="/login" element={<Login />} />
 					<Route exact path="/signup" element={<Signup />} />
-					<Route exact path="/orderhistory" element={<OrderHistory />} />
+					<Route exact path="/orderhistory" element={storeUserInfo.role == 'NOT_MEMBER'? <Login/> : <OrderHistory />} />
 					<Route exact path='/payment' element={<Payment />} />
 					<Route exact path='/paymentsuccess' element={<PaymentSuccess />} />
 					<Route exact path="/employee/order" element={<OrderMgtPage />} />
