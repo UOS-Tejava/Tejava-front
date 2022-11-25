@@ -20,7 +20,10 @@ const OrderMgtPage = () => {
 		.then(data => {
 			data = data.sort((a, b) => b.orderId - a.orderId);
 			setData(data);
-			setOrderList(data);
+			if (mode !== "all")
+				setOrderList(data.filter(d => d.orderStatus === mode));
+			else
+				setOrderList(data);
 		})
 		.catch(err => console.log(err));
 	}, [modified]);

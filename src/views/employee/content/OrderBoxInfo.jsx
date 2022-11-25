@@ -38,20 +38,31 @@ const changeStatus = (id, status) => {
 		body: JSON.stringify({
 			orderId: id,
 			orderStatus: toStatus,
-			userId: JSON.parse(localStorage.getItem('user')).id
+			employeeId: JSON.parse(localStorage.getItem('user')).id
 		})
 	})
-	.then(res => window.location.replace("/"))
+	.then(res => {
+		if (!res.ok)
+			return res.json();
+		else {
+			alert("주문상태를 변경하였습니다.");
+		}
+	})
+	.then(data => {
+		if (data.status === '500')
+			alert(data.message);
+	})
 	.catch(err => console.log(err))
 }
 
 const OrderBoxInfo = (props) => {
 	const item = props.item;
+	const setModified = props.setModified;
 	let menuList = [];
 	props.menu.map((item) => {
 		menuList.push(
 			<MenuWrapper>
-				<ItemText>{item.menu_nm}</ItemText>
+				<ItemText>{item.menu_nm + " (" + item.quantity + ")"}</ItemText>
 				<OptionText>{item.style.style_nm}</OptionText>
 				<OptionText>{optionString(item.options)}</OptionText>
 			</MenuWrapper>
@@ -76,7 +87,10 @@ const OrderBoxInfo = (props) => {
 				{
 					item.orderStatus !== 'completed' &&
 					<Button
-						onClick={() => changeStatus(item.orderId, item.orderStatus)}
+						onClick={() => {
+							changeStatus(item.orderId, item.orderStatus);
+							setModified(true);
+						}}
 					>
 						{convertStatus(item.orderStatus)}
 					</Button>
@@ -103,14 +117,14 @@ const ElemWrapper = styled.div`
 
 const ButtonWrapper = styled.div`
 	width: 30%;
-	height: 100%;
+	// height: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 `;
 
 const Button = styled(motion.button)`
-	height: 50%;
+	height: 120px;
 	width: 50%;
 	border: hidden;
 	border-radius: 10px;
