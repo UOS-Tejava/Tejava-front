@@ -61,7 +61,7 @@ const OrderBox = (props) => {
 					transition={{ duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
 					initial={{ opacity: 0 }}
 					animate={{
-						height : open ? 300 : 0,
+						height : open ? 'auto' : 0,
 						opacity: 1
 					}}
 					exit={{
@@ -113,7 +113,6 @@ const TextWrapper = styled.div`
 `;
 
 const SubWrapper = styled(motion.div)`
-	height: 300px;
 	width: 100%;
 `;
 // TODO: 높이 수정
