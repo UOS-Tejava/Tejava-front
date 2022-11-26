@@ -14,7 +14,7 @@ const MenuOptions = (props) => {
 	const styleList = props.styleList;
 	const optionList = props.optionList.map(item => ({...item}));
 	const [menuDetail, setMenuDetail] = useState({...props.menuDetail, options:[], quantity: 1});
-	const [price, setPrice] = useState(props.menuDetail.price); // 옵션 변경 시 바꿀 것
+	const [price, setPrice] = useState(props.menuDetail.price);
 	const [totalAmount, setTotalAmount] = useState(props.menuDetail.price);
 	const [style, setStyle] = useState();
 	const [styleBoxList, setStyleBoxList] = useState([]);
@@ -200,7 +200,6 @@ const Wrapper = styled.div`
 	width: 50%;
 	height: 100%;
 	overflow: auto;
-	// float: left;
 	display: flex;
 	flex-direction: column;
 	align-items: center;

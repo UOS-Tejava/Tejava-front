@@ -4,7 +4,6 @@ import Backdrop from "./Backdrop";
 import '../../css/Modal.css'
 import styled from "@emotion/styled";
 
-// drop시 상태 정의
 const dropIn = {
 	hidden: {
 		y: "-100vh",
@@ -27,8 +26,6 @@ const dropIn = {
 }
 
 const CartAddModal = ({ children, close, add }) => {
-	// const { close } = props; // close 함수
-
 	return (
 		<Backdrop onClick={close}>
 			<ModalWrapper

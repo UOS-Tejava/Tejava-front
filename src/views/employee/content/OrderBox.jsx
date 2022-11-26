@@ -33,19 +33,19 @@ const OrderBox = (props) => {
 			onClick={() => setOpen((open) => !open)}
 		>
 			<InfoWrapper layout>
-				<TextWrapper style={{width:'25%'}}>
+				<TextWrapper style={{width:'12%'}}>
 					<ItemText>{convertStatus(orderDetail.orderStatus)}</ItemText>
 				</TextWrapper>
-				<TextWrapper style={{width:'20%'}}>
+				<TextWrapper style={{width:'12%'}}>
 					<ItemText>{orderDetail.customerName}</ItemText>
 				</TextWrapper>
-				<TextWrapper style={{width:'40%'}}>
+				<TextWrapper style={{width:'28%'}}>
 					<ItemText>{orderDetail.orderedDate}</ItemText>
 				</TextWrapper>
-				<TextWrapper style={{width:'40%'}}>
+				<TextWrapper style={{width:'28%'}}>
 					<ItemText>{orderDetail.req_orderDateTime}</ItemText>
 				</TextWrapper>
-				<TextWrapper>
+				<TextWrapper style={{width:'20%'}}>
 					<ItemText>{orderDetail.totalPrice}</ItemText>
 				</TextWrapper>
 			</InfoWrapper>
@@ -54,10 +54,6 @@ const OrderBox = (props) => {
 			{
 				open &&
 				<SubWrapper
-					// layout
-					// initial={{ opacity: 0 }}
-					// animate={{ opacity: 1 }}
-					// exit={{ opacity: 0 }}
 					transition={{ duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
 					initial={{ opacity: 0 }}
 					animate={{
@@ -78,7 +74,7 @@ const OrderBox = (props) => {
 }
 
 const Wrapper = styled.div`
-	width: 900px;
+	width: 1000px;
 `;
 
 const ListWrapper = styled(motion.li)`
@@ -90,7 +86,6 @@ const ListWrapper = styled(motion.li)`
 	justify-content: center;
 	overflow: hidden;
 	cursor: pointer;
-	// background-color: rgba(214, 214, 214, 0.5);
 	overflow: hidden;
 	cursor: pointer;
 `;
@@ -99,7 +94,6 @@ const InfoWrapper = styled(motion.div)`
 	width: 100%;
 	height: 90%;
 	display: flex;
-	// flex-direction: column;
 	justify-content: center;
 	float: left;
 `;
@@ -110,12 +104,12 @@ const TextWrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 	margin-top: 10px;
+	text-align: center;
 `;
 
 const SubWrapper = styled(motion.div)`
 	width: 100%;
 `;
-// TODO: 높이 수정
 
 const ItemText = styled.div`
 	font-size: 0.9em;

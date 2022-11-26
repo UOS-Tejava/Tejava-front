@@ -3,11 +3,7 @@ import { motion } from 'framer-motion';
 import Backdrop from "./Backdrop";
 import '../../css/Modal.css'
 import { Button } from "@mui/material";
-import { blue } from "@mui/material/colors";
 
-// initial, animate (end state), exit, transition (delay etc. it's optional)
-
-// drop시 상태 정의
 const dropIn = {
 	hidden: {
 		y: "-100vh",
@@ -30,13 +26,11 @@ const dropIn = {
 }
 
 const Modal = ({ children, close }) => {
-	// const { close } = props; // close 함수
-
 	return (
 		<Backdrop onClick={close}>
 			<motion.div
 				drag
-				onClick={(e) => e.stopPropagation()} // stopPropagation : 현재 이벤트의 추가 전파 방지
+				onClick={(e) => e.stopPropagation()}
 				className="modal"
 				variants={dropIn}
 				initial="hidden"

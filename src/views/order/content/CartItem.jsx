@@ -33,7 +33,7 @@ const CartItem = (props) => {
 		fetch('/cart/delete-one/menuId/' + id, {
 			method: 'DELETE'
 		})
-		.then(data => window.location.reload()) // TODO: 새로고침 안 되도록
+		.then(data => window.location.reload())
 		.catch(err => console.log(err))
 	};
 

@@ -24,7 +24,6 @@ const Wrapper = styled.div`
 	padding: 10px;
 	width: 150px;
 	background: #E3F2FD;
-	// box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
 	margin-left: 10px;
 	margin-right: 10px;
 `;

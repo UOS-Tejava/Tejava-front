@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 const TimePicker = (props) => {
-    const [value, setValue] = useState(dayjs()); // 현재로 설정?
+    const [value, setValue] = useState(dayjs());
     const handleChange = (newValue) => setValue(newValue);
     const setTime = props.setTime;
 

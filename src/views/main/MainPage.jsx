@@ -14,23 +14,20 @@ const MainPage = () => {
 		autoplaySpeed: 5000,
 		slidesToShow: 1,
 		slidesToScroll: 1,
-		// arrows: true,
 		pauseOnHover: true,
 	};
 
 	useEffect(() => {
-		// if (!localStorage.getItem('user')){
-			fetch('/', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: {}
-			})
-			.then(res => res.json())
-			.then(data => localStorage.setItem('user', JSON.stringify(data)))
-			.catch(err => console.log(err));
-		// }
+		fetch('/', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: {}
+		})
+		.then(res => res.json())
+		.then(data => localStorage.setItem('user', JSON.stringify(data)))
+		.catch(err => console.log(err));
 	}, []);
 
 	return (
@@ -68,16 +65,12 @@ const Wrapper = styled.div`
 `;
 
 const BannerImage = styled.img`
-	// width: 100%;
-	min-width: 1280px;
-	height: 412px;
+	min-width: 1440px;
+	height: 380px;
 	background: #0f1316;
 `;
 
 const StyledSlider = styled(Slider)`
-	// text-align: center;
-	// height: 412px;
-	// padding-left: 10px;
 	background: black;
 	width: 100%;
 `;

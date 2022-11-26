@@ -7,7 +7,6 @@ const MenuStyleBox = (props) => {
 		<Wrapper selected={props.selected}
 			onClick={()=>{
 				func();
-				// props.setTotalAmount(props.price + style.price);
 			}} >
 			<StyleName>{style.style_nm}</StyleName>
 			<StyleConfig>{style.style_config}</StyleConfig>

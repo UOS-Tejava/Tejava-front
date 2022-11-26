@@ -117,7 +117,6 @@ const ElemWrapper = styled.div`
 
 const ButtonWrapper = styled.div`
 	width: 30%;
-	// height: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -131,8 +130,6 @@ const Button = styled(motion.button)`
 	font-size: 1.0em;
 	font-family: "Apple SD Gothic Neo";
 	background: lightgray;
-	// color: white;
-	// text-shadow: 1px 1px 1px gray;
 `;
 
 const InfoWrapper = styled.div`
