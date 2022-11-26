@@ -24,8 +24,6 @@ const Cart = (props) => {
 			setCart(data)})
 		.catch(err => console.log(err));
 	}, []);
-	
-	console.log(cart);
 
 	let cartList = [];
 	let price = 0;
@@ -117,7 +115,7 @@ const CartWrapper = styled.div`
 
 const CartItemWrapper = styled.div`
 	// overflow: auto;
-	width: 100%;
+	width: 98%;
 	display: flex;
 	flex-direction: column;
 	// align-items: center;
@@ -125,7 +123,7 @@ const CartItemWrapper = styled.div`
 `;
 
 const TextWrapper = styled.div`
-	width: 88%;
+	width: 86%;
 	font-size: 1.6em;
 	font-family: "Apple SD Gothic Neo";
 	font-weight: bold;
@@ -133,7 +131,7 @@ const TextWrapper = styled.div`
 `;
 
 const SelectionBoxWrapper = styled.div`
-	width: 80%;
+	width: 85%;
 	padding-left: 5%;
 `;
 
@@ -165,7 +163,7 @@ const PriceBox = styled.div`
 `;
 
 const PriceWrapper = styled.div`
-	width: 80%;
+	width: 85%;
 	height: 200px;
 	display: flex;
 	flex-direction: column;
