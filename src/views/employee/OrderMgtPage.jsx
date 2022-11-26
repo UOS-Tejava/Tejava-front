@@ -67,7 +67,7 @@ const OrderMgtPage = () => {
 				<MenuItem value={"pending"}>접수 대기중</MenuItem>
 				<MenuItem value={"cooking"}>조리 중</MenuItem>
 				<MenuItem value={"delivering"}>배달 중</MenuItem>
-				<MenuItem value={"completed"}>완료</MenuItem>
+				<MenuItem value={"completed"}>배달 완료</MenuItem>
 				</Select>
 			</FormControl>
 		</Header>

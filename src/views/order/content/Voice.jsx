@@ -30,14 +30,41 @@ const Voice = (props) => {
 	}, [listening]);
 
 	useEffect(() => {
+		let str = '';
+		let idx = -1;
 		if (transcript === '비스트로 디너' || transcript === '비스트로디너')
-			navigate(0);
+		{
+			str = '비스트로 디너';
+			idx = 0;
+		}
+			// navigate(0);
 		else if (transcript === '프렌치 디너' || transcript === '프렌치디너')
-			navigate(1);
-		else if (transcript === '잉글리시 디너' || transcript === '잉글리시디너')
-			navigate(2);
+		{
+			str = '프렌치 디너';
+			idx = 1;
+		}
+			// navigate(1);
+		else if (transcript === '잉글리시 디너' || transcript === '잉글리시디너'
+				|| transcript === '잉글리쉬 디너' || transcript === '잉글리쉬디너')
+		{
+			str = '잉글리시 디너';
+			idx = 2;
+		}
+			// navigate(2);
 		else if (transcript === '샴페인 축제 디너' || transcript === '샴페인축제디너' || transcript === '샴페인 축제디너' || transcript === '샴페인축제 디너')
-			navigate(3);
+		{
+			str = '샴페인 축제 디너';
+			idx = 3;
+		}
+		if (idx >= 0)
+		{
+			if(!window.confirm(str + " 상세 페이지로 이동합니다.")){
+				resetTranscript();
+			}else{
+				navigate(idx);
+			}
+		}
+			// navigate(3);
 	}, [listening])
 	//TODO: 전환 애니메이션
 

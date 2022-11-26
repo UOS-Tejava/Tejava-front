@@ -3,36 +3,9 @@ import { useEffect, useState } from "react";
 import MenuImage from "./content/MenuImage";
 import MenuOptions from "./content/MenuOptions";
 import { useLocation } from "react-router";
-import axios from "axios";
 
-const testStyleList = [
-	{
-		"id": 1,
-		"style_nm": "심플디너",
-		"style_config": "심플디너 구성",
-		"style_pic": "image",
-		"price": 0,
-	},
-	{
-		"id": 2,
-		"style_nm": "딜럭스디너",
-		"style_config": "딜럭스디너 구성",
-		"style_pic": "image",
-		"price": 10000,
-	},
-	{
-		"id": 3,
-		"style_nm": "발렌타인디너",
-		"style_config": "발렌타인디너 구성",
-		"style_pic": "image",
-		"price": 20000,
-	}
-]
-
-
-const MenuDetailPage = (props) => {
+const MenuDetailPage = () => {
 	const location = useLocation();
-	// const [menuDetail, setMenuDetail] = useState(location.state.detail);
 	const [styleList, setStyleList] = useState([]);
 	const [optionList, setOptionsList] = useState([]);
 	const [style, setStyle] = useState();
@@ -46,8 +19,6 @@ const MenuDetailPage = (props) => {
 				setStyle(data[0]);
 			else
 				setStyle(location.state.detail.style);
-			// console.log(location.state.detail.style);
-			// console.log(data[0]);
 		});
 		fetch('/order/showAllOptions/menuId/' + location.state.idx)
 		.then(res => res.json())
@@ -83,7 +54,7 @@ const Wrapper = styled.div`
 `;
 
 const SubWrapper = styled.div`
-	min-width: fit-content;
+	min-width: 1280px;
 	height: 88vh;
 `;
 
