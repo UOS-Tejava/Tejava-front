@@ -37,20 +37,17 @@ const Voice = (props) => {
 			str = '비스트로 디너';
 			idx = 0;
 		}
-			// navigate(0);
 		else if (transcript === '프렌치 디너' || transcript === '프렌치디너')
 		{
 			str = '프렌치 디너';
 			idx = 1;
 		}
-			// navigate(1);
 		else if (transcript === '잉글리시 디너' || transcript === '잉글리시디너'
 				|| transcript === '잉글리쉬 디너' || transcript === '잉글리쉬디너')
 		{
 			str = '잉글리시 디너';
 			idx = 2;
 		}
-			// navigate(2);
 		else if (transcript === '샴페인 축제 디너' || transcript === '샴페인축제디너' || transcript === '샴페인 축제디너' || transcript === '샴페인축제 디너')
 		{
 			str = '샴페인 축제 디너';
@@ -64,9 +61,7 @@ const Voice = (props) => {
 				navigate(idx);
 			}
 		}
-			// navigate(3);
 	}, [listening])
-	//TODO: 전환 애니메이션
 
 	if (!browserSupportsSpeechRecognition){
 		return (
@@ -82,7 +77,6 @@ const Voice = (props) => {
 			<ButtonGroup variant="text">
 				<Button onClick={() => {
 					SpeechRecognition.startListening();
-					// anim.play();
 				}}>Start</Button>
 				<Button onClick={SpeechRecognition.stopListening}>Stop</Button>
 				<Button onClick={resetTranscript}>Reset</Button>
@@ -104,9 +98,9 @@ const AnimationWrapper = styled.div`
 `;
 
 const Wrapper = styled.div`
-	display: block; // 세로 배치
-	align-items: center; // 세로 가운데정렬
-	justify-content: center; // 가로 가운데정렬
+	display: block;
+	align-items: center;
+	justify-content: center;
 	position: relative;
 	text-align: center;
 	width: 90%

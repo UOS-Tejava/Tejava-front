@@ -35,8 +35,7 @@ const Cart = (props) => {
 	});
 
 	let discount = 0;
-	// if 단골이면 price의 10퍼
-	if (localStorage.getItem('user') && JSON.parse(localStorage.getItem('user')).order_cnt >= 5) // 5로 바꿔
+	if (localStorage.getItem('user') && JSON.parse(localStorage.getItem('user')).order_cnt >= 5)
 		discount = price * 0.1;
 	let totalPrice = price - discount;
 
@@ -94,32 +93,17 @@ const CartWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	padding: 20px;
-	// padding-left: 5%;
 	overflow: auto;
 	&::-webkit-scrollbar{
 		width: 10px;
 		max-height: 20%;
 	}
-	// &::-webkit-scrollbar-thumb{
-	// 	background-color: gray;
-	// 	border-radius: 10px;
-	// 	// height: 2em;
-	// }
-	// &::-webkit-scrollbar-track{
-	// 	border-radius: 5px;
-	// 	// height: 20%;
-	// }
-	// max-width: 500px;
-	// min-width: 500px;
 `;
 
 const CartItemWrapper = styled.div`
-	// overflow: auto;
 	width: 98%;
 	display: flex;
 	flex-direction: column;
-	// align-items: center;
-	// height: 100%;
 `;
 
 const TextWrapper = styled.div`
@@ -181,7 +165,6 @@ const PriceName = styled.div`
 const Price = styled.div`
 	font-size: 1em;
 	font-family: "Apple SD Gothic Neo";
-	// color : #0174DF;
 	color: ${(props) => (props.color)};
 	width: 40%;
 	float: right;

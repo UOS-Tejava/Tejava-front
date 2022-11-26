@@ -31,7 +31,6 @@ const Wrapper = styled(motion.div)`
 	border-radius : 5px;
 	border : hidden;
 	height : 98%;
-	// width: clamp(300px, 60%, 500px);
 	width: 98%;
 	box-shadow : 0 2px 5px rgba(0, 0, 0, 0.2);
 	background : white;
@@ -40,18 +39,6 @@ const Wrapper = styled(motion.div)`
 	align-items: center;
 	justify-content: center;
 	margin-left: 10%;
-`;
-
-const InfoWrapper = styled.div`
-	// position: absolute;
-	// top: 50%;
-	// width: 100%;
-	// background: red;
-	// height :50%;
-	// display: flex;
-	// flex-direction: column;
-	// align-items: center;
-	// justify-content: center;
 `;
 
 const ImageWrapper = styled.div`

@@ -7,8 +7,6 @@ import MenuBox from "./content/MenuBox";
 import Cart from "./content/Cart";
 import { useNavigate } from "react-router";
 
-// const MenuList = (menuDetail) => 
-
 const OrderPage = () => {
 	const [voiceModalOpen, setVoiceModalOpen] = useState(false);
 	const [menuDetail, setMenuDetail] = useState();

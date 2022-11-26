@@ -143,7 +143,6 @@ const SubText= styled.div`
 const LoginText= styled.div`
 	font-size: 0.9em;
 	font-family: "Apple SD Gothic Neo";
-	// font-weight: bold;
 	color: #585858;
 	:hover {
 		text-decoration: underline;

@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { AnimateSharedLayout } from "framer-motion";
 import { useEffect } from "react";
 import { useState } from "react";
 import OrderBox from "./content/OrderBox";
@@ -8,6 +7,7 @@ import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 const OrderMgtPage = () => {
 	const [data, setData] = useState([]);
+	const [initList, setInitList] = useState([]);
 	const [orderList, setOrderList] = useState([]);
 	const [orderBoxList, setOrderBoxList] = useState([]);
 	const [mode, setMode] = useState("all");
@@ -18,21 +18,22 @@ const OrderMgtPage = () => {
 		fetch('/employee/orders')
 		.then(res => res.json())
 		.then(data => {
-			data = data.sort((a, b) => b.orderId - a.orderId);
+			console.log(data);
 			setData(data);
+			setInitList(data.orderList.sort((a, b) => b.orderId - a.orderId));
 			if (mode !== "all")
-				setOrderList(data.filter(d => d.orderStatus === mode));
+				setOrderList(data.orderList.filter(d => d.orderStatus === mode));
 			else
-				setOrderList(data);
+				setOrderList(data.orderList);
 		})
 		.catch(err => console.log(err));
 	}, [modified]);
 
 	useEffect(() => {
 		if (mode !== "all")
-			setOrderList(data.filter(d => d.orderStatus === mode));
+			setOrderList(initList.filter(d => d.orderStatus === mode));
 		else
-			setOrderList(data);
+			setOrderList(initList);
 	}, [mode]);
 
 	useEffect(() => {
@@ -53,8 +54,11 @@ const OrderMgtPage = () => {
 		<>
 		<Wrapper>
 		<Header>
-			<Text>주문 관리</Text>
-			<FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+			<HeaderWrapper>
+				<Text>주문 관리</Text>
+				<SubText>현재 가용 직원 : 조리 {data.chef}명, 배달 {data.delivery}명</SubText>
+			</HeaderWrapper>
+			<FormControl variant="standard" sx={{ minWidth: 120 }}>
 				<InputLabel id="demo-simple-select-standard-label">주문상태</InputLabel>
 				<Select
 					labelId="demo-simple-select-standard-label"
@@ -71,35 +75,30 @@ const OrderMgtPage = () => {
 				</Select>
 			</FormControl>
 		</Header>
-		
 			<TableHeader>
-				<TextWrapper style={{width:'25%'}}>
+				<TextWrapper style={{width:'12%'}}>
 					<ItemText>주문상태</ItemText>
 				</TextWrapper>
-				<TextWrapper style={{width:'20%'}}>
+				<TextWrapper style={{width:'12%'}}>
 					<ItemText>주문자명</ItemText>
 				</TextWrapper>
-				<TextWrapper style={{width:'40%'}}>
+				<TextWrapper style={{width:'27%'}}>
 					<ItemText>주문 일시</ItemText>
 				</TextWrapper>
-				<TextWrapper style={{width:'40%'}}>
+				<TextWrapper style={{width:'28%'}}>
 					<ItemText>배달 요청 일시</ItemText>
 				</TextWrapper>
-				<TextWrapper>
+				<TextWrapper style={{width:'20%'}}>
 					<ItemText>총 가격</ItemText>
 				</TextWrapper>
 			</TableHeader>
-			
-			{/* <AnimateSharedLayout> */}
 				<UlWrapper
-				// layout transition={{ duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
 				>
 				{
 					data &&
 					orderBoxList
 				}
 				</UlWrapper>
-			{/* </AnimateSharedLayout> */}
 		</Wrapper>
 		</>
 	)
@@ -115,20 +114,36 @@ const Wrapper = styled.div`
 
 const Header = styled.div`
 	display: flex;
-	width: 900px;
+	width: 1000px;
 	margin-top: 50px;
+`;
+
+const HeaderWrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+	width: 80%;
+	height: 60px;
 `;
 
 const Text = styled.div`
 	font-size: 1.3em;
 	font-family: "Apple SD Gothic Neo";
 	font-weight: bold;
-	height: 60px;
-	width: 80%;
+	width: 100%;
 	display: flex;
 	align-items: center;
 	padding-left: 30px;
-	// padding-top: 10px;
+`;
+
+const SubText = styled.div`
+	font-size: 0.9em;
+	font-family: "Apple SD Gothic Neo";
+	height: 60px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	padding-left: 30px;
+	color: gray;
 `;
 
 const TextWrapper = styled.div`
@@ -137,6 +152,7 @@ const TextWrapper = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	text-align: center;
 `;
 
 const ItemText = styled.div`
@@ -148,7 +164,7 @@ const ItemText = styled.div`
 `;
 
 const TableHeader = styled.div`
-	width: 915px;
+	width: 1015px;
 	border-top: solid black 0.5px;
 	border-bottom: solid black 0.5px;
 	display: flex;

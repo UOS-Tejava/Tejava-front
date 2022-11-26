@@ -22,7 +22,6 @@ const ButtonWrapper = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	// position: absolute;
 `;
 
 const buttonStyle = {

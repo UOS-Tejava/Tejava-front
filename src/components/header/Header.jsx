@@ -45,11 +45,8 @@ const Header = ({ children }) => {
 				window.location.replace("/");
 
 				localStorage.setItem('user', JSON.stringify(data));
-				// window.location.replace("/");
 			})
 			.catch(err => console.log(err));
-		// localStorage.clear();
-
 	};
 
 
@@ -66,7 +63,7 @@ const Header = ({ children }) => {
 					<HeaderButton onClick={() => window.location.href = "/signup"}>sign up</HeaderButton>
 				</div> */}
 				{
-					(user === null || user.uid === '비회원') && //TODO: 비회원
+					(user === null || user.uid === '비회원') &&
 					<div style={{ display: 'flex', width: '100%', justifyContent: 'flex-end', marginRight: '20px' }}>
 						<HeaderButton onClick={() => navigate('/login')}>sign in</HeaderButton>
 						<HeaderButton onClick={() => navigate('/signup')}>sign up</HeaderButton>
@@ -108,8 +105,8 @@ const Wrapper = styled.div`
 	height: 8vh;
 	display: flex;
 	position: relative;
-	align-items: center; // 세로 가운데정렬
-	justify-content: center; // 가로 가운데정렬
+	align-items: center;
+	justify-content: center;
 `;
 
 const HeaderBox = styled.div`

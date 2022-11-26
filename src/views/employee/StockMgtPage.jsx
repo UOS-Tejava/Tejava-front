@@ -28,25 +28,6 @@ const StockMgtPage = () => {
 	console.log(stockList);
 
 	return (
-		// <Wrapper>
-		// 	{/* {
-		// 		!modify ?
-		// 		<ButtonWrapper>
-		// 			<ModifyButton
-		// 				onClick={() => setModify(true)}
-		// 			>재고 현황 기입하기</ModifyButton>
-		// 		</ButtonWrapper>
-		// 		:
-		// 		<ButtonWrapper>
-		// 			<ModifyButton>수정</ModifyButton>
-		// 			<ModifyButton onClick={() => setModify(false)}>취소</ModifyButton>
-		// 		</ButtonWrapper>
-		// 	} */}
-		// 	<StockWrapper>
-		// 		{stockBoxList}
-		// 	</StockWrapper>
-			
-		// </Wrapper>
 		<Wrapper>
 			<Header>
 				<Text>재고 관리</Text>
@@ -69,14 +50,6 @@ const StockMgtPage = () => {
 	);
 };
 
-// const Wrapper = styled.div`
-// 	height: 88vh;
-// 	display: flex;
-// 	width: 100%;
-// 	align-items: center;
-// 	justify-item: center;
-// `;
-
 const StockWrapper = styled.div`
 	width: 100%;
 	overflow-x: auto;
@@ -94,9 +67,6 @@ const ButtonWrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 `;
-
-// ----------------------
-
 
 const Wrapper = styled.div`
 	height: 88vh;

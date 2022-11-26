@@ -31,36 +31,6 @@ const StockBox = (props) => {
 	}
 
 	return (
-		// <Wrapper>
-		// 	<Image source={item.stock_item_pic} />
-		// 	<BoldText>{item.stock_item_nm}</BoldText>
-		// 	<>
-		// 	<ButtonWrapper>
-		// 	{
-		// 		!modify ?
-		// 		<RegularText>{item.quantity}</RegularText>
-		// 		:
-		// 		<Input
-		// 			type="text"
-		// 			name="quantity"
-		// 			value={quantity}
-		// 			onChange={onChangeInput}
-		// 		/>
-		// 	}
-		// 	{
-		// 		!modify ?
-		// 			<ModifyButton
-		// 				onClick={() => setModify(true)}
-		// 			>수정</ModifyButton>
-		// 		:
-		// 		<>
-		// 			<ModifyButton onClick={requestModify}>확인</ModifyButton>
-		// 			<ModifyButton onClick={() => setModify(false)}>취소</ModifyButton>
-		// 		</>
-		// 	}
-		// 	</ButtonWrapper>
-		// 	</>
-		// </Wrapper>
 		<Wrapper>
 			<ListWrapper>
 				<InfoWrapper>
@@ -103,16 +73,6 @@ const StockBox = (props) => {
 	)
 }
 
-// const Wrapper = styled.div`
-// 	width: 200px;
-// 	height: 200px;
-// 	display: flex;
-// 	flex-direction: column;
-// 	justify-content: center;
-// 	align-items:center;
-// 	margin: 10px;
-// `;
-
 const Image = styled.div`
 	width: 100px;
 	height: 60px;
@@ -137,7 +97,6 @@ const RegularText = styled.div`
 
 const Input = styled.input`
 	width: 50%;
-	// height: 31px;
 	font-size: 15px;
 	border: 0;
 	border-radius: 5px;
@@ -153,14 +112,6 @@ const ModifyButton = styled.button`
 	margin-right: 10px;
 `;
 
-const ButtonWrapper = styled.div`
-	width: 150px;
-	display: flex;
-	// justify-content: center;
-	// align-items: center;
-`;
-
-
 const Wrapper = styled.div`
 	width: 900px;
 	height: 80px;
@@ -175,7 +126,6 @@ const ListWrapper = styled.li`
 	justify-content: center;
 	overflow: hidden;
 	cursor: pointer;
-	// background-color: rgba(214, 214, 214, 0.5);
 	overflow: hidden;
 	cursor: pointer;
 `;
@@ -184,7 +134,6 @@ const InfoWrapper = styled.div`
 	width: 100%;
 	height: 100%;
 	display: flex;
-	// flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	float: left;
@@ -192,16 +141,9 @@ const InfoWrapper = styled.div`
 
 const TextWrapper = styled.div`
 	display: flex;
-	// justify-content: center;
 	align-items: center;
 	margin-left: 20px;
 `;
-
-const SubWrapper = styled.div`
-	height: 300px;
-	width: 100%;
-`;
-// TODO: 높이 수정
 
 const ItemText = styled.div`
 	font-size: 0.9em;
