@@ -13,7 +13,7 @@ import {
 let registerInfo = {
   address: "string",
   adminVerificationCode: "string",
-  agreement: false,
+  agreement: true,
   matchingPwd: "string",
   name: "string",
   phoneCheck: true,
@@ -22,8 +22,8 @@ let registerInfo = {
   registerAsAdmin: false,
   uid: "string"
 }
-
-
+let 직원코드입력 = ''
+let 직원코드 = 'Tejava'
 
 function Signup() {
   let [visible, setVisible] = useState(false);
@@ -52,13 +52,18 @@ function Signup() {
               } else setVisible(false)
               registerInfo.matchingPwd = e.target.value;
             }} />
-            {visible == true ? <div>비밀번호가 일치합니다</div> : null}
+            {visible == true ? <div className='mb-4' style={{fontStyle:'italic'}}>비밀번호가 일치합니다</div> : null}
             <MDBInput wrapperClass='mb-4' label='연락처' size='lg' id='form4' type='tel' onChange={(e) => { registerInfo.phoneNo = e.target.value }} />
             <MDBInput wrapperClass='mb-4' label='주소' size='lg' id='form4' type='text' onChange={(e) => { registerInfo.address = e.target.value }} />
-            <div className='d-flex flex-row justify-content-center mb-4'>
-              <MDBCheckbox name='flexCheck' label='개인정보 활용 동의' onClick={() => {
-                registerInfo.agreement = !(registerInfo.agreement);
-              }} />
+            <MDBInput wrapperClass='mb-4' label='직원 코드' size='lg' id='form4' type='text' onChange={(e) => { 직원코드입력 = e.target.value }} />
+            <button className='btn btn-info mb-4' onClick={()=>{
+              if(직원코드입력 == 직원코드) {alert('인증되었습니다');
+              registerInfo.registerAsAdmin = true;}
+              else alert('인증 실패')
+              console.log(registerInfo.registerAsAdmin);
+            }}>인증</button>
+            <div className='d-flex flex-row justify-content-center mb-4' style={{fontStyle:'italic'}}>
+            회원 가입 시 개인정보 활용에 동의하는 것으로 간주합니다
             </div>
             <MDBBtn className='mb-4 w-100 gradient-custom-4' size='lg' onClick={() => {
               axios.post('/user/register', JSON.stringify(registerInfo), {
@@ -67,7 +72,7 @@ function Signup() {
                 },
               })
                 .then(res => console.log(res))
-                .catch(err => console.log(err))
+                .catch(err => {alert(err.message); console.log(err);})
             }}>등록</MDBBtn>
           </MDBCardBody>
         </MDBCard>

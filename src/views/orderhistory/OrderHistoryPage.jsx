@@ -19,10 +19,12 @@ import axios from "axios";
 let cardId = '';
 
 function OrderHistory() {
-  let [orderHistory, setOrderHistory] = useState([1, 2, 3]);
+  let [orderHistory, setOrderHistory] = useState([]);
   let [show, setShow] = useState(false);
-  let temp='1';
   let navigate = useNavigate();
+  let storeUserInfo = useSelector(state => state.user)
+
+	if(storeUserInfo.role == 'NOT_MEMBER') navigate('/login')
 
   function showModal() {
     setShow(true);
@@ -36,7 +38,6 @@ function OrderHistory() {
     axios.get('/order/history/orders').then((res) => {
       console.log(res.data);
       setOrderHistory(res.data);
-      temp = res.data
     })
   }, []);
   
@@ -45,7 +46,7 @@ function OrderHistory() {
   return (
     <div>
       {show ? <HistoryModal orderHistory={orderHistory} closeModal={closeModal} navigate={navigate} /> : null}
-      <h2 className="text-center">주문내역</h2>
+      <h2 className="text-center mt-3">주문내역</h2>
       {
         orderHistory.map((a, i) => {
           return (
@@ -72,15 +73,14 @@ function HistoryCard(props) {
             props.showModal();
           }
         }>
-          <MDBCardHeader className="" >{props.data.시간}</MDBCardHeader>
-          <div className="row">
-            <MDBCardBody className="">
-              <MDBCardTitle>{props.data.menu_nm}</MDBCardTitle>
-              <MDBCardText>{props.data.menu_config}</MDBCardText>
-              <MDBBtn className="" href='#'>{props.data.price}</MDBBtn>
+          <MDBCardHeader className="" >{props.data.orderDateTime}</MDBCardHeader>
+          <div>
+            <MDBCardBody className="d-flex row align-items-center" >
+              <MDBCardTitle className="col-9" style={{fontSize:'25px'}}>{props.data.menus[0].menu_nm} 외 {props.data.menus.length-1 } 건</MDBCardTitle>
+              <MDBCardText className="btn btn-primary col-3" style={{height:'100px', paddingTop:'30px', fontSize:'20px'}}>{props.data.order_status}</MDBCardText>
             </MDBCardBody>
           </div>
-          <MDBCardFooter className='text-muted'>옵션</MDBCardFooter>
+          <MDBCardFooter className='text-muted'>MR.DAEBAK</MDBCardFooter>
         </MDBCard>
       </div>
     </div>
@@ -98,12 +98,22 @@ function HistoryModal(props) {
         <div>주문일시 {props.orderHistory[cardNum].orderDateTime}</div>
         <div>주문자 {props.orderHistory[cardNum].customerName}</div>
         <div>주소 {props.orderHistory[cardNum].customerAddress}</div>
-        <div>옵션 {props.orderHistory[cardNum].options.map((a,i)=>{
+        <div>주문정보 {props.orderHistory[cardNum].menus.map((a,i)=>{
           return (
-            <span>'{a.option_nm}'  </span>
+            <>
+              <div>메뉴명 : {a.menu_nm}</div>
+              <div>스타일 : {a.style.style_nm}</div>
+              <div>옵션 : {a.options.map((b)=>{return (
+                <>
+                  <span>'{b.option_nm}'  </span>
+                </>
+              )})}</div>
+              <br/>
+            </>
           )
           })}</div>
-        <div className="mb-4">배달요청일시 {props.orderHistory[cardNum].req_orderDateTime}</div>
+        <div className="">배달요청일시 {props.orderHistory[cardNum].req_orderDateTime}</div>
+        <div className="mb-4">총 주문금액 : {props.orderHistory[cardNum].total_price}</div>
         <button className="btn btn-danger" id="close" onClick={props.closeModal}>닫기</button>
       </div>
     </div>

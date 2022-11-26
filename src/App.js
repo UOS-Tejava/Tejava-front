@@ -32,7 +32,7 @@ function App() {
 					<Route exact path="/menu" element={<MenuDetailPage />} />
 					<Route exact path="/login" element={<Login />} />
 					<Route exact path="/signup" element={<Signup />} />
-					<Route exact path="/orderhistory" element={storeUserInfo.role == 'NOT_MEMBER'? <Login/> : <OrderHistory />} />
+					<Route exact path="/orderhistory" element={<OrderHistory />} />
 					<Route exact path='/payment' element={<Payment />} />
 					<Route exact path='/paymentsuccess' element={<PaymentSuccess />} />
 					<Route exact path="/employee/order" element={<OrderMgtPage />} />

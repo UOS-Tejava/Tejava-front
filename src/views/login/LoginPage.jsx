@@ -32,6 +32,8 @@ function LoginBox() {
 	let navigate = useNavigate()
 	let storeUserInfo = useSelector((state) => state.user)
 
+	if(storeUserInfo.role == 'NOT_MEMBER') navigate('/login')
+
 	return (
 		<MDBContainer fluid>
 			<MDBRow className='d-flex justify-content-center align-items-center h-100'>
@@ -47,10 +49,6 @@ function LoginBox() {
 							<MDBInput wrapperClass='mb-4 mx-5 w-100' label='Password' id='formControlLg' type='password' size="lg" onChange={(e) => { loginInfo.pwd = e.target.value }} />
 
 							<MDBCheckbox label='로그인 상태 유지' onClick={() => { loginInfo.staySignedIn = !(loginInfo.staySignedIn) }} />
-							<MDBCheckbox label='직원 로그인' />
-
-							<span className="small"><a class="" href="#!" >아이디 찾기 </a></span>
-							<span className="small"><a class="" href="#!" >비밀번호 찾기</a></span>
 
 							<MDBBtn outline className='mx-2 px-5' color='primary' size='lg' style={{ margin: '20px' }} onClick={() => {
 								axios.post('/login', loginInfo)
