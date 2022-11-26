@@ -4,6 +4,7 @@ import MenuOptionBox from "./MenuOptionBox";
 import MenuStyleBox from "./MenuStyleBox";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router";
+import Slider from "react-slick";
 
 const toPriceString = (item) => {
 	return item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -18,6 +19,13 @@ const MenuOptions = (props) => {
 	const [style, setStyle] = useState();
 	const [styleBoxList, setStyleBoxList] = useState([]);
 	const navigate = useNavigate();
+	const sliderSettings = {
+		dots: false,
+		infinite: false,
+		speed: 600,
+		slidesToShow: 3,
+		slidesToScroll: 1,
+	}
 
 	useEffect(() => {
 		if (props.modify)
@@ -130,17 +138,26 @@ const MenuOptions = (props) => {
 			/>
 		)
 	})}
+	if (optionBoxList.length < 3){
+		for (let i = 0; 3 - optionBoxList.length > 0; i++){
+			optionBoxList.push(<EmptyBox />);
+		}
+	}
 
 	return (
 		<Wrapper>
 			<TextWrapper>스타일 선택</TextWrapper>
 			<StyleBoxWrapper>
+			{/* <StyledSlider {...sliderSettings}> */}
 				{styleBoxList}
+			{/* </StyledSlider> */}
 			</StyleBoxWrapper>
 			<TextWrapper>옵션 추가</TextWrapper>
-			<OptionBoxWrapper>
-				{optionBoxList}
-			</OptionBoxWrapper>
+			{/* <OptionBoxWrapper> */}
+				<StyledSlider {...sliderSettings}>
+					{optionBoxList}
+				</StyledSlider>
+			{/* </OptionBoxWrapper> */}
 			{
 				!props.modify &&
 				<CartButton
@@ -165,6 +182,20 @@ const MenuOptions = (props) => {
 	);
 }
 
+const EmptyBox = styled.div`
+`;
+
+const StyledSlider = styled(Slider)`
+	width: 470px;
+	text-align: center;
+	height: 300px;
+
+	.slick-prev:before,
+	.slick-next:before {
+		color: black;
+	};
+`;
+
 const Wrapper = styled.div`
 	width: 50%;
 	height: 100%;
@@ -185,7 +216,7 @@ const TextWrapper = styled.div`
 
 const StyleBoxWrapper = styled.div`
 	width: 85%;
-	height: 180px;
+	height: 200px;
 	display: flex;
 	overflow-x: auto;
 	white-space: nowrap;

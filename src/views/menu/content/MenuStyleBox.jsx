@@ -20,7 +20,7 @@ const Wrapper = styled.div`
 	border-radius: 20px;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 	background: ${props => `${props.selected ? 'pink' : 'white'}`};
-	min-width: 120px;
+	width: 120px;
 	height: 90%;
 	margin: 8px;
 	display: flex;
@@ -44,6 +44,8 @@ const StyleConfig = styled.div`
 	height: 40%;
 	text-align: center;
 	white-space: normal;
+	padding-left: 10px;
+	padding-right: 10px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
