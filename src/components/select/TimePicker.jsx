@@ -10,7 +10,7 @@ const TimePicker = (props) => {
     const setTime = props.setTime;
 
     useEffect(() => {
-        setTime(value.$y + '년 ' + value.$H + '시 ' + value.$m + '분');
+        setTime(value.$y + '년 ' + (value.$M + 1) + '월 ' + value.$D + '일 ' + value.$H + '시 ' + value.$m + '분');
     }, [value])
 
     return (
