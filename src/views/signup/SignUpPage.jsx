@@ -9,6 +9,7 @@ import {
   MDBCheckbox
 }
   from 'mdb-react-ui-kit';
+import { useNavigate } from 'react-router';
 
 let registerInfo = {
   address: "string",
@@ -23,11 +24,11 @@ let registerInfo = {
   uid: "string"
 }
 let 직원코드입력 = ''
-let 직원코드 = 'Tejava'
+let 직원코드 = 'tejava'
 
 function Signup() {
   let [visible, setVisible] = useState(false);
-
+  let navigate = useNavigate();
   return (
     <>
       <MDBContainer fluid className='d-flex align-items-center justify-content-center bg-image'>
@@ -58,9 +59,10 @@ function Signup() {
             <MDBInput wrapperClass='mb-2' label='직원 코드' size='lg' id='form4' type='text' onChange={(e) => { 직원코드입력 = e.target.value }} />
             <button className='btn btn-info mb-4' onClick={()=>{
               if(직원코드입력 == 직원코드) {alert('인증되었습니다');
-              registerInfo.registerAsAdmin = true;}
-              else alert('인증 실패')
+              registerInfo.registerAsAdmin = true; registerInfo.adminVerificationCode = 'tejava'}
+              else {alert('인증 실패'); registerInfo.registerAsAdmin = false; registerInfo.adminVerificationCode = 'string'}
               console.log(registerInfo.registerAsAdmin);
+              console.log(registerInfo.adminVerificationCode);
             }}>인증</button>
             <div className='d-flex flex-row justify-content-center mb-4' style={{fontStyle:'italic'}}>
             회원 가입 시 개인정보 활용에 동의하는 것으로 간주합니다
@@ -71,7 +73,7 @@ function Signup() {
                   'Content-Type': 'application/json',
                 },
               })
-                .then(res => console.log(res))
+                .then(res => {console.log(res); alert('등록되었습니다'); navigate('/') })
                 .catch(err => {alert(err.message); console.log(err);})
             }}>등록</MDBBtn>
           </MDBCardBody>
