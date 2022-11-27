@@ -34,7 +34,16 @@ const PrevOrderBox = () => {
 				userId: JSON.parse(localStorage.getItem('user')).id
 			})
 		})
-		.then(res => navigate("/order"))
+		.then(res => {
+			if (!res.ok)
+				return res.json();
+			else
+				navigate("/order");
+		})
+		.then(data => {
+			alert(data.message);
+			setModalOpen(false);
+		})
 		.catch(err => console.log(err))
 	};
 
@@ -42,7 +51,7 @@ const PrevOrderBox = () => {
 		if (user && user.role !== 'NOT_MEMBER'){
 			fetch('/order/history')
 			.then(res => res.json())
-			.then(data => setPrevOrderList(data))
+			.then(data => setPrevOrderList(data.reverse()))
 			.catch(err => console.log(err));
 		}
 	}, []);

@@ -17,7 +17,10 @@ const PrevOrderList = (props) => {
 			}}
 		>
 			<ImageWrapper source={menu.menu_pic} />
-			<TextWrapper>{menu.menu_nm}</TextWrapper>
+			<NameWrapper>
+				<TextWrapper>{menu.menu_nm}</TextWrapper>
+				<ItemQuantity>{menu.quantity}</ItemQuantity>
+			</NameWrapper>
 			<OptionWrapper>{menu.style.style_nm}</OptionWrapper>
 			<PriceWrapper>{toPriceString(menu.price) + "원"}</PriceWrapper>
 		</Wrapper>
@@ -43,13 +46,27 @@ const ImageWrapper = styled.div`
 	background-size: cover;
 `;
 
+const NameWrapper = styled.div`
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 15px;
+`;
+
+const ItemQuantity = styled.div`
+	font-size: 1em;
+	font-family: "Apple SD Gothic Neo";
+	font-weight: bold;
+	color : #9070FF;
+	margin-left: 5px;
+`;
+
 const TextWrapper = styled.div`
 	font-size: 1em;
 	font-family: "Apple SD Gothic Neo";
 	font-weight: bold;
-	width: 150px;
 	text-align: center;
-	margin-top: 15px;
 `;
 
 const OptionWrapper = styled.div`

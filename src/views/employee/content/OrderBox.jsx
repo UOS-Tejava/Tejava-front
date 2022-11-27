@@ -15,6 +15,10 @@ const convertStatus = (status) => {
 	return '';
 }
 
+const toPriceString = (item) => {
+	return item.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 const OrderBox = (props) => {
 	const orderDetail = props.orderDetail;
 	const [open, setOpen] = useState(false);
@@ -36,17 +40,17 @@ const OrderBox = (props) => {
 				<TextWrapper style={{width:'12%'}}>
 					<ItemText>{convertStatus(orderDetail.orderStatus)}</ItemText>
 				</TextWrapper>
-				<TextWrapper style={{width:'12%'}}>
+				<TextWrapper style={{width:'13%'}}>
 					<ItemText>{orderDetail.customerName}</ItemText>
 				</TextWrapper>
-				<TextWrapper style={{width:'28%'}}>
+				<TextWrapper style={{width:'30%'}}>
 					<ItemText>{orderDetail.orderedDate}</ItemText>
 				</TextWrapper>
-				<TextWrapper style={{width:'28%'}}>
+				<TextWrapper style={{width:'30%'}}>
 					<ItemText>{orderDetail.req_orderDateTime}</ItemText>
 				</TextWrapper>
-				<TextWrapper style={{width:'20%'}}>
-					<ItemText>{orderDetail.totalPrice}</ItemText>
+				<TextWrapper style={{width:'15%'}}>
+					<ItemText>{toPriceString(orderDetail.totalPrice) + "원"}</ItemText>
 				</TextWrapper>
 			</InfoWrapper>
 		</ListWrapper>

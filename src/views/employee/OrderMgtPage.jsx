@@ -82,13 +82,13 @@ const OrderMgtPage = () => {
 				<TextWrapper style={{width:'12%'}}>
 					<ItemText>주문자명</ItemText>
 				</TextWrapper>
-				<TextWrapper style={{width:'27%'}}>
+				<TextWrapper style={{width:'30%'}}>
 					<ItemText>주문 일시</ItemText>
 				</TextWrapper>
-				<TextWrapper style={{width:'28%'}}>
+				<TextWrapper style={{width:'30%'}}>
 					<ItemText>배달 요청 일시</ItemText>
 				</TextWrapper>
-				<TextWrapper style={{width:'20%'}}>
+				<TextWrapper style={{width:'14%'}}>
 					<ItemText>총 가격</ItemText>
 				</TextWrapper>
 			</TableHeader>

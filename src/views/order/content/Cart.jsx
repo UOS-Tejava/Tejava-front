@@ -17,6 +17,20 @@ const Cart = (props) => {
 	const [cart, setCart] = useState([]);
 	const [time, setTime] = useState("");
 
+	const placeOrder = () => {
+		if (!cart.length)
+			alert("장바구니에 담긴 메뉴가 없습니다.");
+		else {
+			navigate("/payment", {
+				state: {
+					req_orderDateTime: time,
+					total_price: totalPrice,
+					cart: cart
+				}
+			})
+		}
+	}
+
 	useEffect(() => {
 		fetch('/cart')
 		.then(res => res.json())
@@ -72,19 +86,7 @@ const Cart = (props) => {
 			</PriceWrapper>
 			<ButtonWrapper>
 				<OrderButton
-					onClick={() => {
-						if (!cart.length)
-							alert("장바구니에 담긴 메뉴가 없습니다.");
-						else {
-							navigate("/payment", {
-								state: {
-									req_orderDateTime: time,
-									total_price: totalPrice,
-									cart: cart
-								}
-							})
-						}
-					}}
+					onClick={placeOrder}
 				>총 {toPriceString(totalPrice)}원 주문하기</OrderButton>
 			</ButtonWrapper>
 		</CartWrapper>
