@@ -39,10 +39,12 @@ const PrevOrderBox = () => {
 	};
 
 	useEffect(() => {
-		fetch('/order/history')
-		.then(res => res.json())
-		.then(data => setPrevOrderList(data))
-		.catch(err => console.log(err));
+		if (user && user.role !== 'NOT_MEMBER'){
+			fetch('/order/history')
+			.then(res => res.json())
+			.then(data => setPrevOrderList(data))
+			.catch(err => console.log(err));
+		}
 	}, []);
 
 	let prevList = [];
@@ -55,7 +57,7 @@ const PrevOrderBox = () => {
 	return (
 		<>
 			{
-				user.uid === '비회원' &&
+				user.role === 'NOT_MEMBER' &&
 				<MessageBox>
 					<Text>로그인이 필요한 서비스입니다.</Text>
 					<SubText>서비스 이용을 위해 로그인이 필요합니다.</SubText>
@@ -63,7 +65,7 @@ const PrevOrderBox = () => {
 				</MessageBox>
 			}
 			{
-				user.uid !== '비회원' && prevOrderList.length !== 0 &&
+				user.role !== 'NOT_MEMBER' && prevOrderList.length !== 0 &&
 				<StyledSlider {...sliderSettings}>
 				{
 					prevOrderList &&
@@ -72,7 +74,7 @@ const PrevOrderBox = () => {
 				</StyledSlider>
 			}
 			{
-				user.uid !== '비회원' && prevOrderList.length === 0 &&
+				user.role !== 'NOT_MEMBER' && prevOrderList.length === 0 &&
 				<MessageBox>
 					<Text>이전 주문 내역이 없습니다 🥺</Text>
 					<SubText>단골 회원이 되시면 다양한 혜택이 제공됩니다.</SubText>

@@ -33,6 +33,7 @@ const Wrapper = styled.div`
 	width: 200px;
 	border-radius: 8px;
 	border: solid gray 0.1px;
+	cursor: pointer;
 `;
 
 const ImageWrapper = styled.div`

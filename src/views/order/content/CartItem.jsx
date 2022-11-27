@@ -78,6 +78,7 @@ const ItemWrapper = styled.div`
 	border-radius : 10px;
 	border : hidden;
 	box-shadow : 0 2px 5px rgba(0, 0, 0, 0.4);
+	cursor: pointer;
 `;
 
 const MenuInfoWrapper = styled.div`

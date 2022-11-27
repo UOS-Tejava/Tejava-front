@@ -26,6 +26,7 @@ const Wrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+	cursor: pointer;
 `;
 
 const StyleName = styled.div`

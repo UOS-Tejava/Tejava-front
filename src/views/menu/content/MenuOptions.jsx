@@ -116,7 +116,6 @@ const MenuOptions = (props) => {
 						setStyle(item);
 						setMenuDetail((menuDetail) => ({...menuDetail, style:{item}}));
 						setTotalAmount(price + item.price);
-						console.log(menuDetail.options);
 					}} setTotalAmount={setTotalAmount} price={price} />
 			));
 			setStyleBoxList(newList);
@@ -148,16 +147,12 @@ const MenuOptions = (props) => {
 		<Wrapper>
 			<TextWrapper>스타일 선택</TextWrapper>
 			<StyleBoxWrapper>
-			{/* <StyledSlider {...sliderSettings}> */}
 				{styleBoxList}
-			{/* </StyledSlider> */}
 			</StyleBoxWrapper>
 			<TextWrapper>옵션 추가</TextWrapper>
-			{/* <OptionBoxWrapper> */}
 				<StyledSlider {...sliderSettings}>
 					{optionBoxList}
 				</StyledSlider>
-			{/* </OptionBoxWrapper> */}
 			{
 				!props.modify &&
 				<CartButton
@@ -211,11 +206,12 @@ const TextWrapper = styled.div`
 	font-weight: bold;
 	width: 85%;
 	margin-top: 40px;
+	margin-bottom: 20px;
 `;
 
 const StyleBoxWrapper = styled.div`
 	width: 85%;
-	height: 200px;
+	height: 170px;
 	display: flex;
 	overflow-x: auto;
 	white-space: nowrap;

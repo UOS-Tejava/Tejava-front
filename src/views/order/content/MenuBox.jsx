@@ -39,6 +39,7 @@ const Wrapper = styled(motion.div)`
 	align-items: center;
 	justify-content: center;
 	margin-left: 10%;
+	cursor: pointer;
 `;
 
 const ImageWrapper = styled.div`

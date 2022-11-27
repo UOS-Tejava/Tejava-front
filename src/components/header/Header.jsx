@@ -9,7 +9,6 @@ const headers = {
 }
 
 const employee_headers = {
-	"홈": "",
 	"주문 관리": "employee/order",
 	"재고 관리": "employee/stock"
 }
@@ -58,19 +57,15 @@ const Header = ({ children }) => {
 				</Logo>
 				{children}
 				{navList}
-				{/* <div style={{ display: 'flex', width: '100%', justifyContent: 'flex-end', marginRight: '20px' }}>
-					<HeaderButton onClick={() => window.location.href = "/login"}>sign in</HeaderButton>
-					<HeaderButton onClick={() => window.location.href = "/signup"}>sign up</HeaderButton>
-				</div> */}
 				{
-					(user === null || user.uid === '비회원') &&
+					(user === null || user.role === 'NOT_MEMBER') &&
 					<div style={{ display: 'flex', width: '100%', justifyContent: 'flex-end', marginRight: '20px' }}>
 						<HeaderButton onClick={() => navigate('/login')}>sign in</HeaderButton>
 						<HeaderButton onClick={() => navigate('/signup')}>sign up</HeaderButton>
 					</div>
 				}
 				{
-					(user && user.uid !== '비회원') &&
+					(user && user.role !== 'NOT_MEMBER') &&
 					<div style={{ display: 'flex', width: '100%', justifyContent: 'flex-end', marginRight: '20px' }}>
 						<HeaderButton onClick={() => { logout() }}>logout</HeaderButton>
 					</div>

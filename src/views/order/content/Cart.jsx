@@ -44,7 +44,7 @@ const Cart = (props) => {
 				<TextWrapper>
 				주문표
 				<KeyboardVoiceIcon
-					style={{ float : 'right' }}
+					style={{ float : 'right', cursor: 'pointer' }}
 					onClick={() => (props.modalOpen ? close() : open())}
 				/>
 				</TextWrapper>
@@ -73,13 +73,17 @@ const Cart = (props) => {
 			<ButtonWrapper>
 				<OrderButton
 					onClick={() => {
-						navigate("/payment", {
-							state: {
-								req_orderDateTime: time,
-								total_price: totalPrice,
-								cart: cart
-							}
-						})
+						if (!cart.length)
+							alert("장바구니에 담긴 메뉴가 없습니다.");
+						else {
+							navigate("/payment", {
+								state: {
+									req_orderDateTime: time,
+									total_price: totalPrice,
+									cart: cart
+								}
+							})
+						}
 					}}
 				>총 {toPriceString(totalPrice)}원 주문하기</OrderButton>
 			</ButtonWrapper>
@@ -101,13 +105,13 @@ const CartWrapper = styled.div`
 `;
 
 const CartItemWrapper = styled.div`
-	width: 98%;
+	width: 95%;
 	display: flex;
 	flex-direction: column;
 `;
 
 const TextWrapper = styled.div`
-	width: 86%;
+	width: 83%;
 	font-size: 1.6em;
 	font-family: "Apple SD Gothic Neo";
 	font-weight: bold;
@@ -147,7 +151,7 @@ const PriceBox = styled.div`
 `;
 
 const PriceWrapper = styled.div`
-	width: 85%;
+	width: 82%;
 	height: 200px;
 	display: flex;
 	flex-direction: column;
