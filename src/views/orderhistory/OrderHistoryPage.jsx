@@ -34,24 +34,23 @@ function OrderHistory() {
     setShow(false);
   }
   useEffect(() => {
-    console.log('re');
     axios.get('/order/history/orders').then((res) => {
       console.log(res.data);
-      setOrderHistory(res.data);
+      let sortedHistory = [...res.data].reverse()
+      // sortedHistory.sort((a,b)=>{return })
+      setOrderHistory(sortedHistory);
     })
   }, []);
   
-  // console.log(orderHistory);
-
   return (
     <div>
-      {show ? <HistoryModal orderHistory={orderHistory} closeModal={closeModal} navigate={navigate} /> : null}
+      {(show ? <HistoryModal orderHistory={orderHistory} closeModal={closeModal} navigate={navigate} /> : null )}
       <h2 className="text-center mt-3">주문내역</h2>
       {
         orderHistory.map((a, i) => {
           return (
             <>
-              <HistoryCard data={a} index={i} showModal={showModal} />
+              {<HistoryCard data={a} index={i} showModal={showModal}  /> }
             </>
           )
         })
@@ -90,31 +89,32 @@ function HistoryCard(props) {
 
 function HistoryModal(props) {
   let cardNum = (Number(cardId.slice(4)))
-
   return (
     <div className="black-bg">
       <div className="white-bg">
-        <h4>{document.querySelector(`#${cardId} .card-title`).innerHTML}</h4>
-        <div>주문일시 {props.orderHistory[cardNum].orderDateTime}</div>
-        <div>주문자 {props.orderHistory[cardNum].customerName}</div>
-        <div>주소 {props.orderHistory[cardNum].customerAddress}</div>
-        <div>주문정보 {props.orderHistory[cardNum].menus.map((a,i)=>{
-          return (
-            <>
-              <div>메뉴명 : {a.menu_nm}</div>
-              <div>스타일 : {a.style.style_nm}</div>
-              <div>옵션 : {a.options.map((b)=>{return (
-                <>
-                  <span>'{b.option_nm}'  </span>
-                </>
-              )})}</div>
-              <br/>
-            </>
-          )
-          })}</div>
-        <div className="">배달요청일시 {props.orderHistory[cardNum].req_orderDateTime}</div>
-        <div className="mb-4">총 주문금액 : {props.orderHistory[cardNum].total_price}</div>
-        <button className="btn btn-danger" id="close" onClick={props.closeModal}>닫기</button>
+        <div className="detailbox">
+          <h4 className="p-3">{document.querySelector(`#${cardId} .card-title`).innerHTML}</h4>
+          <div>주문일시 : {props.orderHistory[cardNum].orderDateTime}</div>
+          <div><span className="col-6">주문자 :</span><span className="col-6"> {props.orderHistory[cardNum].customerName}</span></div>
+          <div>주소 : {props.orderHistory[cardNum].customerAddress}</div>
+          <div className="p-2" style={{border:'solid 2px lightgray', fontSize:'15px',fontWeight:'bold'}}>주문정보 {props.orderHistory[cardNum].menus.map((a,i)=>{
+            return (
+              <>
+                <div>메뉴명 : {a.menu_nm}</div>
+                <div>스타일 : {a.style.style_nm}</div>
+                <div>옵션 : {a.options.map((b)=>{return (
+                  <>
+                    <span>'{b.option_nm}' x {b.quantity}  </span>
+                  </>
+                )})}</div>
+                <br/>
+              </>
+            )
+            })}</div>
+          <div className="">배달요청일시 : {props.orderHistory[cardNum].req_orderDateTime}</div>
+          <div className="pb-2">총 주문금액 : {props.orderHistory[cardNum].total_price}원</div>
+        </div>
+          <button className="btn btn-danger" id="close" onClick={props.closeModal}>닫기</button>
       </div>
     </div>
   )

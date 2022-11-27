@@ -27,7 +27,8 @@ function Payment() {
                     <div className="col-12">
                         <div className="d-flex flex-column">
                             <p className="text mb-1">주문자 이름</p>
-                            <input className="usernameinput form-control mb-3" type="text" defaultValue={userInfo.address == null ? "Name" : userInfo.name} placeholder='name' onChange={(e) => { placeOrderInfo.customerName = e.target.value }} />
+                            <input className="usernameinput form-control mb-3" type="text" value={userInfo.address == null ? "Name" : userInfo.name} placeholder='name'/>
+                            {/* onChange={(e) => { placeOrderInfo.customerName = e.target.value }} */}
                         </div>
                     </div>
 

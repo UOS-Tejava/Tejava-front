@@ -32,7 +32,6 @@ function LoginBox() {
 	let navigate = useNavigate()
 	let storeUserInfo = useSelector((state) => state.user)
 
-	if(storeUserInfo.role == 'NOT_MEMBER') navigate('/login')
 
 	return (
 		<MDBContainer fluid>

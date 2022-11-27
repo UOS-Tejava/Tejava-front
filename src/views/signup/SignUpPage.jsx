@@ -35,8 +35,8 @@ function Signup() {
         <MDBCard className='m-5' style={{ width: '600px' }}>
           <MDBCardBody className='px-5'>
             <h2 className="text-uppercase text-center mb-5">회원가입</h2>
-            <MDBInput wrapperClass='mb-4' label='아이디' size='lg' id='form1' type='text' onChange={(e) => { registerInfo.uid = e.target.value }} />
-            <MDBBtn className='btn btn-info mb-3' onClick={() => {
+            <MDBInput wrapperClass='mb-2' label='아이디' size='lg' id='form1' type='text' onChange={(e) => { registerInfo.uid = e.target.value }} />
+            <MDBBtn className='btn btn-info mb-4' onClick={() => {
               axios.get(`/user/duplication-check/uid/${registerInfo.uid}`)
                 .then((res) => {
                   console.log(res)
@@ -55,7 +55,7 @@ function Signup() {
             {visible == true ? <div className='mb-4' style={{fontStyle:'italic'}}>비밀번호가 일치합니다</div> : null}
             <MDBInput wrapperClass='mb-4' label='연락처' size='lg' id='form4' type='tel' onChange={(e) => { registerInfo.phoneNo = e.target.value }} />
             <MDBInput wrapperClass='mb-4' label='주소' size='lg' id='form4' type='text' onChange={(e) => { registerInfo.address = e.target.value }} />
-            <MDBInput wrapperClass='mb-4' label='직원 코드' size='lg' id='form4' type='text' onChange={(e) => { 직원코드입력 = e.target.value }} />
+            <MDBInput wrapperClass='mb-2' label='직원 코드' size='lg' id='form4' type='text' onChange={(e) => { 직원코드입력 = e.target.value }} />
             <button className='btn btn-info mb-4' onClick={()=>{
               if(직원코드입력 == 직원코드) {alert('인증되었습니다');
               registerInfo.registerAsAdmin = true;}
