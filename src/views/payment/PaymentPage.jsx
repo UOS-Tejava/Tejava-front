@@ -27,7 +27,7 @@ function Payment() {
                     <div className="col-12">
                         <div className="d-flex flex-column">
                             <p className="text mb-1">주문자 이름</p>
-                            <input className="usernameinput form-control mb-3" type="text" value={userInfo.address == null ? "Name" : userInfo.name} placeholder='name'/>
+                            <input className="usernameinput form-control mb-3" type="text" defaultValue={userInfo.address == null ? "" : userInfo.name} placeholder='name'/>
                             {/* onChange={(e) => { placeOrderInfo.customerName = e.target.value }} */}
                         </div>
                     </div>
@@ -58,7 +58,7 @@ function Payment() {
                     <div className="col-12">
                         <div className="d-flex flex-column">
                             <p className="text mb-1">배달 주소</p>
-                            <input className="form-control mb-3 addressinput" type="text" defaultValue={userInfo.address == null ? "주소" : userInfo.address} placeholder='address' onChange={(e) => { placeOrderInfo.customerAddress = e.target.value }} />
+                            <input className="form-control mb-3 addressinput" type="text" defaultValue={userInfo.address == null ? "" : userInfo.address} placeholder='address' onChange={(e) => { placeOrderInfo.customerAddress = e.target.value }} />
                         </div>
                     </div>
                     <div className="col-12">

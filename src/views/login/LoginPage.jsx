@@ -64,7 +64,7 @@ function LoginBox() {
 							</MDBBtn>
 
 							<div>
-								<p className="mb-0">아직 회원이 아니세요? <a href="#!" class="fw-bold">회원가입</a></p>
+								<p className="mb-0">아직 회원이 아니세요? <button style={{color:'blue', border:'none', backgroundColor:'white'}} onClick={()=>{navigate('/signup')}}>회원가입</button></p>
 							</div>
 						</MDBCardBody>
 					</MDBCard>
