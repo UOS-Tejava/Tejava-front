@@ -16,11 +16,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { changeUserState } from './store';
 
 function App() {
-	// let dispatch = useDispatch();
-	// let userInfo = JSON.parse(localStorage.getItem('user'))
-	// dispatch(changeUserState(userInfo))
-	// let storeUserInfo = useSelector(state => state.user)
-	// console.log(storeUserInfo);
+	let dispatch = useDispatch();
+	let userInfo = JSON.parse(localStorage.getItem('user'))
+	if (userInfo)
+		dispatch(changeUserState(userInfo))
 
 	return (
 		<div>
